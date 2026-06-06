@@ -1,74 +1,100 @@
 import { Metadata } from 'next'
-import GalleryGrid from '@/components/GalleryGrid'
-import { galleryItems } from '@/lib/data'
 import Link from 'next/link'
+import { SplitLetters } from '@/components/SplitLetters'
+import { allPortfolioPhotos } from '@/lib/portfolio'
+import GalleryLightbox, { type GalleryPhoto } from '@/components/GalleryLightbox'
+import FinalCta from '@/components/sections/FinalCta'
 
 export const metadata: Metadata = {
   title: 'Gallery',
   description:
-    'Browse VanityWorks gallery — real work from our shop featuring PPF, ceramic coating, and paint correction on JDM and exotic vehicles.',
+    'Paint corrections, ceramic coatings, PPF installs, and full details. The VanityWorks gallery — the finish speaks for itself.',
 }
+
+// 14 hand-picked photos for the editorial grid. Tile 5 (index 4) spans 2 columns.
+const PICKS: GalleryPhoto[] = [
+  { src: '/portfolio/mclaren-720s/01.jpg', caption: 'McLaren 720S · ceramic + PPF' },
+  { src: '/portfolio/white-r34-gtr/01.jpg', caption: 'Nissan R34 GT-R · showcase detail' },
+  { src: '/portfolio/red-acura-nsx/01.jpg', caption: 'Acura NSX · show build detail' },
+  { src: '/portfolio/purple-r33-gtr/01.jpg', caption: 'Nissan R33 GT-R · showcase detail' },
+  { src: '/portfolio/black-amg-g63/01.jpg', caption: 'Mercedes-AMG G63 · ceramic' },
+  { src: '/portfolio/black-porsche-911/01.jpg', caption: 'Porsche 911 (992) · PPF' },
+  { src: '/portfolio/yellow-lambo-gallardo/01.jpg', caption: 'Lamborghini Gallardo · coating' },
+  { src: '/portfolio/yellow-honda-s2000/01.jpg', caption: 'Honda S2000 · interior detail' },
+  { src: '/portfolio/red-rx7-fd/01.jpg', caption: 'Mazda RX-7 (FD) · show prep' },
+  { src: '/portfolio/silver-supra-2jz/01.jpg', caption: 'Toyota Supra MkIV · engine bay' },
+  { src: '/portfolio/white-evo/01.jpg', caption: 'Mitsubishi Evo · engine bay' },
+  { src: '/portfolio/black-porsche-cayenne/01.jpg', caption: 'Porsche Cayenne · detail + interior' },
+  { src: '/portfolio/red-svt-lightning-wash/after.jpg', caption: 'Ford SVT Lightning · wash + detail' },
+  { src: '/portfolio/subaru-interior-detail/after.jpg', caption: 'Subaru Outback · interior detail' },
+]
+
+// Safety net: if any handpicked path isn't in the flat list, fall back to whatever's there.
+const fallback = allPortfolioPhotos
+  .slice(0, 14)
+  .map((p) => ({ src: p.src, caption: `${p.vehicle} · ${p.service}` }))
+
+const photos = PICKS.length === 14 ? PICKS : fallback
 
 export default function GalleryPage() {
   return (
-    <div className="min-h-screen pt-24 pb-32 bg-white">
-      {/* Header */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14 border-b border-[#E0E0E0]">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-          <div>
-            <p className="text-[#888] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
-              From The Shop
-            </p>
-            <h1
-              className="text-6xl sm:text-7xl text-[#0A0A0A]"
-              style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '0.04em' }}
-            >
-              Gallery
-            </h1>
-            <p className="text-[#666] mt-2 text-sm max-w-md">
-              Real cars. Real results. Browse our recent work and see what VanityWorks can do for
-              your vehicle.
-            </p>
+    <div className="bg-white pt-16 md:pt-20 lg:pt-24">
+      {/* HERO */}
+      <header className="bg-white px-8 pt-16 max-[900px]:px-5 max-[900px]:pt-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-[12px] font-medium text-ink-muted tracking-[-0.005em] mb-12 flex gap-2 items-center max-[900px]:mb-7">
+            <Link href="/" className="text-ink-muted no-underline hover:text-ink transition-colors">
+              Home
+            </Link>
+            <span className="text-line">/</span>
+            <span className="text-ink font-semibold">Gallery</span>
           </div>
-
-          {/* IG CTA */}
-          <div className="flex items-center gap-3 px-5 py-3 bg-white border border-[#E0E0E0] rounded-xl shadow-[0_1px_3px_rgba(10,10,10,0.04)]">
-            <div className="w-8 h-8 rounded-full bg-[#0A0A0A] flex items-center justify-center text-white text-xs font-bold">
-              IG
-            </div>
+          <div className="grid grid-cols-[1.2fr_0.8fr] gap-16 items-end pb-12 border-b border-ink max-[900px]:grid-cols-1 max-[900px]:gap-7">
             <div>
-              <div className="text-[#0A0A0A] text-sm font-semibold">@vanityworks</div>
-              <div className="text-[#888] text-xs">Follow on Instagram</div>
+              <div className="inline-flex items-center gap-2.5 text-[13px] font-semibold text-ink tracking-[-0.005em] mb-6">
+                <span className="inline-block w-2 h-2 rounded-full bg-ink" />
+                The work
+              </div>
+              <h1 className="font-sans font-extrabold text-ink leading-[0.88] tracking-[-0.05em] text-[clamp(48px,7.5vw,120px)] max-[900px]:text-[14vw]">
+                <SplitLetters text="Recent work." />
+              </h1>
+            </div>
+            <div className="flex flex-col gap-[18px]">
+              <p className="text-ink font-medium leading-[1.4] tracking-[-0.015em] text-[clamp(17px,1.6vw,21px)]">
+                Paint corrections, ceramic coatings, PPF installs, and full details.{' '}
+                <span className="text-ink-muted">The finish speaks for itself.</span>
+              </p>
+              <p className="text-[14px] text-ink-muted leading-[1.5] tracking-[-0.005em]">
+                Tap any photo to enlarge. More on{' '}
+                <a
+                  href="https://instagram.com/vanityworks.il"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-ink underline hover:opacity-60 transition-opacity"
+                >
+                  Instagram
+                </a>
+                .
+              </p>
             </div>
           </div>
         </div>
-      </div>
+      </header>
 
-      {/* Gallery */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <GalleryGrid items={galleryItems} showFilter />
-      </div>
-
-      {/* CTA */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
-        <div className="bg-[#F5F5F5] border border-[#0A0A0A] rounded-xl p-8 text-center">
-          <h3
-            className="text-4xl text-[#0A0A0A] mb-3"
-            style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '0.04em' }}
-          >
-            Want Your Car In The Gallery?
-          </h3>
-          <p className="text-[#666] text-sm mb-6 max-w-md mx-auto">
-            Book a service and we&apos;ll document the transformation with professional before/after photography.
-          </p>
-          <Link
-            href="/book"
-            className="inline-block px-8 py-3.5 bg-[#0A0A0A] text-white font-bold text-sm tracking-widest uppercase rounded-lg hover:bg-[#1A1A1A] transition-colors"
-          >
-            Book Your Appointment
-          </Link>
+      {/* GRID + LIGHTBOX */}
+      <section className="bg-white px-8 pt-16 pb-[120px] max-[900px]:px-5 max-[900px]:pt-10 max-[900px]:pb-[72px]">
+        <div className="max-w-7xl mx-auto">
+          <GalleryLightbox photos={photos} wideIndex={4} />
         </div>
-      </div>
+      </section>
+
+      {/* FINAL CTA */}
+      <FinalCta
+        title="Yours could be next."
+        sub="Every car here started with a conversation. **Start yours.**"
+        primaryCta={{ label: 'Book a consultation', href: '/contact' }}
+        secondaryCta={{ label: 'View services', href: '/services' }}
+      />
     </div>
   )
 }

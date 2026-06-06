@@ -3,31 +3,32 @@ import Link from 'next/link'
 import { certifications } from '@/lib/data'
 import CertBadge from '@/components/CertBadge'
 import BrandAccordion from '@/components/BrandAccordion'
+import { GraduationCapIcon, AwardIcon, PackageIcon, RefreshIcon } from '@/components/Icons'
 
 export const metadata: Metadata = {
   title: 'Certifications',
   description:
-    'VanityWorks holds certifications from OPTICLE PPF, Ceramic Pro, DETAILWISE, XPEL, and IGL Coatings — the most trusted names in automotive paint protection.',
+    'VanityWorks is a DetailWise Academy–certified Opticle Paint Protection Film installer — manufacturer-partnered training, hands-on PPF installation credential.',
 }
 
 const whatItMeans = [
   {
-    icon: '◆',
+    Icon: GraduationCapIcon,
     title: 'Factory Training Standards',
     body: 'Each certification program requires hands-on training with the brand\'s actual products, application tools, and quality control standards — not just online coursework.',
   },
   {
-    icon: '◇',
+    Icon: AwardIcon,
     title: 'Warranty Eligibility',
     body: 'Manufacturer warranties on PPF and ceramic coatings are only valid when installed by certified applicators. We can issue warranty documentation for your vehicle.',
   },
   {
-    icon: '◈',
+    Icon: PackageIcon,
     title: 'Product Access',
     body: 'Certified installers get access to professional-grade films, coatings, and pattern software not available to the general public. Your car gets the real thing.',
   },
   {
-    icon: '◉',
+    Icon: RefreshIcon,
     title: 'Ongoing Recertification',
     body: 'Our certifications aren\'t one-time credentials. We maintain active standing with each brand, staying current with new product lines, updated installation techniques, and quality benchmarks.',
   },
@@ -52,69 +53,18 @@ const brandDetails = [
     textColor: '',
   },
   {
-    badge: 'CP',
-    name: 'Ceramic Pro',
-    headline: 'Nano-Ceramic Surface Coating',
-    description:
-      'Ceramic Pro is the global benchmark for professional-grade nano-ceramic coatings. Their coating systems bond chemically to clear coat, glass, wheels, and interior surfaces — creating a semi-permanent protective layer that dramatically enhances gloss, repels contaminants, and blocks UV degradation. Certified installs come with Ceramic Pro warranty registration.',
-    features: [
-      'Sport, Silver, Gold, and Platinum package tiers',
-      'SiO₂ nano-ceramic formulation — up to 9H hardness',
-      'Extreme hydrophobic surface — water beads and sheets off',
-      'UV and chemical resistance prevents oxidation',
-      'Ceramic Pro warranty issued by certified installers only',
-      'Available on paint, glass, wheels, leather, and fabric',
-    ],
-    accentColor: '',
-    textColor: '',
-  },
-  {
     badge: 'DW',
-    name: 'DETAILWISE Pro',
-    headline: 'Advanced Paint Correction Certification',
+    name: 'DetailWise Academy',
+    headline: 'Paint Protection Film Training Certificate',
     description:
-      'DETAILWISE certification is a professional benchmark for paint correction excellence. The program is built around hands-on defect analysis, machine polishing technique, compound and polish science, and finish verification. DETAILWISE certified detailers understand how to read paint under high-intensity lighting and work systematically from inspection to a flawless result.',
+      'DetailWise Academy is the education arm that runs the certified Paint Protection Film training program partnered with Opticle and Car Supplies Warehouse. The program is hands-on: pattern selection, film handling and tack, edge wrapping, multi-day live installs, and final inspection — graded by working installers, not online quizzes.',
     features: [
-      'Paint depth gauge (PTG) measurement and interpretation',
-      'Multi-stage compound and polish selection methodology',
-      'Rotary and dual-action polisher technique mastery',
-      'High-intensity lighting inspection protocols',
-      'Defect classification — swirls, RIDS, water etching, oxidation',
-      'Pre-protection surface prep standards',
-    ],
-    accentColor: '',
-    textColor: '',
-  },
-  {
-    badge: 'XPL',
-    name: 'XPEL Certified',
-    headline: 'PPF & Window Film Installation',
-    description:
-      'XPEL is one of the world\'s most recognized Paint Protection Film and window tint brands. Certified installers receive factory training on proper film preparation, application technique, and edge work — plus access to the XPEL DAP software library with computer-cut patterns for virtually every vehicle make and model.',
-    features: [
-      'XPEL ULTIMATE PLUS™ self-healing PPF',
-      'XPEL Prime window film — ceramic IR rejection',
-      'DAP pattern software access — precision computer-cut',
-      'Full front, zones, and full-body wrap capability',
-      'Stealth matte finish application certified',
-      'XPEL manufacturer warranty eligible',
-    ],
-    accentColor: '',
-    textColor: '',
-  },
-  {
-    badge: 'IGL',
-    name: 'IGL Coatings Approved',
-    headline: 'Eco-Certified Nano-Ceramic Coatings',
-    description:
-      'IGL Coatings is a Malaysia-based global coating manufacturer known for their eco-conscious chemistry and exceptionally high hardness ratings. As an approved IGL applicator, we can install their Kenzo (flagship), Quartz, and Premier lines — covering everything from daily drivers to show cars with proven longevity and slickness.',
-    features: [
-      'IGL Kenzo — 10H hardness, flagship slickness',
-      'IGL Quartz — high-gloss entry protection',
-      'Eco-certified low-VOC formulations',
-      'Industry-leading gloss retention over time',
-      'Available on paint, glass, wheels, trim, and plastic',
-      'IGL approved installer warranty available',
+      'Paint Protection Film Training — certificate of completion',
+      'Trainers: Jason Otterness · Shane Stoleton',
+      'Opticle film handling — gloss, matte, satin',
+      'Pattern software + hand-cut template work',
+      'Edge wrapping and lift-prevention technique',
+      'Co-issued with Opticle & Car Supplies Warehouse',
     ],
     accentColor: '',
     textColor: '',
@@ -123,7 +73,7 @@ const brandDetails = [
 
 export default function CertificationsPage() {
   return (
-    <div className="min-h-screen pt-20 bg-white">
+    <div className="min-h-screen pt-20 lg:pt-24 bg-white">
       {/* Hero */}
       <div className="relative bg-white py-14 md:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-[#E0E0E0]">
         <svg
@@ -196,7 +146,9 @@ export default function CertificationsPage() {
                 key={item.title}
                 className="flex gap-4 bg-white border border-[#E0E0E0] rounded-xl p-5 sm:p-6 shadow-[0_1px_3px_rgba(10,10,10,0.04)]"
               >
-                <div className="text-2xl sm:text-3xl flex-shrink-0 mt-0.5 text-[#888]">{item.icon}</div>
+                <div className="flex-shrink-0 mt-0.5 text-[#0A0A0A]">
+                  <item.Icon className="w-7 h-7 sm:w-8 sm:h-8" />
+                </div>
                 <div>
                   <h3
                     className="text-lg sm:text-xl text-[#0A0A0A] mb-1.5"

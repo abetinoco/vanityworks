@@ -1,8 +1,20 @@
+import { SplitLetters } from '@/components/SplitLetters'
+
+const GOOGLE_BUSINESS_URL =
+  'https://www.google.com/maps/search/?api=1&query=VanityWorks+Detailing+Chicagoland'
+
 interface Review {
   author: string
   car: string
   text: string
   date: string
+}
+
+const featured: Review = {
+  author: 'Kira M.',
+  car: 'BMW M4 Competition',
+  date: '2 months ago',
+  text: "I've used three shops in Chicagoland and VanityWorks isn't even close. The attention to detail on every panel is in a different league.",
 }
 
 const reviews: Review[] = [
@@ -25,12 +37,6 @@ const reviews: Review[] = [
     date: '3 weeks ago',
   },
   {
-    author: 'Kira M.',
-    car: 'BMW M4 Competition',
-    text: "I've used three shops in Chicagoland and VanityWorks isn't even close. The attention to detail on every panel is in a different league.",
-    date: '2 months ago',
-  },
-  {
     author: 'Ryan H.',
     car: 'Toyota GR Supra A90',
     text: 'They treated my Supra like it was their own. Sent me progress photos at every stage. Paint looks like glass now. Highly recommend.',
@@ -44,104 +50,160 @@ const reviews: Review[] = [
   },
 ]
 
-function Stars() {
+const TOTAL = (reviews.length + 1).toString().padStart(2, '0') // includes featured
+
+function Star({ className = 'w-3.5 h-3.5' }: { className?: string }) {
   return (
-    <div className="flex gap-0.5">
+    <svg viewBox="0 0 16 16" fill="currentColor" className={className} aria-hidden>
+      <path d="M8 0.5L10 5.5L15.5 6L11.5 9.5L13 14.5L8 11.5L3 14.5L4.5 9.5L0.5 6L6 5.5L8 0.5Z" />
+    </svg>
+  )
+}
+
+function FiveStars({ size = 'w-3.5 h-3.5' }: { size?: string }) {
+  return (
+    <span className="inline-flex gap-[3px] text-ink" aria-label="5 out of 5 stars">
       {Array.from({ length: 5 }).map((_, i) => (
-        <span key={i} className="text-[#888] text-base leading-none">
-          ★
-        </span>
+        <Star key={i} className={size} />
       ))}
-    </div>
-  )
-}
-
-function GoogleBadge() {
-  return (
-    <div className="flex items-center gap-1.5">
-      <span className="text-sm font-bold tracking-tight">
-        <span className="text-[#4285F4]">G</span>
-        <span className="text-[#EA4335]">o</span>
-        <span className="text-[#FBBC05]">o</span>
-        <span className="text-[#4285F4]">g</span>
-        <span className="text-[#34A853]">l</span>
-        <span className="text-[#EA4335]">e</span>
-      </span>
-      <span className="text-[#888] text-[10px] tracking-wider uppercase">Review</span>
-    </div>
-  )
-}
-
-function ReviewCard({ review }: { review: Review }) {
-  return (
-    <div className="bg-white border border-[#E0E0E0] rounded-lg p-5 sm:p-6 h-full flex flex-col shadow-[0_1px_3px_rgba(10,10,10,0.04)]">
-      <div className="flex items-center justify-between mb-4">
-        <Stars />
-        <GoogleBadge />
-      </div>
-      <p className="text-[#1A1A1A] text-sm leading-relaxed flex-1 mb-5">&ldquo;{review.text}&rdquo;</p>
-      <div className="pt-4 border-t border-[#E0E0E0]">
-        <p className="text-[#0A0A0A] text-sm font-semibold">{review.author}</p>
-        <div className="flex items-center justify-between mt-1">
-          <p className="text-[#888] text-xs tracking-wider">{review.car}</p>
-          <p className="text-[#888] text-xs">{review.date}</p>
-        </div>
-      </div>
-    </div>
+    </span>
   )
 }
 
 export default function GoogleReviews() {
   return (
-    <section className="py-12 md:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      <div className="text-center mb-8">
-        <p className="text-[#888] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
-          5.0 Stars · 200+ Reviews
-        </p>
-        <h2
-          className="text-5xl sm:text-6xl text-[#0A0A0A]"
-          style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '0.04em' }}
-        >
-          Reviewed On Google
-        </h2>
-        <div className="flex items-center justify-center gap-3 mt-4">
-          <Stars />
-          <span className="text-[#666] text-sm">5.0 average</span>
+    <section id="reviews" className="bg-white px-8 py-[120px] max-[900px]:px-5 max-[900px]:py-12">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="grid grid-cols-[auto_1fr] gap-x-[60px] items-end pb-8 border-b border-ink max-[900px]:grid-cols-1 max-[900px]:gap-4 max-[900px]:pb-6">
+          <div className="flex items-center gap-2.5 text-[13px] font-semibold text-ink tracking-[-0.005em] pb-[18px]">
+            <span className="inline-block w-2 h-2 rounded-full bg-ink" />
+            On the record
+          </div>
+          <h2 className="font-sans font-extrabold text-ink leading-[0.92] tracking-[-0.045em] text-right justify-self-end text-[clamp(40px,6vw,96px)] max-[900px]:text-left max-[900px]:justify-self-start max-[900px]:text-[13vw]">
+            <SplitLetters text="What clients say." />
+          </h2>
         </div>
-      </div>
 
-      {/* Mobile: horizontal scroll-snap carousel */}
-      <div className="md:hidden">
-        <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-hide -mx-4 px-4">
+        {/* Rating strip */}
+        <div className="mt-9 mb-14 flex justify-between items-center gap-6 flex-wrap max-[900px]:mt-5 max-[900px]:mb-6 max-[900px]:flex-col max-[900px]:items-start max-[900px]:gap-3">
+          <div className="flex items-baseline gap-4 max-[900px]:gap-3">
+            <span className="font-extrabold text-ink leading-none tracking-[-0.045em] tabular-nums text-[clamp(56px,6vw,88px)] max-[900px]:text-[44px]">
+              5.0
+            </span>
+            <span className="text-[18px] font-medium text-ink-muted tracking-[-0.01em]">
+              / 5 average
+            </span>
+            <FiveStars size="w-[18px] h-[18px]" />
+          </div>
+          <div className="flex flex-col gap-1 text-right max-[900px]:text-left">
+            <span className="text-[11px] font-semibold tracking-[0.12em] uppercase text-ink-muted">
+              Verified on <strong className="text-ink font-bold">Google</strong>
+            </span>
+            <a
+              href={GOOGLE_BUSINESS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-hover
+              className="self-end max-[900px]:self-start text-[14px] font-semibold text-ink border-b border-ink pb-0.5 hover:opacity-60 transition-opacity"
+            >
+              Read all on Google →
+            </a>
+          </div>
+        </div>
+
+        {/* Featured */}
+        <div className="pt-14 pb-14 border-t border-ink border-b border-b-line max-[900px]:pt-6 max-[900px]:pb-6">
+          <p className="font-semibold text-ink leading-[1.15] tracking-[-0.035em] max-w-[22ch] mb-9 text-[clamp(28px,3.6vw,52px)] max-[900px]:text-[19px] max-[900px]:leading-[1.25] max-[900px]:mb-5 max-[900px]:max-w-none">
+            &ldquo;<span className="text-ink">I&apos;ve used three shops in Chicagoland and VanityWorks isn&apos;t even close.</span>{' '}
+            <span className="text-ink-muted font-semibold">
+              The attention to detail on every panel is in a different league.&rdquo;
+            </span>
+          </p>
+          <div className="grid grid-cols-[auto_1fr_auto] gap-6 items-center max-[900px]:grid-cols-1 max-[900px]:gap-3">
+            <FiveStars size="w-[14px] h-[14px]" />
+            <span className="text-[16px] font-bold text-ink tracking-[-0.015em] leading-[1.2]">
+              {featured.author}
+              <span className="block text-[13px] font-medium text-ink-muted mt-[3px]">
+                {featured.car}
+              </span>
+            </span>
+            <span className="inline-flex items-center gap-1.5 text-[10px] font-bold tracking-[0.14em] uppercase text-ink-muted max-[900px]:justify-self-start">
+              <span className="w-1 h-1 rounded-full bg-ink-muted" />
+              Google review · {featured.date}
+            </span>
+          </div>
+        </div>
+
+        {/* Review list */}
+        <div className="grid grid-cols-1">
           {reviews.map((r, i) => (
-            <div key={i} className="snap-center flex-shrink-0 w-[85vw] max-w-sm">
-              <ReviewCard review={r} />
+            <div
+              key={r.author}
+              data-hover
+              className={`group relative grid grid-cols-[80px_1fr_220px] gap-8 items-start py-8 border-b border-line transition-[padding] duration-[400ms] [transition-timing-function:cubic-bezier(0.65,0,0.35,1)] hover:pl-4 before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-0 before:h-[60%] before:bg-ink before:transition-[width] before:duration-[400ms] before:[transition-timing-function:cubic-bezier(0.65,0,0.35,1)] hover:before:w-[3px] max-[900px]:grid-cols-1 max-[900px]:gap-2 max-[900px]:py-4 max-[900px]:hover:pl-3 ${i >= 3 ? 'max-[900px]:hidden' : ''}`}
+            >
+              <span className="text-[13px] font-semibold text-ink-muted tracking-[0.02em] tabular-nums pt-1 max-[900px]:pt-0">
+                <strong className="text-ink font-bold">
+                  {(i + 1).toString().padStart(2, '0')}
+                </strong>{' '}
+                / {TOTAL}
+              </span>
+              <div className="flex flex-col">
+                <span className="inline-flex gap-[3px] mb-2">
+                  <FiveStars size="w-[13px] h-[13px]" />
+                </span>
+                <p className="font-medium text-ink leading-[1.5] tracking-[-0.011em] text-[clamp(15px,1.3vw,17px)] max-[900px]:text-[14px] max-[900px]:leading-[1.4]">
+                  &ldquo;{r.text}&rdquo;
+                </p>
+              </div>
+              <div className="flex flex-col gap-1.5 text-right max-[900px]:text-left max-[900px]:flex-row max-[900px]:flex-wrap max-[900px]:items-baseline max-[900px]:gap-x-3 max-[900px]:gap-y-1.5">
+                <span className="text-[15px] font-bold text-ink tracking-[-0.015em] leading-[1.2]">
+                  {r.author}
+                </span>
+                <span className="text-[12px] font-medium text-ink-muted tracking-[-0.005em] max-[900px]:before:content-['·_'] max-[900px]:before:text-ink-muted">
+                  {r.car}
+                </span>
+                <span className="text-[11px] font-semibold text-ink-muted tracking-[0.04em] uppercase mt-1 max-[900px]:mt-0 max-[900px]:before:content-['·_']">
+                  {r.date}
+                </span>
+              </div>
             </div>
           ))}
         </div>
-        <div className="flex justify-center gap-1.5 mt-3">
-          {reviews.map((_, i) => (
-            <div key={i} className="w-1.5 h-1.5 rounded-full bg-[#CCCCCC]" />
-          ))}
+
+        {/* Bottom */}
+        <div className="mt-12 pt-10 border-t border-ink flex justify-between items-center gap-8 flex-wrap max-[900px]:mt-5 max-[900px]:pt-5 max-[900px]:flex-col max-[900px]:items-start max-[900px]:gap-3">
+          <p className="font-bold text-ink tracking-[-0.025em] leading-[1.2] text-[clamp(20px,2vw,26px)]">
+            Every review is on Google.
+            <br />
+            <span className="text-ink-muted">Verify any of them yourself.</span>
+          </p>
+          <a
+            href={GOOGLE_BUSINESS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-hover
+            className="group bg-ink text-white rounded-full text-[15px] font-semibold px-[26px] py-[18px] inline-flex items-center gap-3 tracking-[-0.005em] transition-transform duration-300 [transition-timing-function:cubic-bezier(0.34,1.56,0.64,1)] hover:scale-[1.04]"
+          >
+            Read all reviews
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            >
+              <path
+                d="M5 11L11 5M11 5H6.5M11 5V9.5"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </a>
         </div>
-      </div>
-
-      {/* Desktop: 3-col grid */}
-      <div className="hidden md:grid md:grid-cols-3 gap-5">
-        {reviews.map((r, i) => (
-          <ReviewCard key={i} review={r} />
-        ))}
-      </div>
-
-      <div className="mt-10 text-center">
-        <a
-          href="https://www.google.com/search?q=vanityworks+chicagoland+detailing"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-6 py-3 min-h-[44px] border border-[#0A0A0A] text-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white rounded-lg text-sm font-semibold tracking-wider uppercase transition-colors"
-        >
-          See All Google Reviews →
-        </a>
       </div>
     </section>
   )

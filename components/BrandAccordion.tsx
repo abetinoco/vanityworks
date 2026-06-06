@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { CheckIcon } from '@/components/Icons'
 
 interface BrandDetail {
   badge: string
@@ -67,7 +68,7 @@ export default function BrandAccordion({ brands }: { brands: BrandDetail[] }) {
               <div className="grid grid-cols-1 gap-2">
                 {brand.features.map((f) => (
                   <div key={f} className="flex items-start gap-2 text-xs text-[#666]">
-                    <span className="mt-0.5 flex-shrink-0 text-[#888]">✓</span>
+                    <CheckIcon className="mt-0.5 flex-shrink-0 w-3.5 h-3.5 text-[#0A0A0A]" strokeWidth={2} />
                     {f}
                   </div>
                 ))}
@@ -100,7 +101,7 @@ export default function BrandAccordion({ brands }: { brands: BrandDetail[] }) {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {brand.features.map((f) => (
                     <div key={f} className="flex items-start gap-2 text-xs text-[#666]">
-                      <span className="mt-0.5 flex-shrink-0 text-[#888]">✓</span>
+                      <CheckIcon className="mt-0.5 flex-shrink-0 w-3.5 h-3.5 text-[#0A0A0A]" strokeWidth={2} />
                       {f}
                     </div>
                   ))}

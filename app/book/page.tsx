@@ -3,6 +3,8 @@ import Link from 'next/link'
 import ContactForm from '@/components/ContactForm'
 import ServiceCalculator from '@/components/ServiceCalculator'
 import FaqAccordion from '@/components/FaqAccordion'
+import GoogleMap from '@/components/GoogleMap'
+import { PhoneIcon, MapPinIcon } from '@/components/Icons'
 
 export const metadata: Metadata = {
   title: 'Book a Consultation',
@@ -56,13 +58,13 @@ const faqs = [
   },
   {
     q: 'Do you offer warranties on your work?',
-    a: 'Yes. PPF carries the manufacturer\'s warranty (up to 10 years with OPTICLE/XPEL). Ceramic Pro coatings come with the Ceramic Pro warranty, issued only by certified installers like us.',
+    a: 'Yes. Opticle PPF installs carry the manufacturer\'s warranty (per Opticle\'s film-specific terms). Ceramic coatings carry the coating manufacturer\'s standard warranty.',
   },
 ]
 
 export default function BookPage() {
   return (
-    <div className="min-h-screen pt-20 bg-white">
+    <div className="min-h-screen pt-20 lg:pt-24 bg-white">
       {/* Hero */}
       <div className="relative bg-white py-14 md:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-[#E0E0E0]">
         {/* Decorative lines */}
@@ -188,8 +190,8 @@ export default function BookPage() {
                   href="tel:+12245724787"
                   className="flex items-center gap-4 group"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-[#F5F5F5] border border-[#E0E0E0] flex items-center justify-center text-[#0A0A0A] text-sm flex-shrink-0 group-hover:border-[#0A0A0A] transition-colors">
-                    ☎
+                  <div className="w-10 h-10 rounded-lg bg-[#F5F5F5] border border-[#E0E0E0] flex items-center justify-center text-[#0A0A0A] flex-shrink-0 group-hover:border-[#0A0A0A] transition-colors">
+                    <PhoneIcon className="w-4 h-4" />
                   </div>
                   <div>
                     <div className="text-[#888] text-xs tracking-wider uppercase">Call or Text</div>
@@ -213,8 +215,8 @@ export default function BookPage() {
                 </a>
 
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-[#F5F5F5] border border-[#E0E0E0] flex items-center justify-center text-[#0A0A0A] text-sm flex-shrink-0">
-                    ◉
+                  <div className="w-10 h-10 rounded-lg bg-[#F5F5F5] border border-[#E0E0E0] flex items-center justify-center text-[#0A0A0A] flex-shrink-0">
+                    <MapPinIcon className="w-4 h-4" />
                   </div>
                   <div>
                     <div className="text-[#888] text-xs tracking-wider uppercase">Service Area</div>
@@ -228,7 +230,7 @@ export default function BookPage() {
               <div className="border-t border-[#E0E0E0] pt-8">
                 <p className="text-[#888] text-xs tracking-wider uppercase mb-4">Certified By</p>
                 <div className="flex flex-wrap gap-2">
-                  {['OPTICLE PPF', 'Ceramic Pro', 'DETAILWISE', 'XPEL', 'IGL'].map((cert) => (
+                  {['OPTICLE PPF', 'DETAILWISE ACADEMY'].map((cert) => (
                     <span
                       key={cert}
                       className="px-3 py-1 text-xs font-semibold tracking-wider rounded-full border border-[#E0E0E0] bg-white text-[#0A0A0A]"
@@ -260,6 +262,27 @@ export default function BookPage() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Service Area Map */}
+      <section className="bg-white py-12 md:py-16 px-4 sm:px-6 lg:px-8 border-t border-[#E0E0E0]">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-8">
+            <p className="text-[#888] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
+              Where We Work
+            </p>
+            <h2
+              className="text-4xl sm:text-5xl text-[#0A0A0A] mb-2"
+              style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '0.04em' }}
+            >
+              Chicagoland & Surrounding Areas
+            </h2>
+            <p className="text-[#666] text-sm max-w-xl mx-auto">
+              Fully mobile — we come to your home, condo garage, or office. Chicago, the North Shore, and the western suburbs.
+            </p>
+          </div>
+          <GoogleMap query="Chicagoland, IL" ariaLabel="VanityWorks service area covering Chicagoland" />
         </div>
       </section>
 

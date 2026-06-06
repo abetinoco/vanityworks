@@ -1,199 +1,231 @@
 import { Metadata } from 'next'
-import CertBadge from '@/components/CertBadge'
-import { certifications, stats } from '@/lib/data'
 import Link from 'next/link'
+import Image from 'next/image'
+import { SplitLetters } from '@/components/SplitLetters'
+import FinalCta from '@/components/sections/FinalCta'
 
 export const metadata: Metadata = {
   title: 'About',
   description:
-    'Learn about VanityWorks — our story, certifications, and commitment to protecting JDM and exotic vehicles.',
+    "A one-bay operation that treats every car like it's going on a showroom floor. Lakemoor, IL — built on obsession since 2017.",
 }
 
-const team = [
+function renderMarked(text: string) {
+  return text.split('**').map((p, i) =>
+    i % 2 === 1 ? (
+      <strong key={i} className="text-ink font-semibold">
+        {p}
+      </strong>
+    ) : (
+      <span key={i}>{p}</span>
+    ),
+  )
+}
+
+const bodyParagraphs = [
+  "Most detail shops run on volume — get the car in, get it out, move to the next. **That's not what this is.** VanityWorks is a focused operation built around paint: protecting it, correcting it, and making it look better than the day the car left the factory.",
+  'The specialty is **JDM and exotic** — the cars enthusiasts actually care about — but the same standard applies to a daily driver getting its first real detail. Every car gets the same obsessive attention, the same manufacturer-grade products, and the same honest assessment of what it actually needs.',
+  "No upselling. No corner-cutting. **If your paint only needs a one-step, you're not paying for three.** If it needs more, you'll know exactly why before any work begins.",
+]
+
+const stats = [
+  { num: '2017', label: 'Detailing since' },
+  { num: '01', label: 'Manufacturer certification' },
+  { num: 'JDM', label: '& exotic specialty' },
+  { num: '1:1', label: 'One car at a time, fully' },
+]
+
+const values = [
   {
-    name: 'Marcus Reyes',
-    role: 'Founder & Lead Installer',
-    certs: 'XPEL · Ceramic Pro · IGL',
-    bio: 'Former dealership detailer turned independent specialist. 10+ years installing PPF and coatings on everything from daily drivers to Le Mans contenders.',
+    num: '/ 01',
+    name: 'Honest assessment',
+    desc: "We tell you what your paint actually needs — and what it doesn't. No invented problems, no padded tiers, no pressure.",
   },
   {
-    name: 'Tiana Park',
-    role: 'Paint Correction Specialist',
-    certs: 'Detail King Pro · Rupes Certified',
-    bio: 'Tiana obsesses over paint depth gauges and lighting. She leads all 2-stage and 3-stage correction jobs with documented results every time.',
+    num: '/ 02',
+    name: 'Manufacturer-grade',
+    desc: 'Certified installer products and processes. The same materials and methods the brands themselves train and warranty.',
   },
   {
-    name: 'Dev Okonkwo',
-    role: 'PPF & Tint Installer',
-    certs: 'XPEL · Llumar Authorized',
-    bio: 'Dev cut his teeth on JDM fitments where panel gaps are unforgiving. He handles all GT-R, NSX, and EVO PPF work personally.',
+    num: '/ 03',
+    name: 'One car at a time',
+    desc: "Your car isn't in a queue of ten. It gets full, undivided attention from intake to final inspection — however long that takes.",
   },
 ]
 
+const certs = [
+  { name: 'Opticle PPF Certified', type: 'DetailWise Academy · Paint Protection Film Training' },
+]
+
+const CheckMark = () => (
+  <svg viewBox="0 0 14 14" fill="none" className="w-3.5 h-3.5">
+    <path d="M2 7.5L5.5 11L12 3" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+)
+
 export default function AboutPage() {
   return (
-    <div className="min-h-screen pt-24 pb-32 bg-white">
-      {/* Header */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14 border-b border-[#E0E0E0]">
-        <p className="text-[#888] text-xs font-semibold tracking-[0.2em] uppercase mb-4">
-          Our Story
-        </p>
-        <h1
-          className="text-5xl sm:text-7xl md:text-8xl text-[#0A0A0A] mb-6"
-          style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '0.04em' }}
-        >
-          Built for Car People.
-          <br />
-          <span className="text-[#888]">By Car People.</span>
-        </h1>
-        <p className="text-[#1A1A1A] text-base leading-relaxed max-w-2xl">
-          VanityWorks started in 2016 with a single-car garage, a Rupes polisher, and an
-          obsession with paint perfection. Eight years later we&apos;re a full-service protection
-          studio with XPEL, Ceramic Pro, and IGL certifications — and we still treat every car
-          like it&apos;s the first one.
-        </p>
-      </div>
-
-      {/* Stats */}
-      <section className="py-10 md:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {stats.map((stat) => (
-            <div
-              key={stat.label}
-              className="bg-white border border-[#E0E0E0] rounded-xl p-6 text-center shadow-[0_1px_3px_rgba(10,10,10,0.04)]"
-            >
-              <div
-                className="text-5xl text-[#0A0A0A] mb-2"
-                style={{ fontFamily: 'Bebas Neue, sans-serif' }}
-              >
-                {stat.value}{stat.suffix}
+    <div className="bg-white pt-16 md:pt-20 lg:pt-24">
+      {/* HERO */}
+      <header className="bg-white px-8 pt-16 max-[900px]:px-5 max-[900px]:pt-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-[12px] font-medium text-ink-muted tracking-[-0.005em] mb-12 flex gap-2 items-center max-[900px]:mb-7">
+            <Link href="/" className="text-ink-muted no-underline hover:text-ink transition-colors">
+              Home
+            </Link>
+            <span className="text-line">/</span>
+            <span className="text-ink font-semibold">About</span>
+          </div>
+          <div className="grid grid-cols-[1.2fr_0.8fr] gap-16 items-end pb-12 border-b border-ink max-[900px]:grid-cols-1 max-[900px]:gap-7">
+            <div>
+              <div className="inline-flex items-center gap-2.5 text-[13px] font-semibold text-ink tracking-[-0.005em] mb-6">
+                <span className="inline-block w-2 h-2 rounded-full bg-ink" />
+                Who we are
               </div>
-              <div className="text-[#888] text-xs uppercase tracking-wider">{stat.label}</div>
+              <h1 className="font-sans font-extrabold text-ink leading-[0.88] tracking-[-0.05em] text-[clamp(48px,7.5vw,120px)] max-[900px]:text-[14vw]">
+                <SplitLetters text="Built on obsession." />
+              </h1>
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Mission */}
-      <section className="bg-[#F5F5F5] border-y border-[#E0E0E0] py-10 md:py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
-          <div>
-            <h2
-              className="text-5xl text-[#0A0A0A] mb-6"
-              style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '0.04em' }}
-            >
-              Why VanityWorks?
-            </h2>
-            <div className="space-y-5 text-[#1A1A1A] text-sm leading-relaxed">
-              <p>
-                Most detail shops treat paint protection as a product. We treat it as a craft.
-                Every installation is documented, measured, and inspected under high-intensity
-                lighting before you pick up your car.
+            <div className="flex flex-col gap-[18px]">
+              <p className="text-ink font-medium leading-[1.4] tracking-[-0.015em] text-[clamp(17px,1.6vw,21px)]">
+                A one-bay operation that treats every car like it&apos;s going on a showroom floor.{' '}
+                <span className="text-ink-muted">Because most of them basically are.</span>
               </p>
-              <p>
-                We specialize in JDM and exotic vehicles because they demand a higher standard.
-                Factory clear coats, custom paint codes, and tight tolerances — we&apos;ve seen it all
-                and know how to work with it.
-              </p>
-              <p>
-                Our certifications aren&apos;t just wall decorations. They represent ongoing
-                factory training, access to the latest products, and accountability to the brands
-                that stand behind our work.
+              <p className="text-[14px] text-ink-muted leading-[1.5] tracking-[-0.005em]">
+                Lakemoor, IL · serving Chicagoland &amp; the North Shore
               </p>
             </div>
           </div>
+        </div>
+      </header>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {[
-              { title: 'No shortcuts.', body: 'Every surface is decontaminated before any product goes on. No exceptions.' },
-              { title: 'Documented results.', body: 'Before/after photos and paint thickness readings on every correction job.' },
-              { title: 'Manufacturer-backed.', body: 'All protection packages include manufacturer warranties — not just our word.' },
-              { title: 'JDM & exotic focus.', body: 'We own JDMs. We get it. Your build gets the respect it deserves.' },
-            ].map((item) => (
-              <div key={item.title} className="flex items-start gap-4 p-4 sm:p-5 bg-white border border-[#E0E0E0] rounded-xl shadow-[0_1px_3px_rgba(10,10,10,0.04)]">
-                <div className="w-1.5 h-1.5 rounded-full bg-[#0A0A0A] flex-shrink-0 mt-2" />
-                <div>
-                  <div className="text-[#0A0A0A] text-sm font-bold mb-1">{item.title}</div>
-                  <div className="text-[#666] text-xs sm:text-sm">{item.body}</div>
-                </div>
-              </div>
+      {/* INTRO */}
+      <section className="bg-white px-8 max-[900px]:px-5">
+        <div className="max-w-7xl mx-auto mt-16 grid grid-cols-2 gap-16 items-start pb-[120px] max-[900px]:grid-cols-1 max-[900px]:gap-6 max-[900px]:pb-[72px] max-[900px]:mt-10">
+          <p className="font-semibold text-ink leading-[1.2] tracking-[-0.03em] max-w-[20ch] text-[clamp(24px,2.6vw,38px)]">
+            VanityWorks started with one idea: do it right, or don&apos;t touch it.
+          </p>
+          <div className="text-[16px] leading-[1.6] text-ink-muted tracking-[-0.005em] max-w-[54ch] space-y-[18px]">
+            {bodyParagraphs.map((p, i) => (
+              <p key={i}>{renderMarked(p)}</p>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Team */}
-      <section className="py-10 md:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <h2
-          className="text-5xl text-[#0A0A0A] mb-10"
-          style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '0.04em' }}
-        >
-          Meet The Team
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {team.map((member) => (
-            <div
-              key={member.name}
-              className="bg-white border border-[#E0E0E0] rounded-xl p-6 shadow-[0_1px_3px_rgba(10,10,10,0.04)]"
-            >
-              {/* Avatar */}
-              <div className="w-14 h-14 rounded-full bg-[#0A0A0A] flex items-center justify-center mb-4">
-                <span
-                  className="text-2xl text-white font-bold"
-                  style={{ fontFamily: 'Bebas Neue, sans-serif' }}
-                >
-                  {member.name.charAt(0)}
+      {/* PORTRAIT BAND */}
+      <section className="bg-white px-8 pb-[120px] max-[900px]:px-5 max-[900px]:pb-[72px]">
+        <div className="max-w-7xl mx-auto">
+          <div className="relative w-full aspect-[21/9] overflow-hidden border border-ink bg-gradient-to-br from-[#1a1a1a] to-[#050505] max-[900px]:aspect-[4/3]">
+            <Image
+              src="/portfolio/white-r34-gtr/01.jpg"
+              alt="Nissan Skyline R34 GT-R — in for a showcase detail"
+              fill
+              sizes="(max-width: 900px) 100vw, 1280px"
+              className="object-cover"
+              style={{ objectPosition: 'center' }}
+            />
+            <span className="absolute bottom-[18px] left-[18px] bg-black/55 backdrop-blur-md text-white text-[10px] font-bold tracking-[0.16em] uppercase px-[11px] py-[7px]">
+              Nissan R34 GT-R · in the bay
+            </span>
+          </div>
+        </div>
+      </section>
+
+      {/* STATS */}
+      <section className="bg-white px-8 pb-[120px] max-[900px]:px-5 max-[900px]:pb-[72px]">
+        <div className="max-w-7xl mx-auto grid grid-cols-4 gap-px bg-line border border-ink max-[900px]:grid-cols-2">
+          {stats.map((s) => (
+            <div key={s.label} className="bg-white px-7 py-9 flex flex-col gap-2.5">
+              <span className="font-extrabold tracking-[-0.04em] leading-none text-ink tabular-nums text-[clamp(40px,5vw,64px)]">
+                {s.num}
+              </span>
+              <span className="text-[13px] font-medium text-ink-muted leading-[1.4] tracking-[-0.005em]">
+                {s.label}
+              </span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* VALUES */}
+      <section className="bg-white px-8 pb-[120px] max-[900px]:px-5 max-[900px]:pb-[72px]">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-[auto_1fr] gap-x-[60px] items-end pb-12 border-b border-ink mb-14 max-[900px]:grid-cols-1 max-[900px]:gap-4 max-[900px]:pb-7 max-[900px]:mb-9">
+            <span className="inline-flex items-center gap-2.5 text-[13px] font-semibold text-ink tracking-[-0.005em] pb-[18px] max-[900px]:pb-0">
+              <span className="inline-block w-2 h-2 rounded-full bg-ink" />
+              How we work
+            </span>
+            <h2 className="font-sans font-extrabold text-ink leading-[0.92] tracking-[-0.045em] text-right justify-self-end text-[clamp(36px,5vw,80px)] max-[900px]:text-left max-[900px]:justify-self-start max-[900px]:text-[11vw]">
+              <SplitLetters text="The standard." />
+            </h2>
+          </div>
+          <div className="grid grid-cols-3 gap-px bg-line border border-ink max-[900px]:grid-cols-1">
+            {values.map((v) => (
+              <div
+                key={v.num}
+                className="bg-white px-8 py-9 flex flex-col gap-3 transition-colors duration-300 hover:bg-[#fafafa]"
+              >
+                <span className="text-[12px] font-semibold text-ink-muted tracking-[0.04em]">
+                  {v.num}
+                </span>
+                <span className="text-[22px] font-extrabold tracking-[-0.03em] leading-[1.05] text-ink">
+                  {v.name}
+                </span>
+                <span className="text-[14px] leading-[1.5] text-ink-muted tracking-[-0.005em]">
+                  {v.desc}
                 </span>
               </div>
-              <h3
-                className="text-2xl text-[#0A0A0A] mb-0.5"
-                style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '0.04em' }}
-              >
-                {member.name}
-              </h3>
-              <p className="text-[#888] text-xs font-semibold tracking-wider uppercase mb-1">{member.role}</p>
-              <p className="text-[#888] text-xs mb-4">{member.certs}</p>
-              <p className="text-[#666] text-sm leading-relaxed">{member.bio}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Certifications */}
-      <section className="bg-[#F5F5F5] border-y border-[#E0E0E0] py-10 md:py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <h2
-            className="text-5xl text-[#0A0A0A] mb-10"
-            style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '0.04em' }}
-          >
-            Certifications & Partners
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {certifications.map((cert) => (
-              <CertBadge key={cert.badge} cert={cert} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-10 md:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
-        <h2
-          className="text-5xl text-[#0A0A0A] mb-4"
-          style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '0.04em' }}
-        >
-          Let&apos;s Work on Your Car
-        </h2>
-        <p className="text-[#666] mb-8 max-w-md mx-auto text-sm">
-          Drop us a message and let&apos;s figure out the best protection plan for your build.
-        </p>
-        <Link
-          href="/book"
-          className="inline-block px-10 py-4 bg-[#0A0A0A] text-white font-bold text-sm tracking-widest uppercase rounded-lg hover:bg-[#1A1A1A] transition-colors"
-        >
-          Get in Touch
-        </Link>
+      {/* CERTS */}
+      <section className="bg-white px-8 pb-[120px] max-[900px]:px-5 max-[900px]:pb-[72px]">
+        <div className="max-w-7xl mx-auto">
+          <div className="border border-ink p-12 grid grid-cols-2 gap-12 items-center max-[900px]:grid-cols-1 max-[900px]:gap-8 max-[900px]:p-7">
+            <div>
+              <h3 className="font-extrabold tracking-[-0.035em] leading-[1.05] mb-4 text-[clamp(26px,3vw,40px)]">
+                <SplitLetters text="Trained by the manufacturers." />
+              </h3>
+              <p className="text-[15px] leading-[1.55] text-ink-muted tracking-[-0.005em] max-w-[44ch]">
+                Anyone can buy a buffer.{' '}
+                <strong className="text-ink font-semibold">
+                  Certification means the brands behind the products trained the installer and stand behind the work
+                </strong>{' '}
+                — with warranties that only hold when the install is done right. VanityWorks is a DetailWise Academy–certified Opticle PPF installer.
+              </p>
+            </div>
+            <div className="flex flex-col gap-4">
+              {certs.map((c) => (
+                <div
+                  key={c.name}
+                  className="border border-line px-6 py-[22px] flex items-center justify-between gap-4"
+                >
+                  <div>
+                    <div className="text-[18px] font-extrabold tracking-[-0.02em]">{c.name}</div>
+                    <div className="text-[10px] font-bold tracking-[0.12em] uppercase text-ink-muted">
+                      {c.type}
+                    </div>
+                  </div>
+                  <span className="w-7 h-7 rounded-full bg-ink flex items-center justify-center flex-shrink-0">
+                    <CheckMark />
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
+
+      {/* FINAL CTA */}
+      <FinalCta
+        title="See the difference."
+        sub="Bring us the car. We'll show you what obsessive actually looks like — **no pressure, just an honest read.**"
+        primaryCta={{ label: 'Book a consultation', href: '/contact' }}
+        secondaryCta={{ label: 'See the work', href: '/gallery' }}
+      />
     </div>
   )
 }

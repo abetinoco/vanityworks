@@ -24,8 +24,10 @@ const config: Config = {
         },
       },
       fontFamily: {
+        sans: ['var(--font-inter-tight)', 'Inter Tight', 'Inter', 'system-ui', 'sans-serif'],
         display: ['var(--font-bebas)', 'Bebas Neue', 'Impact', 'sans-serif'],
-        body: ['var(--font-barlow)', 'Barlow', 'sans-serif'],
+        script: ['var(--font-allura)', 'Allura', 'cursive'],
+        body: ['var(--font-inter-tight)', 'Inter Tight', 'Inter', 'system-ui', 'sans-serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.6s ease-out forwards',

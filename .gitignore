@@ -36,3 +36,6 @@ yarn-error.log*
 
 # claude
 .claude/
+
+# raw portfolio source assets (processed copies live in public/portfolio)
+VanityWorks Portfolio/

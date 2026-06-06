@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { CheckIcon, ArrowRightIcon } from '@/components/Icons'
 
 const vehicleSizes = [
   { id: 'compact', label: 'Compact / Coupe', examples: 'Civic, BRZ, MX-5, EVO', multiplier: 1.0 },
@@ -35,7 +36,7 @@ const serviceOptions = [
   {
     id: 'ceramic-gold',
     name: 'Ceramic Coating — Gold Package',
-    description: 'Multi-layer Ceramic Pro system, 5+ year protection',
+    description: 'Multi-layer nano-ceramic system, 5+ year protection',
     basePrice: 1499,
     category: 'ceramic',
   },
@@ -211,7 +212,7 @@ export default function ServiceCalculator() {
                         ? 'bg-[#0A0A0A] border-[#0A0A0A] text-white'
                         : 'border-[#CCCCCC]'
                     }`}>
-                      {selected && <span className="text-[9px] font-bold">✓</span>}
+                      {selected && <CheckIcon className="w-2.5 h-2.5" strokeWidth={3} />}
                     </div>
                     <span className="text-xs font-medium">{a.name}</span>
                   </div>
@@ -256,9 +257,10 @@ export default function ServiceCalculator() {
               </div>
               <Link
                 href={`/book?service=${encodeURIComponent(service?.name ?? '')}&estimate=${grandTotal}`}
-                className="block w-full py-3.5 bg-[#0A0A0A] text-white font-bold text-sm tracking-widest uppercase rounded-lg text-center hover:bg-[#1A1A1A] transition-colors"
+                className="flex w-full py-3.5 bg-[#0A0A0A] text-white font-bold text-sm tracking-widest uppercase rounded-lg items-center justify-center gap-2 hover:bg-[#1A1A1A] transition-colors"
               >
-                Book This Package →
+                Book This Package
+                <ArrowRightIcon className="w-4 h-4" />
               </Link>
               <p className="text-[#888] text-[10px] text-center mt-2">
                 This is a rough estimate — we&apos;ll confirm the final price after inspecting your car.

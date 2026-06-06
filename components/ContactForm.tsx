@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { CheckIcon, ArrowRightIcon } from '@/components/Icons'
 
 const services = [
   'Paint Protection Film',
@@ -38,8 +39,8 @@ export default function ContactForm() {
   if (submitted) {
     return (
       <div className="flex flex-col items-center justify-center py-16 text-center gap-4">
-        <div className="w-16 h-16 rounded-full bg-[#F5F5F5] border border-[#0A0A0A] flex items-center justify-center text-2xl text-[#0A0A0A]">
-          ✓
+        <div className="w-16 h-16 rounded-full bg-[#F5F5F5] border border-[#0A0A0A] flex items-center justify-center text-[#0A0A0A]">
+          <CheckIcon className="w-7 h-7" strokeWidth={2} />
         </div>
         <h3
           className="text-3xl text-[#0A0A0A]"
@@ -156,9 +157,10 @@ export default function ContactForm() {
 
       <button
         type="submit"
-        className="w-full py-4 bg-[#0A0A0A] text-white font-bold text-sm tracking-widest uppercase rounded-lg hover:bg-[#1A1A1A] transition-colors"
+        className="w-full py-4 bg-[#0A0A0A] text-white font-bold text-sm tracking-widest uppercase rounded-lg hover:bg-[#1A1A1A] transition-colors inline-flex items-center justify-center gap-2"
       >
-        Send Message →
+        Send Message
+        <ArrowRightIcon className="w-4 h-4" />
       </button>
 
       <p className="text-[#888] text-xs text-center">

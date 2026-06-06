@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { ArrowRightIcon } from '@/components/Icons'
 
 export const metadata: Metadata = {
   title: 'Blog · Detailing Insights & Build Guides',
@@ -146,7 +147,8 @@ export default function BlogPage() {
                     {article.excerpt}
                   </p>
                   <div className="mt-5 inline-flex items-center gap-2 text-[#0A0A0A] text-xs font-semibold tracking-wider uppercase">
-                    Read Article →
+                    Read Article
+                    <ArrowRightIcon className="w-3.5 h-3.5" />
                   </div>
                 </div>
               </Link>

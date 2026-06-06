@@ -1,118 +1,115 @@
-'use client'
+import { SplitLetters } from '@/components/SplitLetters'
 
-import { useState } from 'react'
+interface Step {
+  number: string
+  eyebrow: string
+  title: string
+  body: string
+  metaLabel: string
+  metaValue: string
+}
 
-const steps = [
+const steps: Step[] = [
   {
     number: '01',
-    title: 'Book Online',
-    description: 'Pick your service and schedule in under a minute.',
+    eyebrow: 'Step 01 — Booking',
+    title: 'Book online in 60 seconds.',
+    body: 'Pick your service, pick a date. Pay nothing until consultation. No phone tag.',
+    metaLabel: 'Time required',
+    metaValue: '~60 seconds',
   },
   {
     number: '02',
-    title: 'Drop Off Your Car',
-    description: 'Or let us come to you — fully mobile in Chicagoland.',
+    eyebrow: 'Step 02 — Drop-off',
+    title: 'Drop off — or we’ll come to you.',
+    body: 'Bring the car to Volo, or book mobile service anywhere in Chicagoland for an upcharge.',
+    metaLabel: 'Location',
+    metaValue: 'In-shop or mobile',
   },
   {
     number: '03',
-    title: 'We Work Our Magic',
-    description: 'Certified hands. Premium products. Documented results.',
+    eyebrow: 'Step 03 — The work',
+    title: 'Certified install. Documented.',
+    body: 'Manufacturer-trained hands. Paint depth measured. Progress shots delivered.',
+    metaLabel: 'Service window',
+    metaValue: '1–3 days typical',
   },
   {
     number: '04',
-    title: 'Pick Up & Stun',
-    description: 'Drive away with a finish that turns heads.',
+    eyebrow: 'Step 04 — Delivery',
+    title: 'Pick up. Turn heads.',
+    body: 'Final walkthrough under high-intensity lighting. Care instructions. Warranty paperwork.',
+    metaLabel: 'Warranty',
+    metaValue: 'Up to 10 years',
   },
 ]
 
 export default function HowItWorks() {
-  const [open, setOpen] = useState<number | null>(null)
-
   return (
-    <section className="bg-[#F5F5F5] border-y border-[#E0E0E0] py-10 md:py-16 px-4 sm:px-6 lg:px-8">
+    <section className="bg-white px-8 pt-[120px] max-[900px]:px-5 max-[900px]:pt-20">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-8">
-          <p className="text-[#888] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
-            The Process
-          </p>
-          <h2
-            className="text-5xl sm:text-6xl text-[#0A0A0A]"
-            style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '0.04em' }}
-          >
-            How It Works
+        {/* Header */}
+        <div className="grid grid-cols-[auto_1fr] gap-x-[60px] items-end pb-12 border-b border-ink max-[900px]:grid-cols-1 max-[900px]:gap-4 max-[900px]:pb-8">
+          <div className="flex items-center gap-2.5 text-[13px] font-semibold text-ink tracking-[-0.005em] pb-[18px]">
+            <span className="inline-block w-2 h-2 rounded-full bg-ink" />
+            The process
+          </div>
+          <h2 className="font-sans font-extrabold text-ink leading-[0.92] tracking-[-0.045em] text-right justify-self-end text-[clamp(40px,6vw,96px)] max-[900px]:text-left max-[900px]:justify-self-start max-[900px]:text-[13vw]">
+            <SplitLetters text="How it works." />
           </h2>
-          <p className="text-[#666] mt-3 max-w-xl mx-auto text-sm leading-relaxed">
-            Four steps from booking to a finish you&apos;ll want to show off.
-          </p>
         </div>
 
-        {/* Desktop: 4-col grid */}
-        <div className="hidden md:grid md:grid-cols-4 gap-6">
-          {steps.map((step) => (
-            <div
-              key={step.number}
-              className="relative bg-white border border-[#E0E0E0] rounded-lg p-6 hover:border-[#0A0A0A] transition-colors shadow-[0_1px_3px_rgba(10,10,10,0.04)]"
-            >
-              <span
-                className="text-6xl text-[#0A0A0A] leading-none block mb-3"
-                style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '0.02em' }}
-              >
-                {step.number}
-              </span>
-              <h3
-                className="text-[#0A0A0A] text-2xl mb-2"
-                style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '0.04em' }}
-              >
-                {step.title}
-              </h3>
-              <p className="text-[#666] text-sm leading-relaxed">{step.description}</p>
-            </div>
-          ))}
-        </div>
+        {/* Timeline */}
+        <div className="relative mt-20 pb-[120px] max-[900px]:mt-12 max-[900px]:pb-[60px]">
+          {/* Desktop horizontal track */}
+          <div className="hidden md:block absolute top-12 left-6 right-6 h-px bg-line z-[1]">
+            <div className="absolute inset-0 bg-ink timeline-track-line" />
+          </div>
 
-        {/* Mobile: numbered accordion, collapsed by default */}
-        <div className="md:hidden space-y-2">
-          {steps.map((step, i) => (
-            <div
-              key={step.number}
-              className="bg-white border border-[#E0E0E0] rounded-lg overflow-hidden"
-            >
-              <button
-                className="w-full flex items-center gap-4 px-4 py-3 text-left min-h-[52px]"
-                onClick={() => setOpen(open === i ? null : i)}
-                aria-expanded={open === i}
-              >
-                <span
-                  className="text-3xl text-[#0A0A0A] leading-none flex-shrink-0 w-10"
-                  style={{ fontFamily: 'Bebas Neue, sans-serif' }}
-                >
-                  {step.number}
-                </span>
-                <span
-                  className="text-[#0A0A0A] text-lg flex-1"
-                  style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '0.04em' }}
-                >
-                  {step.title}
-                </span>
-                <span
-                  className={`text-[#888] text-xs transition-transform duration-200 flex-shrink-0 ${
-                    open === i ? 'rotate-180' : ''
-                  }`}
-                >
-                  ▼
-                </span>
-              </button>
+          {/* Mobile vertical track */}
+          <div
+            aria-hidden
+            className="md:hidden absolute top-12 bottom-12 left-12 w-px bg-ink/40 z-[1]"
+          />
+
+          {/* Steps */}
+          <div className="grid grid-cols-4 gap-8 relative z-[2] max-[900px]:grid-cols-1 max-[900px]:gap-0">
+            {steps.map((step, idx) => (
               <div
-                className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                  open === i ? 'max-h-24 opacity-100' : 'max-h-0 opacity-0'
-                }`}
+                key={step.number}
+                data-hover
+                className="step-rise group relative px-6 max-[900px]:pl-[130px] max-[900px]:pr-0 max-[900px]:pb-10 max-[900px]:last:pb-0"
+                style={{ animationDelay: `${0.4 + idx * 0.2}s` }}
               >
-                <p className="px-4 pb-4 text-[#666] text-sm leading-relaxed border-t border-[#F0F0F0] pt-2">
-                  {step.description}
+                {/* Node */}
+                <div className="step-node-anim relative z-[3] mb-9 w-24 h-24 rounded-full bg-white border-[1.5px] border-ink flex items-center justify-center text-[36px] font-extrabold tracking-[-0.045em] tabular-nums text-ink group-hover:bg-ink group-hover:text-white group-hover:scale-105 max-[900px]:absolute max-[900px]:left-0 max-[900px]:top-0 max-[900px]:mb-0 max-[900px]:text-[32px]">
+                  {step.number}
+                  <span
+                    aria-hidden
+                    className="absolute left-1/2 -bottom-4 w-px h-4 bg-ink opacity-40 -translate-x-1/2 max-[900px]:hidden"
+                  />
+                </div>
+
+                <p className="text-[11px] font-semibold tracking-[0.12em] uppercase text-ink-muted mb-2.5 max-[900px]:mt-2">
+                  {step.eyebrow}
                 </p>
+                <h3 className="font-sans font-extrabold text-ink tracking-[-0.03em] leading-[1.05] mb-3.5 text-[clamp(22px,1.8vw,30px)]">
+                  {step.title}
+                </h3>
+                <p className="text-sm text-ink-muted leading-[1.5] tracking-[-0.005em] mb-5 max-w-[24ch] max-[900px]:max-w-none">
+                  {step.body}
+                </p>
+                <div className="flex flex-col gap-1 pt-3.5 border-t border-line">
+                  <span className="text-[10px] font-semibold tracking-[0.1em] uppercase text-ink-muted">
+                    {step.metaLabel}
+                  </span>
+                  <span className="text-[13px] font-semibold text-ink tracking-[-0.01em]">
+                    {step.metaValue}
+                  </span>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

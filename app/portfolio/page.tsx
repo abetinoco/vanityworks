@@ -1,85 +1,177 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { galleryItems } from '@/lib/data'
+import {
+  allPortfolioPhotos,
+  type PortfolioEntry,
+  type FlatPhoto,
+} from '@/lib/portfolio'
+import { XIcon } from '@/components/Icons'
+import BeforeAfterSlider from '@/components/BeforeAfterSlider'
 
-const makes = ['All', 'Nissan', 'BMW', 'Toyota', 'Porsche', 'McLaren', 'Subaru', 'Honda', 'Mitsubishi']
-
-const serviceFilters = ['All Services', 'Paint Protection Film', 'Ceramic Coating', 'Paint Correction', 'Interior & Exterior Detail']
-
-type GalleryItem = typeof galleryItems[number]
-
-function PortfolioCard({ item, onClick }: { item: GalleryItem; onClick: () => void }) {
+function PhotoTile({
+  photo,
+  onClick,
+}: {
+  photo: FlatPhoto
+  onClick: () => void
+}) {
   return (
     <button
       onClick={onClick}
-      className="group relative aspect-square rounded-xl overflow-hidden bg-[#F5F5F5] border border-[#E0E0E0] hover:border-[#0A0A0A] transition-all duration-300 hover:-translate-y-0.5 shadow-[0_1px_3px_rgba(10,10,10,0.04)]"
+      className="group relative aspect-square rounded-xl overflow-hidden bg-[#F5F5F5] border border-[#E0E0E0] hover:border-[#0A0A0A] transition-all duration-300 hover:-translate-y-0.5 shadow-[0_1px_3px_rgba(10,10,10,0.04)] text-left"
     >
       <Image
-        src={item.image}
-        alt={item.title}
+        src={photo.src}
+        alt={photo.vehicle}
         fill
         className="object-cover transition-transform duration-700 group-hover:scale-110"
-        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, 20vw"
       />
-      {/* Cinematic overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-50 group-hover:opacity-95 transition-opacity duration-300" />
 
-      {/* Content */}
-      <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-        <div className="flex items-center gap-2 mb-1">
-          <span className="px-2 py-0.5 text-[9px] font-bold tracking-widest uppercase rounded-full bg-white/95 text-[#0A0A0A] border border-white/40">
-            {item.make}
-          </span>
+      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+      {photo.label && (
+        <div className="absolute top-3 left-3 px-2 py-0.5 text-[9px] font-bold tracking-widest uppercase rounded-full bg-[#0A0A0A] text-white">
+          {photo.label}
         </div>
-        <p className="text-white text-sm font-semibold leading-tight">{item.title}</p>
-        <p className="text-white/70 text-xs mt-0.5">{item.service}</p>
+      )}
+
+      <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
+        <p className="text-white text-sm font-semibold leading-tight">{photo.vehicle}</p>
       </div>
     </button>
   )
 }
 
-function Lightbox({ item, onClose }: { item: GalleryItem; onClose: () => void }) {
+function Lightbox({
+  entry,
+  initialIdx,
+  onClose,
+}: {
+  entry: PortfolioEntry
+  initialIdx: number
+  onClose: () => void
+}) {
+  const [idx, setIdx] = useState(initialIdx)
+
+  useEffect(() => {
+    setIdx(initialIdx)
+  }, [initialIdx, entry])
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+      if (entry.type === 'showcase') {
+        if (e.key === 'ArrowRight') setIdx((i) => (i + 1) % entry.photos.length)
+        if (e.key === 'ArrowLeft')
+          setIdx((i) => (i - 1 + entry.photos.length) % entry.photos.length)
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [entry, onClose])
+
+  const beforeSrc =
+    entry.photos.find((p) => p.label === 'Before')?.src ?? entry.photos[0].src
+  const afterSrc =
+    entry.photos.find((p) => p.label === 'After')?.src ??
+    entry.photos[entry.photos.length - 1].src
+
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm overflow-y-auto"
       onClick={onClose}
     >
-      <div
-        className="relative max-w-4xl w-full rounded-2xl overflow-hidden border border-[#E0E0E0] bg-white"
-        onClick={e => e.stopPropagation()}
-      >
-        <div className="relative aspect-video">
-          <Image src={item.image} alt={item.title} fill className="object-cover" />
-        </div>
-        <div className="bg-white px-6 py-5 flex items-center justify-between border-t border-[#E0E0E0]">
-          <div>
-            <div className="flex items-center gap-3 mb-1">
-              <span className="px-2.5 py-0.5 text-[10px] font-bold tracking-widest uppercase rounded-full bg-[#0A0A0A] text-white">
-                {item.make}
-              </span>
-              <span className="text-[#888] text-xs uppercase tracking-wider">{item.service}</span>
-            </div>
-            <h3 className="text-[#0A0A0A] text-xl" style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '0.04em' }}>
-              {item.title}
-            </h3>
-            <p className="text-[#888] text-xs mt-0.5">{item.vehicle}</p>
+      <div className="relative max-w-5xl w-full my-auto" onClick={(e) => e.stopPropagation()}>
+        {entry.type === 'before-after' ? (
+          <BeforeAfterSlider
+            beforeSrc={beforeSrc}
+            afterSrc={afterSrc}
+            title={entry.vehicle}
+            vehicle={entry.service}
+          />
+        ) : (
+          <div className="relative aspect-[16/10] rounded-2xl overflow-hidden border border-[#E0E0E0] bg-white">
+            <Image
+              src={entry.photos[idx].src}
+              alt={entry.vehicle}
+              fill
+              priority
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 1024px"
+            />
+            {entry.photos.length > 1 && (
+              <>
+                <button
+                  onClick={() =>
+                    setIdx((i) => (i - 1 + entry.photos.length) % entry.photos.length)
+                  }
+                  aria-label="Previous photo"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 hover:bg-white text-[#0A0A0A] flex items-center justify-center transition-colors text-lg"
+                >
+                  ‹
+                </button>
+                <button
+                  onClick={() => setIdx((i) => (i + 1) % entry.photos.length)}
+                  aria-label="Next photo"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 hover:bg-white text-[#0A0A0A] flex items-center justify-center transition-colors text-lg"
+                >
+                  ›
+                </button>
+                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 bg-black/35 backdrop-blur-sm px-3 py-1.5 rounded-full">
+                  {entry.photos.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setIdx(i)}
+                      aria-label={`Go to photo ${i + 1}`}
+                      className={`h-1.5 rounded-full transition-all ${
+                        i === idx ? 'w-5 bg-white' : 'w-1.5 bg-white/50'
+                      }`}
+                    />
+                  ))}
+                </div>
+                <div className="absolute top-3 right-3 px-2.5 py-1 bg-black/55 text-white text-[10px] font-semibold tracking-wider uppercase rounded-full backdrop-blur-sm">
+                  {idx + 1} / {entry.photos.length}
+                </div>
+              </>
+            )}
           </div>
-          <div className="flex items-center gap-3">
+        )}
+
+        <div className="mt-4 bg-white border border-[#E0E0E0] rounded-2xl px-6 py-5 flex items-start justify-between gap-4">
+          <div className="min-w-0 flex-1">
+            <p className="text-[#888] text-xs uppercase tracking-wider mb-1">
+              {entry.service}
+            </p>
+            <h3
+              className="text-[#0A0A0A] text-2xl leading-none"
+              style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '0.04em' }}
+            >
+              {entry.vehicle}
+            </h3>
+            {entry.caption && (
+              <p className="text-[#666] text-sm mt-2 leading-relaxed max-w-2xl">
+                {entry.caption}
+              </p>
+            )}
+          </div>
+          <div className="flex items-center gap-2 flex-shrink-0">
             <Link
               href="/book"
-              className="px-4 py-2 bg-[#0A0A0A] text-white text-xs font-bold tracking-widest uppercase rounded-lg hover:bg-[#1A1A1A] transition-colors"
+              className="hidden sm:inline-flex px-4 py-2 bg-[#0A0A0A] text-white text-xs font-bold tracking-widest uppercase rounded-lg hover:bg-[#1A1A1A] transition-colors"
               onClick={onClose}
             >
               Book This Service
             </Link>
             <button
               onClick={onClose}
+              aria-label="Close"
               className="w-9 h-9 rounded-full bg-[#F5F5F5] border border-[#E0E0E0] flex items-center justify-center text-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white transition-colors"
             >
-              ✕
+              <XIcon className="w-4 h-4" />
             </button>
           </div>
         </div>
@@ -89,21 +181,31 @@ function Lightbox({ item, onClose }: { item: GalleryItem; onClose: () => void })
 }
 
 export default function PortfolioPage() {
-  const [activeMake, setActiveMake] = useState('All')
-  const [activeService, setActiveService] = useState('All Services')
-  const [lightbox, setLightbox] = useState<GalleryItem | null>(null)
+  const [lightbox, setLightbox] = useState<{
+    entry: PortfolioEntry
+    idx: number
+  } | null>(null)
 
-  const filtered = galleryItems.filter(item => {
-    const makeMatch = activeMake === 'All' || item.make === activeMake
-    const serviceMatch = activeService === 'All Services' || item.service === activeService
-    return makeMatch && serviceMatch
-  })
+  useEffect(() => {
+    if (lightbox) {
+      const prior = document.body.style.overflow
+      document.body.style.overflow = 'hidden'
+      return () => {
+        document.body.style.overflow = prior
+      }
+    }
+  }, [lightbox])
 
   return (
-    <div className="min-h-screen pt-20 pb-32 bg-white">
+    <div className="min-h-screen pt-20 lg:pt-24 pb-32 bg-white">
       {/* Hero band */}
       <div className="relative bg-white py-24 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-[#E0E0E0]">
-        <svg className="absolute inset-0 w-full h-full opacity-[0.05]" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice" fill="none">
+        <svg
+          className="absolute inset-0 w-full h-full opacity-[0.05]"
+          viewBox="0 0 1440 600"
+          preserveAspectRatio="xMidYMid slice"
+          fill="none"
+        >
           <path d="M0 400 Q480 240 960 220 Q1200 210 1440 360" stroke="#0A0A0A" strokeWidth="1" />
           <path d="M0 500 Q480 360 960 340 Q1200 325 1440 460" stroke="#0A0A0A" strokeWidth="0.5" />
         </svg>
@@ -122,12 +224,11 @@ export default function PortfolioPage() {
                 Portfolio
               </h1>
               <p className="text-[#666] text-base max-w-lg leading-relaxed">
-                Every car in this portfolio was serviced by VanityWorks. Browse by make or service
-                to find vehicles like yours — and see what we can do.
+                Every photo on this page is real work from the shop. Tap any tile to view the full
+                set — multi-angle showcases open as a carousel, before/after jobs open as a drag slider.
               </p>
             </div>
 
-            {/* IG badge */}
             <a
               href="https://instagram.com/vanityworks.il"
               target="_blank"
@@ -138,7 +239,9 @@ export default function PortfolioPage() {
                 IG
               </div>
               <div>
-                <div className="text-[#0A0A0A] text-sm font-semibold group-hover:text-[#888] transition-colors">@vanityworks.il</div>
+                <div className="text-[#0A0A0A] text-sm font-semibold group-hover:text-[#888] transition-colors">
+                  @vanityworks.il
+                </div>
                 <div className="text-[#888] text-xs">New work posted weekly</div>
               </div>
             </a>
@@ -146,93 +249,27 @@ export default function PortfolioPage() {
         </div>
       </div>
 
-      {/* Filters */}
-      <div className="sticky top-16 md:top-20 z-30 bg-white/95 backdrop-blur-md border-b border-[#E0E0E0]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-3">
-          {/* Make filter */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-hide">
-            <span className="text-[#888] text-[10px] tracking-widest uppercase flex-shrink-0 mr-1">Make</span>
-            {makes.map(make => (
-              <button
-                key={make}
-                onClick={() => setActiveMake(make)}
-                className={`flex-shrink-0 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all ${
-                  activeMake === make
-                    ? 'bg-[#0A0A0A] text-white'
-                    : 'border border-[#E0E0E0] bg-white text-[#666] hover:border-[#0A0A0A] hover:text-[#0A0A0A]'
-                }`}
-              >
-                {make}
-              </button>
-            ))}
-          </div>
-
-          {/* Service filter */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-hide">
-            <span className="text-[#888] text-[10px] tracking-widest uppercase flex-shrink-0 mr-1">Service</span>
-            {serviceFilters.map(s => (
-              <button
-                key={s}
-                onClick={() => setActiveService(s)}
-                className={`flex-shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all ${
-                  activeService === s
-                    ? 'bg-[#F5F5F5] border border-[#0A0A0A] text-[#0A0A0A]'
-                    : 'border border-[#E0E0E0] bg-white text-[#888] hover:border-[#0A0A0A] hover:text-[#0A0A0A]'
-                }`}
-              >
-                {s}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Grid */}
+      {/* Grid — all 44 photos, no filter UI */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        {filtered.length === 0 ? (
-          <div className="text-center py-24">
-            <p className="text-[#888] text-lg mb-2">No results for this filter combo.</p>
-            <button
-              onClick={() => { setActiveMake('All'); setActiveService('All Services') }}
-              className="text-[#0A0A0A] text-sm font-semibold tracking-wider uppercase hover:text-[#888]"
-            >
-              Clear Filters →
-            </button>
-          </div>
-        ) : (
-          <>
-            <p className="text-[#888] text-xs tracking-widest uppercase mb-6">
-              {filtered.length} {filtered.length === 1 ? 'Result' : 'Results'}
-              {activeMake !== 'All' && ` · ${activeMake}`}
-              {activeService !== 'All Services' && ` · ${activeService}`}
-            </p>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
-              {filtered.map(item => (
-                <PortfolioCard key={item.id} item={item} onClick={() => setLightbox(item)} />
-              ))}
-              {/* IG placeholder cells */}
-              <div className="relative aspect-square rounded-xl bg-[#FAFAFA] border border-[#E0E0E0] border-dashed flex flex-col items-center justify-center gap-2 p-4">
-                <span className="text-3xl text-[#B5B5B5]">·</span>
-                <span className="text-[#888] text-xs text-center leading-snug">
-                  Follow <span className="text-[#888]">@vanityworks.il</span> for the latest
-                </span>
-              </div>
-              <div className="relative aspect-square rounded-xl bg-[#FAFAFA] border border-[#E0E0E0] border-dashed flex flex-col items-center justify-center gap-2 p-4">
-                <span className="text-3xl text-[#B5B5B5]">·</span>
-                <span className="text-[#888] text-xs text-center leading-snug">
-                  New work added after every appointment
-                </span>
-              </div>
-            </div>
-          </>
-        )}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">
+          {allPortfolioPhotos.map((photo) => (
+            <PhotoTile
+              key={photo.id}
+              photo={photo}
+              onClick={() => setLightbox({ entry: photo.entry, idx: photo.indexInEntry })}
+            />
+          ))}
+        </div>
       </div>
 
       {/* CTA strip */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-[#F5F5F5] border border-[#0A0A0A] rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
-            <h3 className="text-3xl text-[#0A0A0A] mb-2" style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '0.04em' }}>
+            <h3
+              className="text-3xl text-[#0A0A0A] mb-2"
+              style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '0.04em' }}
+            >
               Want Your Car In Here?
             </h3>
             <p className="text-[#666] text-sm max-w-md">
@@ -256,8 +293,13 @@ export default function PortfolioPage() {
         </div>
       </div>
 
-      {/* Lightbox */}
-      {lightbox && <Lightbox item={lightbox} onClose={() => setLightbox(null)} />}
+      {lightbox && (
+        <Lightbox
+          entry={lightbox.entry}
+          initialIdx={lightbox.idx}
+          onClose={() => setLightbox(null)}
+        />
+      )}
     </div>
   )
 }

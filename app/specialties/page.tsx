@@ -1,5 +1,17 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import {
+  ArrowRightIcon,
+  LayersIcon,
+  RulerIcon,
+  ScissorsIcon,
+  WrenchIcon,
+  TrophyIcon,
+  CameraIcon,
+  ShieldIcon,
+  SparkleIcon,
+  SunIcon,
+} from '@/components/Icons'
 
 export const metadata: Metadata = {
   title: 'JDM & Exotic Specialists',
@@ -29,32 +41,32 @@ const exoticRoster = [
 
 const whyJdm = [
   {
-    icon: '◆',
+    Icon: LayersIcon,
     title: 'Japanese Factory Clearcoat',
     body: 'JDM vehicles are often shipped with thinner, softer Japanese-spec clearcoat. We meter paint depth on every panel before any polishing step to protect what\'s there.',
   },
   {
-    icon: '◢',
+    Icon: RulerIcon,
     title: 'Precision Panel Gaps',
     body: 'Tight JDM panel tolerances and unique bumper cutout geometry require hand-cut film relief cuts. We don\'t rely on generic patterns — we fit to your specific car.',
   },
   {
-    icon: '◇',
+    Icon: ScissorsIcon,
     title: 'JDM-Specific PPF Patterns',
-    body: 'We use OPTICLE and XPEL DAP pattern libraries supplemented by our own hand-cut templates for vehicles not covered by off-the-shelf programs.',
+    body: 'We use OPTICLE pattern libraries supplemented by our own hand-cut templates for vehicles not covered by off-the-shelf programs.',
   },
   {
-    icon: '◈',
+    Icon: WrenchIcon,
     title: 'Modified Vehicle Experience',
     body: 'Aftermarket bumpers, widebody kits, carbon aero — we\'ve handled it. If your build has been modified, we adapt our process instead of turning you away.',
   },
   {
-    icon: '◉',
+    Icon: TrophyIcon,
     title: 'Track & Show Builds',
     body: 'From track-prepped time attack cars to concours-level show builds, we understand the specific needs of cars that are used hard and displayed proudly.',
   },
   {
-    icon: '◐',
+    Icon: CameraIcon,
     title: 'Documented Process',
     body: 'We photograph every stage of your vehicle\'s service under high-intensity lighting — so you see exactly what we found and what we did about it.',
   },
@@ -62,7 +74,7 @@ const whyJdm = [
 
 export default function SpecialtiesPage() {
   return (
-    <div className="min-h-screen pt-20 bg-white">
+    <div className="min-h-screen pt-20 lg:pt-24 bg-white">
       {/* Hero */}
       <div className="relative overflow-hidden bg-white py-16 md:py-20 px-4 sm:px-6 lg:px-8 border-b border-[#E0E0E0]">
         {/* Graphic lines */}
@@ -107,9 +119,10 @@ export default function SpecialtiesPage() {
             </Link>
             <Link
               href="/services/paint-protection-film"
-              className="px-8 py-4 border border-[#0A0A0A] text-[#0A0A0A] font-semibold text-sm tracking-widest uppercase rounded-lg hover:bg-[#0A0A0A] hover:text-white transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-[#0A0A0A] text-[#0A0A0A] font-semibold text-sm tracking-widest uppercase rounded-lg hover:bg-[#0A0A0A] hover:text-white transition-colors"
             >
-              PPF for Exotics →
+              PPF for Exotics
+              <ArrowRightIcon className="w-4 h-4" />
             </Link>
           </div>
         </div>
@@ -160,7 +173,9 @@ export default function SpecialtiesPage() {
                 key={item.title}
                 className="bg-white border border-[#E0E0E0] hover:border-[#0A0A0A] rounded-xl p-4 sm:p-6 transition-colors shadow-[0_1px_3px_rgba(10,10,10,0.04)]"
               >
-                <div className="text-2xl sm:text-3xl mb-3 text-[#888]">{item.icon}</div>
+                <div className="mb-3 text-[#0A0A0A]">
+                  <item.Icon className="w-7 h-7 sm:w-8 sm:h-8" />
+                </div>
                 <h3
                   className="text-base sm:text-xl text-[#0A0A0A] mb-1.5 leading-snug"
                   style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '0.04em' }}
@@ -270,21 +285,21 @@ export default function SpecialtiesPage() {
             {[
               {
                 href: '/services/paint-protection-film',
-                icon: '◆',
+                Icon: ShieldIcon,
                 title: 'Paint Protection Film',
-                note: 'OPTICLE & XPEL certified. Full-front, partial zones, or full-body wraps.',
+                note: 'OPTICLE PPF trained. Full-front, partial zones, or full-body wraps.',
                 cta: 'Starting at $899',
               },
               {
                 href: '/services/ceramic-coating',
-                icon: '◇',
+                Icon: SparkleIcon,
                 title: 'Ceramic Coating',
-                note: 'Ceramic Pro certified. Nano-ceramic SiO₂ for hydrophobic, UV-resistant gloss.',
+                note: 'Professional-grade nano-ceramic SiO₂ for hydrophobic, UV-resistant gloss.',
                 cta: 'Starting at $699',
               },
               {
                 href: '/services/paint-correction',
-                icon: '◈',
+                Icon: SunIcon,
                 title: 'Paint Correction',
                 note: 'DETAILWISE certified. Multi-stage machine polishing to 95%+ defect removal.',
                 cta: 'Starting at $449',
@@ -295,7 +310,9 @@ export default function SpecialtiesPage() {
                 href={s.href}
                 className="group bg-white border border-[#0A0A0A] hover:bg-[#0A0A0A] rounded-xl p-4 sm:p-7 transition-colors shadow-[0_1px_3px_rgba(10,10,10,0.04)]"
               >
-                <div className="text-3xl sm:text-4xl mb-3 text-[#888]">{s.icon}</div>
+                <div className="mb-3 text-[#0A0A0A] group-hover:text-white transition-colors">
+                  <s.Icon className="w-8 h-8 sm:w-9 sm:h-9" />
+                </div>
                 <h3
                   className="text-lg sm:text-2xl text-[#0A0A0A] group-hover:text-white mb-1.5 transition-colors"
                   style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '0.04em' }}
@@ -303,7 +320,10 @@ export default function SpecialtiesPage() {
                   {s.title}
                 </h3>
                 <p className="text-[#666] group-hover:text-white/70 text-xs sm:text-sm leading-relaxed mb-3 sm:mb-5 transition-colors">{s.note}</p>
-                <div className="text-[#0A0A0A] group-hover:text-[#888] font-bold text-xs sm:text-sm transition-colors">{s.cta} →</div>
+                <div className="inline-flex items-center gap-1.5 text-[#0A0A0A] group-hover:text-[#888] font-bold text-xs sm:text-sm transition-colors">
+                  {s.cta}
+                  <ArrowRightIcon className="w-3.5 h-3.5" />
+                </div>
               </Link>
             ))}
           </div>

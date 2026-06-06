@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import type { GalleryItem } from '@/lib/data'
+import { XIcon } from '@/components/Icons'
 
 interface GalleryGridProps {
   items: GalleryItem[]
@@ -108,9 +109,10 @@ export default function GalleryGrid({ items, showFilter = false }: GalleryGridPr
               </div>
               <button
                 onClick={() => setLightbox(null)}
+                aria-label="Close"
                 className="w-8 h-8 rounded-full bg-[#F5F5F5] border border-[#E0E0E0] flex items-center justify-center text-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white transition-colors"
               >
-                ✕
+                <XIcon className="w-4 h-4" />
               </button>
             </div>
           </div>
