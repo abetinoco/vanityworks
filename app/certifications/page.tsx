@@ -73,7 +73,7 @@ const brandDetails = [
 
 export default function CertificationsPage() {
   return (
-    <div className="min-h-screen pt-20 lg:pt-24 bg-white">
+    <div className="min-h-screen pt-24 lg:pt-28 bg-white">
       {/* Hero */}
       <div className="relative bg-white py-14 md:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-[#E0E0E0]">
         <svg

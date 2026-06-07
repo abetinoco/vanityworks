@@ -74,7 +74,7 @@ const whyJdm = [
 
 export default function SpecialtiesPage() {
   return (
-    <div className="min-h-screen pt-20 lg:pt-24 bg-white">
+    <div className="min-h-screen pt-24 lg:pt-28 bg-white">
       {/* Hero */}
       <div className="relative overflow-hidden bg-white py-16 md:py-20 px-4 sm:px-6 lg:px-8 border-b border-[#E0E0E0]">
         {/* Graphic lines */}

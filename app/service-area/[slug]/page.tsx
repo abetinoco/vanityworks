@@ -54,7 +54,7 @@ export default function ServiceAreaPage({ params }: Props) {
   }
 
   return (
-    <div className="min-h-screen pt-20 lg:pt-24 bg-white">
+    <div className="min-h-screen pt-24 lg:pt-28 bg-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessAreaSchema) }}

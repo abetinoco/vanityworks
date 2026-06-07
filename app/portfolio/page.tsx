@@ -197,7 +197,7 @@ export default function PortfolioPage() {
   }, [lightbox])
 
   return (
-    <div className="min-h-screen pt-20 lg:pt-24 pb-32 bg-white">
+    <div className="min-h-screen pt-24 lg:pt-28 pb-32 bg-white">
       {/* Hero band */}
       <div className="relative bg-white py-24 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-[#E0E0E0]">
         <svg

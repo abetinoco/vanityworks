@@ -105,20 +105,26 @@ export default function Nav() {
   const isServicesActive =
     pathname === '/services' || pathname.startsWith('/services/')
 
+  // Transparent + white-text mode: only on homepage before scroll
+  const isHome = pathname === '/'
+  const transparent = isHome && !scrolled && !servicesOpen
+
   return (
     <Fragment>
       <header
         ref={headerRef}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled || servicesOpen
-            ? 'bg-white/95 backdrop-blur-md border-b border-[#E0E0E0] shadow-[0_1px_3px_rgba(10,10,10,0.04)]'
-            : 'bg-white/80 backdrop-blur-sm'
+          transparent
+            ? 'bg-transparent'
+            : scrolled || servicesOpen
+              ? 'bg-white/95 backdrop-blur-md border-b border-[#E0E0E0] shadow-[0_1px_3px_rgba(10,10,10,0.04)]'
+              : 'bg-white/90 backdrop-blur-sm'
         }`}
         onMouseLeave={handleLeave}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 md:h-20 lg:h-24">
-            {/* Logo — image logo across all viewports */}
+          <div className="flex items-center justify-between h-20 md:h-24 lg:h-28">
+            {/* Logo */}
             <Link
               href="/"
               data-hover
@@ -132,7 +138,9 @@ export default function Nav() {
                 width={1536}
                 height={1024}
                 priority
-                className="block h-9 md:h-12 lg:h-16 w-auto object-contain"
+                className={`block h-12 md:h-16 lg:h-20 w-auto object-contain transition-all duration-300 ${
+                  transparent ? 'invert brightness-105' : ''
+                }`}
               />
             </Link>
 
@@ -142,7 +150,9 @@ export default function Nav() {
                 <Link
                   href="/services"
                   className={`inline-flex items-center gap-1.5 text-xs font-semibold tracking-wider uppercase transition-colors duration-200 ${
-                    isServicesActive ? 'text-[#0A0A0A]' : 'text-[#888] hover:text-[#0A0A0A]'
+                    transparent
+                      ? isServicesActive ? 'text-white' : 'text-white/70 hover:text-white'
+                      : isServicesActive ? 'text-[#0A0A0A]' : 'text-[#888] hover:text-[#0A0A0A]'
                   }`}
                   aria-expanded={servicesOpen}
                   aria-haspopup="true"
@@ -163,9 +173,9 @@ export default function Nav() {
                   href={link.href}
                   onMouseEnter={handleLeave}
                   className={`text-xs font-semibold tracking-wider uppercase transition-colors duration-200 ${
-                    pathname === link.href
-                      ? 'text-[#0A0A0A]'
-                      : 'text-[#888] hover:text-[#0A0A0A]'
+                    transparent
+                      ? pathname === link.href ? 'text-white' : 'text-white/70 hover:text-white'
+                      : pathname === link.href ? 'text-[#0A0A0A]' : 'text-[#888] hover:text-[#0A0A0A]'
                   }`}
                 >
                   {link.label}
@@ -177,29 +187,34 @@ export default function Nav() {
             <div className="hidden lg:flex items-center gap-4" onMouseEnter={handleLeave}>
               <Link
                 href="tel:+12245724787"
-                className="text-xs text-[#888] hover:text-[#0A0A0A] tracking-wider transition-colors"
+                className={`text-xs tracking-wider transition-colors ${
+                  transparent ? 'text-white/65 hover:text-white' : 'text-[#888] hover:text-[#0A0A0A]'
+                }`}
               >
                 (224) 572-4787
               </Link>
               <Link
                 href="/book"
-                className="px-5 py-2 text-sm font-bold tracking-wider uppercase rounded bg-[#0A0A0A] text-white hover:bg-[#1A1A1A] transition-colors"
+                className={`px-5 py-2 text-sm font-bold tracking-wider uppercase rounded transition-colors ${
+                  transparent
+                    ? 'bg-white text-[#0A0A0A] hover:bg-white/90'
+                    : 'bg-[#0A0A0A] text-white hover:bg-[#1A1A1A]'
+                }`}
               >
                 Book Now
               </Link>
             </div>
 
-            {/* Mobile hamburger — portal-rendered overlay sits above it when open.
-                ml-auto pushes it to the right since the logo is hidden on mobile. */}
+            {/* Mobile hamburger */}
             <button
               className="lg:hidden relative z-50 ml-auto flex flex-col gap-1.5 p-2 min-h-[44px] min-w-[44px] items-center justify-center"
               onClick={() => setMenuOpen(true)}
               aria-label="Open menu"
               aria-expanded={menuOpen}
             >
-              <span className="block h-0.5 w-6 bg-[#0A0A0A]" />
-              <span className="block h-0.5 w-6 bg-[#0A0A0A]" />
-              <span className="block h-0.5 w-6 bg-[#0A0A0A]" />
+              <span className={`block h-0.5 w-6 transition-colors duration-300 ${transparent ? 'bg-white' : 'bg-[#0A0A0A]'}`} />
+              <span className={`block h-0.5 w-6 transition-colors duration-300 ${transparent ? 'bg-white' : 'bg-[#0A0A0A]'}`} />
+              <span className={`block h-0.5 w-6 transition-colors duration-300 ${transparent ? 'bg-white' : 'bg-[#0A0A0A]'}`} />
             </button>
           </div>
         </div>

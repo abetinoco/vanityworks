@@ -141,7 +141,7 @@ export default function ServiceDetailPage({ params }: Props) {
   const heroTiles = getHeroTiles(s.slug, 3)
 
   return (
-    <div className="bg-white pt-16 md:pt-20 lg:pt-24">
+    <div className="bg-white pt-20 md:pt-24 lg:pt-28">
       {/* HERO */}
       <header className="bg-white px-8 pt-16 max-[900px]:px-5 max-[900px]:pt-8">
         <div className="max-w-7xl mx-auto">
