@@ -74,7 +74,7 @@ export default function HowItWorks() {
               <div
                 key={step.number}
                 data-hover
-                className="step-rise group relative px-6 max-[900px]:px-0 max-[900px]:min-w-[220px] max-[900px]:flex-shrink-0 max-[900px]:pb-0"
+                className="step-rise group relative px-6 max-[900px]:px-0 max-[900px]:w-[200px] max-[900px]:flex-shrink-0 max-[900px]:pb-0"
                 style={{ animationDelay: `${0.4 + idx * 0.2}s` }}
               >
                 {/* Node */}
