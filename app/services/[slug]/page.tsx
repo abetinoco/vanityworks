@@ -24,6 +24,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
+// Final-CTA background photo per service. Each one is a different cool car so
+// the page closes on a fresh visual — and the photo doesn't repeat the hero
+// tiles above it.
+const FINAL_CTA_BG: Record<string, { src: string; position?: string }> = {
+  'full-detail':            { src: '/portfolio/red-rx7-fd/01.jpg',        position: 'center 60%' },
+  'paint-correction':       { src: '/portfolio/yellow-lambo-gallardo/01.jpg', position: 'center 55%' },
+  'ceramic-coating':        { src: '/portfolio/white-r34-gtr/01.jpg',     position: 'center 50%' },
+  'paint-protection-film':  { src: '/portfolio/red-acura-nsx/01.jpg',     position: 'center 55%' },
+}
+
 // Two-tier keyword scoring against each portfolio entry's service string.
 // Primary = direct hits (e.g. "ppf" for PPF). Secondary = adjacent work that
 // still belongs in the same domain (e.g. ceramic shots on the PPF page).
@@ -417,13 +427,15 @@ export default function ServiceDetailPage({ params }: Props) {
         </div>
       </section>
 
-      {/* FINAL CTA — shared component, per-service copy */}
+      {/* FINAL CTA — shared component, per-service copy + per-service car */}
       <FinalCta
         eyebrow={s.finalEyebrow}
         title={s.finalTitle}
         sub={s.finalSub}
         primaryCta={s.finalPrimaryCta}
         secondaryCta={s.finalSecondaryCta}
+        bgSrc={FINAL_CTA_BG[s.slug]?.src}
+        bgPosition={FINAL_CTA_BG[s.slug]?.position}
       />
     </div>
   )

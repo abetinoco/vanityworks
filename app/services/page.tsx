@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { services } from '@/lib/data'
 import { SplitLetters } from '@/components/SplitLetters'
+import FinalCta from '@/components/sections/FinalCta'
 
 export const metadata: Metadata = {
   title: 'Services',
@@ -172,6 +173,16 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
+
+      {/* FINAL CTA */}
+      <FinalCta
+        title="Pick your tier. We'll do the rest."
+        sub="Not sure which one fits? **Tell us about the car** — we'll give you an honest read and book the right service."
+        primaryCta={{ label: 'Book a consultation', href: '/book' }}
+        secondaryCta={{ label: 'See the work', href: '/gallery' }}
+        bgSrc="/portfolio/mclaren-720s/02.jpg"
+        bgPosition="center 55%"
+      />
     </div>
   )
 }

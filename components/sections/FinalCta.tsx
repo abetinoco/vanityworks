@@ -14,6 +14,10 @@ interface FinalCtaProps {
   sub?: string
   primaryCta?: CtaLink
   secondaryCta?: CtaLink
+  /** Background photo. Defaults to the same hero.jpg the Hero uses. */
+  bgSrc?: string
+  /** Tailwind objectPosition override (e.g. '60% center', 'center 30%'). */
+  bgPosition?: string
 }
 
 const DEFAULT_SUB =
@@ -37,19 +41,21 @@ export default function FinalCta({
   sub = DEFAULT_SUB,
   primaryCta = { label: 'Book a consultation', href: '/book' },
   secondaryCta = { label: 'See services', href: '/services' },
+  bgSrc = '/hero.jpg',
+  bgPosition = '60% center',
 }: FinalCtaProps = {}) {
   return (
     <section className="relative overflow-hidden bg-black text-white px-8 py-16 max-[900px]:px-5 max-[900px]:py-12">
-      {/* Hero photo background — same /hero.jpg the Hero section uses */}
+      {/* Photo background — overridable per-page via bgSrc */}
       <Image
-        src="/hero.jpg"
+        src={bgSrc}
         alt=""
         aria-hidden
         fill
         quality={85}
         sizes="100vw"
         className="object-cover z-0"
-        style={{ objectPosition: '60% center' }}
+        style={{ objectPosition: bgPosition }}
       />
 
       {/* Dark gradient overlay — keeps title + sub + CTAs legible across the photo */}
