@@ -345,17 +345,15 @@ export default function Nav() {
                 href="/"
                 onClick={closeAll}
                 aria-label="VanityWorks Detailing — Home"
-                className="flex flex-col leading-none"
+                className="flex items-center"
               >
-                <span
-                  className="text-white text-xl tracking-widest"
-                  style={{ fontFamily: 'Bebas Neue, sans-serif' }}
-                >
-                  VANITY<span className="text-white/45">WORKS</span>
-                </span>
-                <span className="mt-1 block text-[9px] font-medium uppercase tracking-[0.16em] text-white/40">
-                  Detailing — Chicagoland
-                </span>
+                <Image
+                  src="/logo.png"
+                  alt="VanityWorks Detailing"
+                  width={1536}
+                  height={1024}
+                  className="h-10 w-auto invert brightness-105"
+                />
               </Link>
               <button
                 type="button"

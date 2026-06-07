@@ -66,23 +66,19 @@ export default function HowItWorks() {
             <div className="absolute inset-0 bg-ink timeline-track-line" />
           </div>
 
-          {/* Mobile vertical track */}
-          <div
-            aria-hidden
-            className="md:hidden absolute top-12 bottom-12 left-12 w-px bg-ink/40 z-[1]"
-          />
 
           {/* Steps */}
-          <div className="grid grid-cols-4 gap-8 relative z-[2] max-[900px]:grid-cols-1 max-[900px]:gap-0">
+          <div className="max-[900px]:overflow-x-auto max-[900px]:-mx-5 max-[900px]:px-5">
+            <div className="grid grid-cols-4 gap-8 relative z-[2] max-[900px]:flex max-[900px]:flex-nowrap max-[900px]:gap-5 max-[900px]:pb-5">
             {steps.map((step, idx) => (
               <div
                 key={step.number}
                 data-hover
-                className="step-rise group relative px-6 max-[900px]:pl-[130px] max-[900px]:pr-0 max-[900px]:pb-10 max-[900px]:last:pb-0"
+                className="step-rise group relative px-6 max-[900px]:px-0 max-[900px]:min-w-[220px] max-[900px]:flex-shrink-0 max-[900px]:pb-0"
                 style={{ animationDelay: `${0.4 + idx * 0.2}s` }}
               >
                 {/* Node */}
-                <div className="step-node-anim relative z-[3] mb-9 w-24 h-24 rounded-full bg-white border-[1.5px] border-ink flex items-center justify-center text-[36px] font-extrabold tracking-[-0.045em] tabular-nums text-ink group-hover:bg-ink group-hover:text-white group-hover:scale-105 max-[900px]:absolute max-[900px]:left-0 max-[900px]:top-0 max-[900px]:mb-0 max-[900px]:text-[32px]">
+                <div className="step-node-anim relative z-[3] mb-9 w-24 h-24 rounded-full bg-white border-[1.5px] border-ink flex items-center justify-center text-[36px] font-extrabold tracking-[-0.045em] tabular-nums text-ink group-hover:bg-ink group-hover:text-white group-hover:scale-105 max-[900px]:w-16 max-[900px]:h-16 max-[900px]:text-[26px] max-[900px]:mb-6">
                   {step.number}
                   <span
                     aria-hidden
@@ -90,7 +86,7 @@ export default function HowItWorks() {
                   />
                 </div>
 
-                <p className="text-[11px] font-semibold tracking-[0.12em] uppercase text-ink-muted mb-2.5 max-[900px]:mt-2">
+                <p className="text-[11px] font-semibold tracking-[0.12em] uppercase text-ink-muted mb-2.5">
                   {step.eyebrow}
                 </p>
                 <h3 className="font-sans font-extrabold text-ink tracking-[-0.03em] leading-[1.05] mb-3.5 text-[clamp(22px,1.8vw,30px)]">
@@ -109,6 +105,7 @@ export default function HowItWorks() {
                 </div>
               </div>
             ))}
+            </div>
           </div>
         </div>
       </div>

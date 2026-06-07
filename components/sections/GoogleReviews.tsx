@@ -136,12 +136,13 @@ export default function GoogleReviews() {
         </div>
 
         {/* Review list */}
-        <div className="grid grid-cols-1">
+        <div className="max-[900px]:overflow-x-auto max-[900px]:-mx-5 max-[900px]:px-5 max-[900px]:mt-6">
+          <div className="grid grid-cols-1 max-[900px]:flex max-[900px]:flex-nowrap max-[900px]:gap-4 max-[900px]:pb-4">
           {reviews.map((r, i) => (
             <div
               key={r.author}
               data-hover
-              className={`group relative grid grid-cols-[80px_1fr_220px] gap-8 items-start py-8 border-b border-line transition-[padding] duration-[400ms] [transition-timing-function:cubic-bezier(0.65,0,0.35,1)] hover:pl-4 before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-0 before:h-[60%] before:bg-ink before:transition-[width] before:duration-[400ms] before:[transition-timing-function:cubic-bezier(0.65,0,0.35,1)] hover:before:w-[3px] max-[900px]:grid-cols-1 max-[900px]:gap-2 max-[900px]:py-4 max-[900px]:hover:pl-3 ${i >= 3 ? 'max-[900px]:hidden' : ''}`}
+              className="group relative grid grid-cols-[80px_1fr_220px] gap-8 items-start py-8 border-b border-line transition-[padding] duration-[400ms] [transition-timing-function:cubic-bezier(0.65,0,0.35,1)] hover:pl-4 before:content-[''] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-0 before:h-[60%] before:bg-ink before:transition-[width] before:duration-[400ms] before:[transition-timing-function:cubic-bezier(0.65,0,0.35,1)] hover:before:w-[3px] max-[900px]:grid-cols-1 max-[900px]:gap-3 max-[900px]:min-w-[280px] max-[900px]:flex-shrink-0 max-[900px]:border max-[900px]:border-line max-[900px]:rounded-xl max-[900px]:p-5 max-[900px]:py-5 max-[900px]:hover:pl-5"
             >
               <span className="text-[13px] font-semibold text-ink-muted tracking-[0.02em] tabular-nums pt-1 max-[900px]:pt-0">
                 <strong className="text-ink font-bold">
@@ -170,6 +171,7 @@ export default function GoogleReviews() {
               </div>
             </div>
           ))}
+          </div>
         </div>
 
         {/* Bottom */}

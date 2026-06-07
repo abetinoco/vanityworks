@@ -39,7 +39,7 @@ const indexItems = [
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[80vh] lg:min-h-[72vh] flex flex-col overflow-hidden text-white">
+    <section className="relative min-h-[62vh] lg:min-h-[72vh] flex flex-col overflow-hidden text-white">
       {/* Custom mouse-follower (home only, desktop only) */}
       <Cursor />
 
@@ -67,7 +67,7 @@ export default function Hero() {
       {/* Foreground content — uses the same `max-w-7xl mx-auto` track as
           the Nav, Footer, and every other section so the headline's right
           edge lines up with the nav's right edge on every viewport. */}
-      <div className="relative z-10 flex flex-col flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 lg:pt-36 pb-5 sm:pb-8">
+      <div className="relative z-10 flex flex-col flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 lg:pt-36 pb-6 sm:pb-8">
         {/* Massive headline (color inherits from `text-white` on the section) */}
         <div className="mt-2 sm:mt-4 w-full">
           <HeadlineLine text="Your car," delay={0.15} align="left" />
