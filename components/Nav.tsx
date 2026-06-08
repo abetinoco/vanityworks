@@ -482,30 +482,6 @@ export default function Nav() {
                     ))}
                   </div>
                 </div>
-
-                <div>
-                  <p className="mb-3 block text-[9px] font-semibold uppercase tracking-[0.14em] text-white/35">
-                    Why VanityWorks
-                  </p>
-                  <ul className="space-y-2 text-[12px] text-white/65 leading-snug">
-                    <li className="flex items-start gap-2">
-                      <span className="mt-[7px] h-1 w-1 rounded-full bg-white/40 shrink-0" />
-                      Opticle PPF · DetailWise Academy trained
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="mt-[7px] h-1 w-1 rounded-full bg-white/40 shrink-0" />
-                      Fully mobile — we come to you
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="mt-[7px] h-1 w-1 rounded-full bg-white/40 shrink-0" />
-                      JDM &amp; exotic specialists
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="mt-[7px] h-1 w-1 rounded-full bg-white/40 shrink-0" />
-                      200+ five-star Google reviews
-                    </li>
-                  </ul>
-                </div>
               </aside>
             </div>
 
