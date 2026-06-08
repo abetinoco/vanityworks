@@ -26,7 +26,7 @@ const allura = Allura({
   display: 'swap',
 })
 
-const SITE_URL = 'https://vanityworks.com'
+const SITE_URL = 'https://vanityworksdetailing.com'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

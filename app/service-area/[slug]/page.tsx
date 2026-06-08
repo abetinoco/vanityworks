@@ -40,8 +40,8 @@ export default function ServiceAreaPage({ params }: Props) {
     '@context': 'https://schema.org',
     '@type': 'AutoDetailing',
     name: `VanityWorks Detailing — ${area.city}`,
-    image: 'https://vanityworks.com/logo.png',
-    url: `https://vanityworks.com/service-area/${area.slug}`,
+    image: 'https://vanityworksdetailing.com/og-image.png',
+    url: `https://vanityworksdetailing.com/service-area/${area.slug}`,
     telephone: '+1-224-572-4787',
     priceRange: '$$-$$$',
     address: {
