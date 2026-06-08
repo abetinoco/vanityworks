@@ -136,7 +136,7 @@ export default function GoogleReviews() {
         </div>
 
         {/* Review list */}
-        <div className="max-[900px]:overflow-x-auto max-[900px]:-mx-5 max-[900px]:px-5 max-[900px]:mt-6">
+        <div className="max-[900px]:overflow-x-auto max-[900px]:mt-6">
           <div className="grid grid-cols-1 max-[900px]:flex max-[900px]:flex-nowrap max-[900px]:gap-4 max-[900px]:pb-4">
           {reviews.map((r, i) => (
             <div

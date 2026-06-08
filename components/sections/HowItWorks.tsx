@@ -68,7 +68,7 @@ export default function HowItWorks() {
 
 
           {/* Steps */}
-          <div className="max-[900px]:overflow-x-auto max-[900px]:-mx-5 max-[900px]:px-5">
+          <div className="max-[900px]:overflow-x-auto">
             <div className="grid grid-cols-4 gap-8 relative z-[2] max-[900px]:flex max-[900px]:flex-nowrap max-[900px]:gap-5 max-[900px]:pb-5">
             {steps.map((step, idx) => (
               <div
