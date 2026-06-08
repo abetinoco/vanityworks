@@ -57,16 +57,16 @@ export const metadata: Metadata = {
     url: SITE_URL,
     images: [
       {
-        url: '/logo.png',
-        width: 1536,
-        height: 1024,
-        alt: 'VanityWorks Detailing',
+        url: '/og-image.png',
+        width: 1734,
+        height: 907,
+        alt: 'VanityWorks Detailing — Your car, perfected.',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    images: ['/logo.png'],
+    images: ['/og-image.png'],
   },
   icons: {
     icon: '/favicon.png',
