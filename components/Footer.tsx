@@ -61,7 +61,7 @@ export default function Footer() {
                 className="h-16 w-auto object-contain invert brightness-105 max-[900px]:h-9"
               />
             </Link>
-            <p className="text-[13px] leading-[1.55] text-[#888] tracking-[-0.005em] max-w-[32ch] max-[900px]:text-[11px] max-[900px]:leading-[1.45]">
+            <p className="text-[13px] leading-[1.55] text-[#888] tracking-[-0.005em] max-w-[32ch] max-[900px]:text-[11px] max-[900px]:leading-[1.4] max-[900px]:max-w-[44ch]">
               PPF, ceramic coating, and surgical-grade paint correction for JDM, exotic, and the
               cars worth obsessing over.
             </p>
@@ -156,7 +156,7 @@ export default function Footer() {
           </div>
 
           {/* Contact */}
-          <div className="flex flex-col gap-[18px] max-[900px]:col-span-2 max-[900px]:gap-2">
+          <div className="flex flex-col gap-[18px] max-[900px]:gap-1.5">
             <span className="text-[11px] font-bold tracking-[0.16em] uppercase text-[#888] mb-1 max-[900px]:text-[10px] max-[900px]:mb-0">
               Contact
             </span>
@@ -180,8 +180,8 @@ export default function Footer() {
                 </svg>
               </span>
               <span>
-                <strong className="block font-semibold text-white mb-0.5">(224) 572-4787</strong>
-                <span className="text-[#888] text-[12px] max-[900px]:text-[10px] font-medium">Text preferred</span>
+                <strong className="block font-semibold text-white mb-0.5 max-[900px]:mb-0">(224) 572-4787</strong>
+                <span className="text-[#888] text-[12px] font-medium max-[900px]:hidden">Text preferred</span>
               </span>
             </a>
 
@@ -205,10 +205,10 @@ export default function Footer() {
                 </svg>
               </span>
               <span>
-                <strong className="block font-semibold text-white mb-0.5">
+                <strong className="block font-semibold text-white mb-0.5 max-[900px]:mb-0">
                   hello@vanityworks.il
                 </strong>
-                <span className="text-[#888] text-[12px] max-[900px]:text-[10px] font-medium">Replies within 24h</span>
+                <span className="text-[#888] text-[12px] font-medium max-[900px]:hidden">Replies within 24h</span>
               </span>
             </a>
 
@@ -228,8 +228,8 @@ export default function Footer() {
                 </svg>
               </span>
               <span>
-                <strong className="block font-semibold text-white mb-0.5">Lakemoor, IL</strong>
-                <span className="text-[#888] text-[12px] max-[900px]:text-[10px] font-medium">By appointment</span>
+                <strong className="block font-semibold text-white mb-0.5 max-[900px]:mb-0">Lakemoor, IL</strong>
+                <span className="text-[#888] text-[12px] font-medium max-[900px]:hidden">By appointment</span>
               </span>
             </div>
 
@@ -249,8 +249,8 @@ export default function Footer() {
                 </svg>
               </span>
               <span>
-                <strong className="block font-semibold text-white mb-0.5">Mon–Sat</strong>
-                <span className="text-[#888] text-[12px] max-[900px]:text-[10px] font-medium">By appointment only</span>
+                <strong className="block font-semibold text-white mb-0.5 max-[900px]:mb-0">Mon–Sat</strong>
+                <span className="text-[#888] text-[12px] font-medium max-[900px]:hidden">By appointment only</span>
               </span>
             </div>
           </div>
