@@ -339,8 +339,9 @@ export default function Nav() {
               menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
             }`}
           >
-            {/* Top bar */}
-            <div className="flex shrink-0 items-center justify-between gap-4 border-b border-white/[0.08] px-5 py-[18px]">
+            {/* Top bar — matches navbar height + padding so the logo doesn't
+                jump when the menu opens/closes */}
+            <div className="flex shrink-0 items-center justify-between gap-4 border-b border-white/[0.08] h-20 px-4">
               <Link
                 href="/"
                 onClick={closeAll}
@@ -352,7 +353,7 @@ export default function Nav() {
                   alt="VanityWorks Detailing"
                   width={1536}
                   height={1024}
-                  className="h-10 w-auto invert brightness-105"
+                  className="h-12 w-auto invert brightness-105"
                 />
               </Link>
               <button
