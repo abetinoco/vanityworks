@@ -101,6 +101,7 @@ export default function RecentWork() {
                     src={item.image}
                     alt={`${item.title} — ${item.service}`}
                     fill
+                    loading="lazy"
                     sizes={wide ? '(max-width:900px) 100vw, 50vw' : '(max-width:900px) 50vw, 25vw'}
                     className="object-cover transition-transform duration-[800ms] [transition-timing-function:cubic-bezier(0.65,0,0.35,1)] group-hover:scale-[1.04]"
                   />
@@ -230,6 +231,7 @@ export default function RecentWork() {
               fill
               sizes="80vw"
               className="object-cover"
+              priority
             />
           </div>
 

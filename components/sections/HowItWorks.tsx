@@ -20,11 +20,11 @@ const steps: Step[] = [
   },
   {
     number: '02',
-    eyebrow: 'Step 02 — Drop-off',
-    title: 'Drop off — or we’ll come to you.',
-    body: 'Bring the car to Volo, or book mobile service anywhere in Chicagoland for an upcharge.',
+    eyebrow: 'Step 02 — We come to you',
+    title: 'We come to you.',
+    body: 'Mobile service anywhere in Chicagoland — Lake County through the North Shore. Prefer to drop off? We’ll arrange a spot in McHenry County.',
     metaLabel: 'Location',
-    metaValue: 'In-shop or mobile',
+    metaValue: 'Mobile or drop-off',
   },
   {
     number: '03',

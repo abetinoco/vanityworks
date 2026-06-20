@@ -7,7 +7,7 @@ import FinalCta from '@/components/sections/FinalCta'
 export const metadata: Metadata = {
   title: 'About',
   description:
-    "A one-bay operation that treats every car like it's going on a showroom floor. Lakemoor, IL — built on obsession since 2017.",
+    "A mobile-first detailing operation that treats every car like it's going on a showroom floor. Chicagoland — built on obsession since 2023.",
 }
 
 function renderMarked(text: string) {
@@ -29,7 +29,7 @@ const bodyParagraphs = [
 ]
 
 const stats = [
-  { num: '2017', label: 'Detailing since' },
+  { num: '2023', label: 'Detailing since' },
   { num: '01', label: 'Manufacturer certification' },
   { num: 'JDM', label: '& exotic specialty' },
   { num: '1:1', label: 'One car at a time, fully' },
@@ -88,11 +88,11 @@ export default function AboutPage() {
             </div>
             <div className="flex flex-col gap-[18px]">
               <p className="text-ink font-medium leading-[1.4] tracking-[-0.015em] text-[clamp(17px,1.6vw,21px)]">
-                A one-bay operation that treats every car like it&apos;s going on a showroom floor.{' '}
+                A mobile-first operation that treats every car like it&apos;s going on a showroom floor.{' '}
                 <span className="text-ink-muted">Because most of them basically are.</span>
               </p>
               <p className="text-[14px] text-ink-muted leading-[1.5] tracking-[-0.005em]">
-                Lakemoor, IL · serving Chicagoland &amp; the North Shore
+                Chicagoland mobile · based in McHenry County — Lake County to the North Shore
               </p>
             </div>
           </div>
@@ -118,9 +118,10 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto">
           <div className="relative w-full aspect-[21/9] overflow-hidden border border-ink bg-gradient-to-br from-[#1a1a1a] to-[#050505] max-[900px]:aspect-[4/3]">
             <Image
-              src="/portfolio/white-r34-gtr/01.jpg"
+              src="/portfolio/white-r34-gtr/01.webp"
               alt="Nissan Skyline R34 GT-R — in for a showcase detail"
               fill
+              loading="lazy"
               sizes="(max-width: 900px) 100vw, 1280px"
               className="object-cover"
               style={{ objectPosition: 'center' }}

@@ -34,7 +34,7 @@ const indexItems = [
   { num: '01', label: 'Paint protection film' },
   { num: '02', label: 'Ceramic coating' },
   { num: '03', label: 'Paint correction' },
-  { num: '04', label: 'Window tint' },
+  { num: '04', label: 'Full detail' },
 ]
 
 export default function Hero() {
@@ -43,10 +43,10 @@ export default function Hero() {
       {/* Custom mouse-follower (home only, desktop only) */}
       <Cursor />
 
-      {/* Background image — dedicated /hero.jpg.
-          Drop a new file at public/hero.jpg to update without code changes. */}
+      {/* Background image — dedicated /hero.webp.
+          Drop a new file at public/hero.webp to update without code changes. */}
       <Image
-        src="/hero.jpg"
+        src="/hero.webp"
         alt=""
         fill
         priority
@@ -98,7 +98,7 @@ export default function Hero() {
         >
           <p className="text-[18px] leading-snug text-white max-w-[44ch] font-medium tracking-[-0.012em]">
             For JDM, exotic, and the cars worth obsessing over.{' '}
-            <span className="text-white/65">By appointment, in Volo, IL — since 2017.</span>
+            <span className="text-white/65">By appointment · mobile across Chicagoland — since 2023.</span>
           </p>
 
           <div className="flex items-center gap-5 sm:gap-6 flex-wrap">

@@ -759,7 +759,7 @@ export const serviceAreas: ServiceArea[] = [
     ],
     driveCopy: '30-minute drive from our base — full coverage across DuPage County.',
     metaDescription:
-      'Naperville mobile auto detailing — PPF, ceramic coating, paint correction & window tint. Certified installers come to your home or office in DuPage County.',
+      'Naperville mobile auto detailing — PPF, ceramic coating, paint correction & full detail. Certified installers come to your home or office in DuPage County.',
   },
   {
     slug: 'evanston',

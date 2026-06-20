@@ -9,15 +9,15 @@ interface AreaRow {
 }
 
 const areas: AreaRow[] = [
-  { name: 'Lakemoor, IL', distance: 'Shop · HQ', tag: 'Base', base: true },
-  { name: 'Lake County', distance: 'Within 20 mi', tag: 'Standard' },
-  { name: 'Chicago + North Shore', distance: 'Within 40 mi', tag: 'Mobile' },
-  { name: 'Western suburbs', distance: 'Within 50 mi', tag: 'Mobile' },
+  { name: 'Lake County', distance: 'Primary area', tag: 'Mobile', base: true },
+  { name: 'North Shore', distance: 'Evanston · Glencoe', tag: 'Mobile' },
+  { name: 'Chicago + Cook', distance: 'Mobile', tag: 'Mobile' },
+  { name: 'McHenry County', distance: 'Home base', tag: 'Base' },
 ]
 
 const MAP_EMBED_SRC =
-  'https://www.google.com/maps?q=Lakemoor,IL&t=&z=10&ie=UTF8&iwloc=&output=embed'
-const MAP_PLACE_URL = 'https://www.google.com/maps/place/Lakemoor,+IL/'
+  'https://www.google.com/maps?q=Chicago,IL&t=&z=9&ie=UTF8&iwloc=&output=embed'
+const MAP_PLACE_URL = 'https://www.google.com/maps/place/Chicago,+IL/'
 
 export default function ServiceArea() {
   return (
@@ -30,7 +30,7 @@ export default function ServiceArea() {
             Where we work
           </div>
           <h2 className="font-sans font-extrabold text-ink leading-[0.92] tracking-[-0.045em] text-right justify-self-end break-words text-[clamp(40px,6vw,96px)] max-[900px]:text-left max-[900px]:justify-self-start max-[900px]:text-[13vw]">
-            <SplitLetters text="Lakemoor to Lake Shore Drive." />
+            <SplitLetters text="Lake County to Lake Shore Drive." />
           </h2>
         </div>
 
@@ -39,21 +39,22 @@ export default function ServiceArea() {
           {/* Info */}
           <div className="pt-3">
             <div className="text-[11px] font-semibold tracking-[0.12em] uppercase text-ink-muted tabular-nums mb-6">
-              Lakemoor, IL ·{' '}
-              <strong className="text-ink font-bold">42.342°N · 88.193°W</strong>
+              Chicagoland ·{' '}
+              <strong className="text-ink font-bold">Mobile detailing</strong>
             </div>
 
             <h3 className="font-extrabold text-ink leading-[0.95] tracking-[-0.04em] mb-7 text-[clamp(32px,4vw,56px)] max-[900px]:text-[9vw]">
-              Bring it in.
+              We come to you.
               <br />
-              <span className="text-ink-muted font-extrabold">Or we&apos;ll come to you.</span>
+              <span className="text-ink-muted font-extrabold">Or drop it off.</span>
             </h3>
 
             <p className="text-[16px] font-medium leading-[1.5] tracking-[-0.011em] text-ink max-w-[42ch] mb-9 max-[900px]:text-[15px]">
-              The shop is in Lakemoor.{' '}
+              Mobile-first, based in McHenry County.{' '}
               <span className="text-ink-muted font-medium">
                 For PPF, ceramic, and full corrections we&apos;ll travel to your home garage,
-                condo parking, or office driveway across Chicagoland and the North Shore.
+                condo parking, or office driveway — Lake County through the North Shore
+                and across Chicagoland.
               </span>
             </p>
 
@@ -103,18 +104,18 @@ export default function ServiceArea() {
           {/* Map */}
           <div className="relative w-full aspect-[5/4] border border-ink overflow-hidden bg-[#f4f4f4]">
             <span className="absolute top-4 left-4 z-10 text-[10px] font-bold tracking-[0.14em] uppercase text-ink bg-white border border-ink px-3 py-2 pointer-events-none max-[900px]:text-[9px] max-[900px]:px-[9px] max-[900px]:py-1.5">
-              Lakemoor · HQ
+              Chicagoland
             </span>
             <span className="absolute bottom-4 right-4 z-10 text-[10px] font-medium tracking-[0.08em] uppercase text-ink-muted bg-white border border-line px-3 py-2 pointer-events-none max-[900px]:text-[9px] max-[900px]:px-[9px] max-[900px]:py-1.5">
-              Chicagoland ·{' '}
-              <strong className="text-ink font-bold">40 mi radius</strong>
+              Lake County ·{' '}
+              <strong className="text-ink font-bold">North Shore</strong>
             </span>
 
             <iframe
               src={MAP_EMBED_SRC}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="VanityWorks service area — Lakemoor, IL"
+              title="VanityWorks service area — Chicagoland"
               className="absolute inset-0 w-full h-full block border-0"
             />
 

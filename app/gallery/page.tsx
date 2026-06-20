@@ -13,20 +13,20 @@ export const metadata: Metadata = {
 
 // 14 hand-picked photos for the editorial grid. Tile 5 (index 4) spans 2 columns.
 const PICKS: GalleryPhoto[] = [
-  { src: '/portfolio/mclaren-720s/01.jpg', caption: 'McLaren 720S · ceramic + PPF' },
-  { src: '/portfolio/white-r34-gtr/01.jpg', caption: 'Nissan R34 GT-R · showcase detail' },
-  { src: '/portfolio/red-acura-nsx/01.jpg', caption: 'Acura NSX · show build detail' },
-  { src: '/portfolio/purple-r33-gtr/01.jpg', caption: 'Nissan R33 GT-R · showcase detail' },
-  { src: '/portfolio/black-amg-g63/01.jpg', caption: 'Mercedes-AMG G63 · ceramic' },
-  { src: '/portfolio/black-porsche-911/01.jpg', caption: 'Porsche 911 (992) · PPF' },
-  { src: '/portfolio/yellow-lambo-gallardo/01.jpg', caption: 'Lamborghini Gallardo · coating' },
-  { src: '/portfolio/yellow-honda-s2000/01.jpg', caption: 'Honda S2000 · interior detail' },
-  { src: '/portfolio/red-rx7-fd/01.jpg', caption: 'Mazda RX-7 (FD) · show prep' },
-  { src: '/portfolio/silver-supra-2jz/01.jpg', caption: 'Toyota Supra MkIV · engine bay' },
-  { src: '/portfolio/white-evo/01.jpg', caption: 'Mitsubishi Evo · engine bay' },
-  { src: '/portfolio/black-porsche-cayenne/01.jpg', caption: 'Porsche Cayenne · detail + interior' },
-  { src: '/portfolio/red-svt-lightning-wash/after.jpg', caption: 'Ford SVT Lightning · wash + detail' },
-  { src: '/portfolio/subaru-interior-detail/after.jpg', caption: 'Subaru Outback · interior detail' },
+  { src: '/portfolio/mclaren-720s/01.webp', caption: 'McLaren 720S · showcase' },
+  { src: '/portfolio/white-r34-gtr/01.webp', caption: 'Nissan R34 GT-R · showcase' },
+  { src: '/portfolio/red-acura-nsx/01.webp', caption: 'Acura NSX · showcase' },
+  { src: '/portfolio/purple-r33-gtr/01.webp', caption: 'Nissan R33 GT-R · showcase' },
+  { src: '/portfolio/black-amg-g63/01.webp', caption: 'Mercedes-AMG G63 · showcase' },
+  { src: '/portfolio/black-porsche-911/01.webp', caption: 'Porsche 911 (992) · showcase' },
+  { src: '/portfolio/yellow-lambo-gallardo/01.webp', caption: 'Lamborghini Gallardo · showcase' },
+  { src: '/portfolio/yellow-honda-s2000/01.webp', caption: 'Honda S2000 · interior' },
+  { src: '/portfolio/red-rx7-fd/01.webp', caption: 'Toyota Supra MkIV · show display' },
+  { src: '/portfolio/silver-supra-2jz/01.webp', caption: 'Toyota Supra MkIV · engine bay' },
+  { src: '/portfolio/white-evo/01.webp', caption: 'Mitsubishi Evo · engine bay' },
+  { src: '/portfolio/black-porsche-cayenne/01.webp', caption: 'Porsche Cayenne · exterior + interior' },
+  { src: '/portfolio/red-svt-lightning-wash/after.webp', caption: 'Ford SVT Lightning · wash' },
+  { src: '/portfolio/subaru-interior-detail/after.webp', caption: 'Subaru Outback · interior' },
 ]
 
 // Safety net: if any handpicked path isn't in the flat list, fall back to whatever's there.

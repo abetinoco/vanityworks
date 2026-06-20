@@ -54,8 +54,8 @@ export default function SpecialtyJDM() {
       </div>
 
       {/* Marquee — full bleed */}
-      <div className="relative overflow-hidden border-t border-ink mt-[60px] pt-[60px] pb-[100px] max-[900px]:mt-10 max-[900px]:pt-9 max-[900px]:pb-[60px]">
-        <div className="max-w-7xl mx-auto flex items-center gap-2.5 text-[11px] font-semibold tracking-[0.14em] uppercase text-ink-muted mb-9 px-8 max-[900px]:px-5 max-[900px]:mb-6">
+      <div className="relative overflow-hidden border-t border-b border-ink mt-[15px] pt-[15px] pb-[25px] max-[900px]:mt-[10px] max-[900px]:pt-[9px] max-[900px]:pb-[15px]">
+        <div className="max-w-7xl mx-auto flex items-center gap-2.5 text-[11px] font-semibold tracking-[0.14em] uppercase text-ink-muted mb-2 px-8 max-[900px]:px-5 max-[900px]:mb-2">
           <span className="w-1.5 h-1.5 rounded-full bg-ink" />
           Platforms we specialize in
         </div>
@@ -65,7 +65,7 @@ export default function SpecialtyJDM() {
               key={i}
               data-text={item.outline ? item.name : undefined}
               aria-hidden={i >= marqueeItems.length || undefined}
-              className={`flex items-center gap-10 font-sans font-extrabold leading-[0.92] tracking-[-0.045em] px-10 whitespace-nowrap text-[clamp(60px,10vw,160px)] after:content-[''] after:w-[18px] after:h-[18px] after:rounded-full after:bg-ink after:flex-shrink-0 max-[900px]:text-[18vw] max-[900px]:gap-6 max-[900px]:px-6 max-[900px]:after:w-3 max-[900px]:after:h-3 ${
+              className={`flex items-center gap-10 font-sans font-extrabold leading-[0.92] tracking-[-0.045em] px-10 whitespace-nowrap text-[clamp(15px,2.5vw,40px)] after:content-[''] after:w-[18px] after:h-[18px] after:rounded-full after:bg-ink after:flex-shrink-0 max-[900px]:text-[4.5vw] max-[900px]:gap-6 max-[900px]:px-6 max-[900px]:after:w-3 max-[900px]:after:h-3 ${
                 item.outline ? 'marquee-item-outline' : 'text-ink'
               }`}
             >

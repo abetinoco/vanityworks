@@ -103,6 +103,7 @@ export default function BeforeAfterSlider({
             src={afterSrc}
             alt={afterLabel}
             fill
+            loading="lazy"
             className="object-cover"
             draggable={false}
           />
@@ -122,6 +123,7 @@ export default function BeforeAfterSlider({
               src={beforeSrc}
               alt={beforeLabel}
               fill
+              loading="lazy"
               className="object-cover"
               draggable={false}
             />

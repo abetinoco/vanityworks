@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRightIcon } from '@/components/Icons'
 
@@ -15,8 +14,6 @@ interface ServiceRow {
   tagline: string
   body: string
   features: string[]
-  imageSrc: string
-  imageCaption: string
 }
 
 const rows: ServiceRow[] = [
@@ -36,8 +33,6 @@ const rows: ServiceRow[] = [
       'Computer-cut precision',
       'Manufacturer warranty',
     ],
-    imageSrc: '/portfolio/black-porsche-911/01.jpg',
-    imageCaption: 'PPF install · Porsche 992',
   },
   {
     num: '02',
@@ -55,8 +50,6 @@ const rows: ServiceRow[] = [
       'Hydrophobic self-cleaning',
       'UV & oxidation protection',
     ],
-    imageSrc: '/portfolio/black-amg-g63/04.jpg',
-    imageCaption: 'Ceramic cure · Beading test',
   },
   {
     num: '03',
@@ -74,8 +67,6 @@ const rows: ServiceRow[] = [
       'Paint depth measurement',
       'High-intensity inspection',
     ],
-    imageSrc: '/portfolio/mclaren-720s/04.jpg',
-    imageCaption: 'Before / after · 50/50 split',
   },
   {
     num: '04',
@@ -93,8 +84,6 @@ const rows: ServiceRow[] = [
       'Hand polish & gloss',
       'Leather, carpet, trim',
     ],
-    imageSrc: '/portfolio/yellow-honda-s2000/01.jpg',
-    imageCaption: 'Interior · Cockpit detail',
   },
 ]
 
@@ -107,7 +96,7 @@ function LetterName({ text }: { text: string }) {
           data-hover
           className={`ww-row-letter ${ch === ' ' ? 'space' : ''}`}
         >
-          {ch === ' ' ? ' ' : ch}
+          {ch === ' ' ? ' ' : ch}
         </span>
       ))}
     </>
@@ -118,7 +107,7 @@ export default function WhatWeDo() {
   const [openIdx, setOpenIdx] = useState<number>(0)
 
   // On mobile, default to all-rows-closed so the section isn't dominated
-  // by the auto-expanded first row's image + body block.
+  // by the auto-expanded first row's body block.
   useEffect(() => {
     if (typeof window === 'undefined') return
     if (window.matchMedia('(max-width: 900px)').matches) {
@@ -166,26 +155,33 @@ export default function WhatWeDo() {
                 }}
                 className="ww-row relative border-b border-[#E0E0E0] py-5 lg:py-9 overflow-hidden transition-[padding] duration-500 ease-[cubic-bezier(0.65,0,0.35,1)] cursor-pointer lg:cursor-none focus:outline-none focus-visible:bg-[#FAFAFA]"
               >
-                {/* Top line */}
-                <div className="grid grid-cols-[36px_1fr] lg:grid-cols-[60px_1fr_auto] gap-4 lg:gap-10 items-baseline relative z-10">
-                  <span className="ww-row-num text-[14px] font-semibold text-[#9A9A9A] tracking-[-0.01em] tabular-nums">
+                {/* Top line: number + (name / subtitle / price), all left-aligned */}
+                <div className="grid grid-cols-[36px_1fr] lg:grid-cols-[60px_1fr] gap-4 lg:gap-10 relative z-10 pr-8">
+                  <span className="ww-row-num text-[14px] font-semibold text-[#9A9A9A] tracking-[-0.01em] tabular-nums pt-2 lg:pt-4">
                     / {row.num}
                   </span>
-                  <span
-                    className="ww-row-name text-[9vw] sm:text-[clamp(40px,7vw,96px)] lg:whitespace-nowrap font-extrabold leading-[0.92] tracking-[-0.055em] text-[#0A0A0A] transition-opacity duration-300"
-                  >
-                    <LetterName text={row.name} />
-                  </span>
 
-                  <div className="ww-row-meta col-span-2 lg:col-span-1 lg:text-right flex flex-row lg:flex-col items-baseline lg:items-end justify-between gap-2 mt-3 lg:mt-0 transition-opacity duration-300">
-                    <span className="text-[22px] font-bold text-[#0A0A0A] tracking-[-0.025em] tabular-nums leading-none flex items-baseline gap-1.5 lg:flex-col lg:items-end lg:gap-1">
-                      <span className="text-[11px] font-medium text-[#9A9A9A] tracking-[0.04em] uppercase order-1 lg:order-none">
+                  <div className="flex flex-col gap-2.5 lg:gap-3">
+                    <span className="ww-row-name text-[9vw] sm:text-[clamp(40px,7vw,96px)] lg:whitespace-nowrap font-extrabold leading-[0.92] tracking-[-0.055em] text-[#0A0A0A]">
+                      <LetterName text={row.name} />
+                    </span>
+
+                    {/* Second title — always-visible subtitle */}
+                    <span className="ww-row-sub text-[15px] sm:text-[17px] lg:text-[19px] font-semibold text-[#9A9A9A] leading-[1.25] tracking-[-0.012em]">
+                      {row.tagline}
+                    </span>
+
+                    {/* Price + duration, left-aligned */}
+                    <span className="flex items-baseline gap-2 mt-1.5 lg:mt-2.5">
+                      <span className="text-[11px] font-medium text-[#9A9A9A] tracking-[0.04em] uppercase">
                         From
                       </span>
-                      {row.price}
-                    </span>
-                    <span className="text-[12px] text-[#9A9A9A] font-medium tracking-[-0.005em] lg:mt-1.5">
-                      {row.duration}
+                      <span className="text-[20px] lg:text-[22px] font-bold text-[#0A0A0A] tracking-[-0.025em] tabular-nums leading-none">
+                        {row.price}
+                      </span>
+                      <span className="text-[12px] text-[#9A9A9A] font-medium tracking-[-0.005em] ml-1">
+                        · {row.duration}
+                      </span>
                     </span>
                   </div>
                 </div>
@@ -194,8 +190,8 @@ export default function WhatWeDo() {
                 <svg
                   viewBox="0 0 18 18"
                   fill="none"
-                  className={`absolute top-9 lg:top-12 right-0 w-[18px] h-[18px] pointer-events-none transition-all duration-300 ${
-                    isOpen ? 'opacity-100 rotate-45' : 'opacity-0 lg:group-hover:opacity-100'
+                  className={`absolute top-7 lg:top-12 right-0 w-[18px] h-[18px] text-[#0A0A0A] pointer-events-none transition-transform duration-300 ${
+                    isOpen ? 'rotate-45' : ''
                   }`}
                   aria-hidden
                 >
@@ -207,29 +203,28 @@ export default function WhatWeDo() {
                   />
                 </svg>
 
-                {/* Expandable detail */}
+                {/* Expandable detail — text only, aligned under the service name */}
                 <div
-                  className={`grid grid-cols-1 lg:grid-cols-[60px_1fr_380px] gap-5 lg:gap-10 items-start overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.65,0,0.35,1)] ${
-                    isOpen ? 'max-h-[800px] opacity-100 mt-8' : 'max-h-0 opacity-0 mt-0'
+                  className={`grid grid-cols-[36px_1fr] lg:grid-cols-[60px_1fr] gap-4 lg:gap-10 overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.65,0,0.35,1)] ${
+                    isOpen ? 'max-h-[600px] opacity-100 mt-6 lg:mt-8' : 'max-h-0 opacity-0 mt-0'
                   }`}
                   aria-hidden={!isOpen}
                 >
-                  {/* Desktop spacer */}
-                  <div className="hidden lg:block" />
+                  {/* spacer to align with the name column */}
+                  <div aria-hidden />
 
-                  {/* Text column */}
-                  <div className="lg:pr-10">
-                    <p className="text-[17px] font-semibold text-[#0A0A0A] leading-[1.35] mb-4 tracking-[-0.012em]" style={{ maxWidth: '36ch' }}>
-                      {row.tagline}
-                    </p>
-                    <p className="text-[14px] leading-[1.5] text-[#9A9A9A] mb-5 tracking-[-0.005em]" style={{ maxWidth: '50ch' }}>
+                  <div>
+                    <p
+                      className="text-[14px] lg:text-[15px] leading-[1.55] text-[#9A9A9A] mb-6 tracking-[-0.005em]"
+                      style={{ maxWidth: '56ch' }}
+                    >
                       {row.body}
                     </p>
-                    <ul className="grid grid-cols-1 lg:grid-cols-2 gap-y-2 gap-x-6 mb-6 list-none">
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-2.5 gap-x-10 mb-7 list-none" style={{ maxWidth: '46ch' }}>
                       {row.features.map((f) => (
                         <li
                           key={f}
-                          className="text-[13px] font-medium text-[#0A0A0A] tracking-[-0.005em] flex items-center gap-2"
+                          className="text-[13px] font-medium text-[#0A0A0A] tracking-[-0.005em] flex items-center gap-2.5"
                         >
                           <span className="w-1 h-1 bg-[#0A0A0A] rounded-full shrink-0" />
                           {f}
@@ -245,28 +240,6 @@ export default function WhatWeDo() {
                       See {row.name.toLowerCase()} gallery
                       <ArrowRightIcon className="w-3.5 h-3.5" />
                     </Link>
-                  </div>
-
-                  {/* Image */}
-                  <div
-                    className={`relative w-full aspect-[4/3] bg-[#0A0A0A] rounded overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.65,0,0.35,1)] ${
-                      isOpen ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'
-                    }`}
-                    style={{ transitionDelay: isOpen ? '100ms' : '0ms' }}
-                  >
-                    <Image
-                      src={row.imageSrc}
-                      alt={row.imageCaption}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 1024px) 100vw, 380px"
-                    />
-                    <div className="absolute bottom-3.5 left-4 right-4 z-10 flex justify-between text-white text-[11px] font-medium tracking-[0.04em] uppercase">
-                      <span>{row.imageCaption}</span>
-                      <span>
-                        {row.num} / 04
-                      </span>
-                    </div>
                   </div>
                 </div>
               </div>

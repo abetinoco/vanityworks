@@ -74,7 +74,6 @@ const addOns = [
   { id: 'engine', name: 'Engine Bay Detail', price: 149 },
   { id: 'wheels-ceramic', name: 'Wheel Ceramic Coating (set of 4)', price: 299 },
   { id: 'glass-ceramic', name: 'Glass Ceramic Coating', price: 199 },
-  { id: 'tint', name: 'Window Tint (full car)', price: 349 },
   { id: 'interior-protect', name: 'Interior Fabric/Leather Protection', price: 249 },
 ]
 

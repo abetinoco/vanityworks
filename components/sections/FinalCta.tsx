@@ -14,7 +14,7 @@ interface FinalCtaProps {
   sub?: string
   primaryCta?: CtaLink
   secondaryCta?: CtaLink
-  /** Background photo. Defaults to the same hero.jpg the Hero uses. */
+  /** Background photo. Defaults to the same hero.webp the Hero uses. */
   bgSrc?: string
   /** Tailwind objectPosition override (e.g. '60% center', 'center 30%'). */
   bgPosition?: string
@@ -41,7 +41,7 @@ export default function FinalCta({
   sub = DEFAULT_SUB,
   primaryCta = { label: 'Book a consultation', href: '/book' },
   secondaryCta = { label: 'See services', href: '/services' },
-  bgSrc = '/hero.jpg',
+  bgSrc = '/hero.webp',
   bgPosition = '60% center',
 }: FinalCtaProps = {}) {
   return (
@@ -52,6 +52,7 @@ export default function FinalCta({
         alt=""
         aria-hidden
         fill
+        loading="lazy"
         quality={85}
         sizes="100vw"
         className="object-cover z-0"

@@ -7,9 +7,8 @@ const services = [
   'Paint Protection Film',
   'Ceramic Coating',
   'Paint Correction',
-  'Window Tint',
-  'Interior Protection',
   'Full Detail',
+  'Interior Protection',
   'Multiple / Not Sure',
 ]
 
@@ -23,6 +22,8 @@ export default function ContactForm() {
     message: '',
   })
   const [submitted, setSubmitted] = useState(false)
+  const [status, setStatus] = useState<'idle' | 'sending' | 'error'>('idle')
+  const [error, setError] = useState('')
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -30,10 +31,25 @@ export default function ContactForm() {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // In production, hook up to API route
-    setSubmitted(true)
+    setStatus('sending')
+    setError('')
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+      const json = await res.json().catch(() => ({}))
+      if (!res.ok || !json.ok) {
+        throw new Error(json.error || 'Something went wrong. Please try again.')
+      }
+      setSubmitted(true)
+    } catch (err) {
+      setStatus('error')
+      setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
+    }
   }
 
   if (submitted) {
@@ -157,11 +173,18 @@ export default function ContactForm() {
 
       <button
         type="submit"
-        className="w-full py-4 bg-[#0A0A0A] text-white font-bold text-sm tracking-widest uppercase rounded-lg hover:bg-[#1A1A1A] transition-colors inline-flex items-center justify-center gap-2"
+        disabled={status === 'sending'}
+        className="w-full py-4 bg-[#0A0A0A] text-white font-bold text-sm tracking-widest uppercase rounded-lg hover:bg-[#1A1A1A] transition-colors inline-flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
       >
-        Send Message
-        <ArrowRightIcon className="w-4 h-4" />
+        {status === 'sending' ? 'Sending…' : 'Send Message'}
+        {status !== 'sending' && <ArrowRightIcon className="w-4 h-4" />}
       </button>
+
+      {status === 'error' && (
+        <p className="text-[#b00020] text-xs text-center" role="alert">
+          {error}
+        </p>
+      )}
 
       <p className="text-[#888] text-xs text-center">
         We typically respond within 24 hours. No spam, ever.

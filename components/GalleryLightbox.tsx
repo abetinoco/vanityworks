@@ -66,6 +66,7 @@ export default function GalleryLightbox({ photos, wideIndex = 4 }: Props) {
                 src={p.src}
                 alt={p.caption}
                 fill
+                loading="lazy"
                 sizes={wide ? '(max-width: 900px) 100vw, 50vw' : '(max-width: 900px) 50vw, 25vw'}
                 className="object-cover transition-transform duration-[700ms] [transition-timing-function:cubic-bezier(0.65,0,0.35,1)] group-hover:scale-[1.05]"
               />

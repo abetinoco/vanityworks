@@ -133,7 +133,7 @@ export default function Nav() {
               onClick={closeAll}
             >
               <Image
-                src="/logo.png"
+                src="/logo.webp"
                 alt="VanityWorks Detailing"
                 width={1536}
                 height={1024}
@@ -349,10 +349,11 @@ export default function Nav() {
                 className="flex items-center"
               >
                 <Image
-                  src="/logo.png"
+                  src="/logo.webp"
                   alt="VanityWorks Detailing"
                   width={1536}
                   height={1024}
+                  priority
                   className="h-12 w-auto invert brightness-105"
                 />
               </Link>

@@ -28,33 +28,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 // the page closes on a fresh visual — and the photo doesn't repeat the hero
 // tiles above it.
 const FINAL_CTA_BG: Record<string, { src: string; position?: string }> = {
-  'full-detail':            { src: '/portfolio/red-rx7-fd/01.jpg',        position: 'center 60%' },
-  'paint-correction':       { src: '/portfolio/yellow-lambo-gallardo/01.jpg', position: 'center 55%' },
-  'ceramic-coating':        { src: '/portfolio/white-r34-gtr/01.jpg',     position: 'center 50%' },
-  'paint-protection-film':  { src: '/portfolio/red-acura-nsx/01.jpg',     position: 'center 55%' },
+  'full-detail':            { src: '/portfolio/red-rx7-fd/01.webp',        position: 'center 60%' },
+  'paint-correction':       { src: '/portfolio/yellow-lambo-gallardo/01.webp', position: 'center 55%' },
+  'ceramic-coating':        { src: '/portfolio/white-r34-gtr/01.webp',     position: 'center 50%' },
+  'paint-protection-film':  { src: '/portfolio/red-acura-nsx/01.webp',     position: 'center 55%' },
 }
 
-// Two-tier keyword scoring against each portfolio entry's service string.
-// Primary = direct hits (e.g. "ppf" for PPF). Secondary = adjacent work that
-// still belongs in the same domain (e.g. ceramic shots on the PPF page).
-// Ties broken by `featured`, then portfolio order.
-const SERVICE_KEYWORDS: Record<string, { primary: string[]; secondary: string[] }> = {
-  'full-detail': {
-    primary: ['hand wash', 'wash', 'interior detail'],
-    secondary: ['detail'],
-  },
-  'paint-correction': {
-    primary: ['correction', 'paint work'],
-    secondary: ['show', 'detail'],
-  },
-  'ceramic-coating': {
-    primary: ['ceramic'],
-    secondary: ['coating'],
-  },
-  'paint-protection-film': {
-    primary: ['ppf', 'protection film'],
-    secondary: ['ceramic', 'coating'],
-  },
+// Curated showcase cars per service page. Photos are honest beauty/detail
+// shots of real client cars — they illustrate the kind of vehicle we work on,
+// not the service action itself (the chips never claim an unpictured service).
+// Each tile shows only the vehicle name. Edit these lists to re-curate a page.
+const SERVICE_SHOWCASE: Record<string, string[]> = {
+  'full-detail': ['black-porsche-cayenne', 'subaru-interior-detail', 'red-svt-lightning-wash'],
+  'paint-correction': ['red-acura-nsx', 'red-r33-gtr', 'yellow-honda-s2000'],
+  'ceramic-coating': ['black-amg-g63', 'yellow-lambo-gallardo', 'purple-r33-gtr'],
+  'paint-protection-film': ['black-porsche-911', 'mclaren-720s', 'white-r34-gtr'],
 }
 
 interface HeroTile {
@@ -69,24 +57,16 @@ function pickShowcasePhoto(entry: PortfolioEntry): string {
 }
 
 function getHeroTiles(slug: string, n = 3): HeroTile[] {
-  const kw = SERVICE_KEYWORDS[slug] ?? { primary: [], secondary: [] }
-  const ranked = portfolio
-    .filter((e) => e.photos.length > 0)
-    .map((entry) => {
-      const svc = entry.service.toLowerCase()
-      const primary = kw.primary.reduce((acc, k) => (svc.includes(k) ? acc + 1 : acc), 0)
-      const secondary = kw.secondary.reduce((acc, k) => (svc.includes(k) ? acc + 1 : acc), 0)
-      return { entry, primary, secondary }
-    })
-    .sort((a, b) => {
-      if (b.primary !== a.primary) return b.primary - a.primary
-      if (b.secondary !== a.secondary) return b.secondary - a.secondary
-      const fa = a.entry.featured ? 1 : 0
-      const fb = b.entry.featured ? 1 : 0
-      return fb - fa
-    })
+  const curated = (SERVICE_SHOWCASE[slug] ?? [])
+    .map((s) => portfolio.find((e) => e.slug === s))
+    .filter((e): e is PortfolioEntry => Boolean(e && e.photos.length > 0))
 
-  return ranked.slice(0, n).map(({ entry }) => ({
+  // Backfill with featured entries (then any entry) if a list is short.
+  const backfill = portfolio
+    .filter((e) => e.photos.length > 0 && !curated.includes(e))
+    .sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0))
+
+  return [...curated, ...backfill].slice(0, n).map((entry) => ({
     src: pickShowcasePhoto(entry),
     vehicle: entry.vehicle,
   }))
@@ -224,6 +204,7 @@ export default function ServiceDetailPage({ params }: Props) {
                   alt={`${t.vehicle} — ${s.name}`}
                   fill
                   priority={i === 0}
+                  loading={i === 0 ? undefined : 'lazy'}
                   sizes="(max-width: 900px) 100vw, 33vw"
                   className="object-cover"
                 />

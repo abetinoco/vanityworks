@@ -180,7 +180,7 @@ export default function ServicesPage() {
         sub="Not sure which one fits? **Tell us about the car** — we'll give you an honest read and book the right service."
         primaryCta={{ label: 'Book a consultation', href: '/book' }}
         secondaryCta={{ label: 'See the work', href: '/gallery' }}
-        bgSrc="/portfolio/mclaren-720s/02.jpg"
+        bgSrc="/portfolio/mclaren-720s/02.webp"
         bgPosition="center 55%"
       />
     </div>

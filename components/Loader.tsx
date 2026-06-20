@@ -49,7 +49,7 @@ export default function Loader() {
         <div className="loader-frame">
           <div className="loader-logo-wrap">
             <Image
-              src="/logo.png"
+              src="/logo.webp"
               alt=""
               width={1536}
               height={1024}

@@ -20,7 +20,7 @@ interface Credential {
 }
 
 // To wire a real photo: drop the file under /public/certifications/ and set
-// `photoSrc` (e.g. photoSrc: '/certifications/ppf.jpg'). Until then, a tasteful
+// `photoSrc` (e.g. photoSrc: '/certifications/ppf.webp'). Until then, a tasteful
 // dark-gradient placeholder renders in its place.
 const credentials: Credential[] = [
   {
@@ -29,7 +29,7 @@ const credentials: Credential[] = [
     meta: 'Hands-on · multi-day',
     title: 'Paint Protection Film.',
     placeholderLabel: 'DetailWise Academy · PPF Training',
-    photoSrc: '/certifications/ppf.jpg',
+    photoSrc: '/certifications/ppf.webp',
     photoAlt: 'DetailWise Academy Paint Protection Film Training — certificate of completion',
     body: (
       <>
@@ -91,6 +91,7 @@ export default function Certifications() {
                     src={cred.photoSrc}
                     alt={cred.photoAlt}
                     fill
+                    loading="lazy"
                     sizes="(max-width: 900px) 100vw, 50vw"
                     className="object-cover transition-transform duration-[800ms] [transition-timing-function:cubic-bezier(0.65,0,0.35,1)] group-hover:scale-[1.02]"
                   />

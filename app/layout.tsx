@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter_Tight, Bebas_Neue, Allura } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
@@ -44,7 +45,8 @@ export const metadata: Metadata = {
     'PPF installer near me',
     'Opticle PPF Chicago',
     'DetailWise Academy trained',
-    'window tint Chicagoland',
+    'full detail Chicagoland',
+    'mobile car detailing Lake County',
     'JDM detailing',
     'exotic car detailing Chicago',
     'GT-R PPF',
@@ -57,7 +59,7 @@ export const metadata: Metadata = {
     url: SITE_URL,
     images: [
       {
-        url: '/og-image.png',
+        url: '/og-image.webp',
         width: 1734,
         height: 907,
         alt: 'VanityWorks Detailing — Your car, perfected.',
@@ -66,11 +68,11 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    images: ['/og-image.png'],
+    images: ['/og-image.webp'],
   },
   icons: {
-    icon: '/favicon.png',
-    apple: '/favicon.png',
+    icon: '/favicon.webp',
+    apple: '/favicon.webp',
   },
   robots: {
     index: true,
@@ -82,7 +84,7 @@ const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': 'AutoDetailing',
   name: 'VanityWorks Detailing',
-  image: `${SITE_URL}/logo.png`,
+  image: `${SITE_URL}/logo.webp`,
   url: SITE_URL,
   telephone: '+1-224-572-4787',
   priceRange: '$$-$$$',
@@ -99,8 +101,10 @@ const localBusinessSchema = {
   },
   areaServed: [
     { '@type': 'City', name: 'Chicago' },
-    { '@type': 'City', name: 'Naperville' },
     { '@type': 'City', name: 'Evanston' },
+    { '@type': 'City', name: 'Glencoe' },
+    { '@type': 'AdministrativeArea', name: 'Lake County, IL' },
+    { '@type': 'AdministrativeArea', name: 'North Shore' },
     { '@type': 'AdministrativeArea', name: 'Chicagoland' },
   ],
   openingHoursSpecification: [
@@ -122,9 +126,7 @@ const localBusinessSchema = {
       { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Paint Protection Film' } },
       { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Ceramic Coating' } },
       { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Paint Correction' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Window Tint' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Interior Protection' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Interior & Exterior Detail' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Full Detail' } },
     ],
   },
   aggregateRating: {
@@ -146,6 +148,7 @@ export default function RootLayout({
         <Nav />
         <main>{children}</main>
         <Footer />
+        <Analytics />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}

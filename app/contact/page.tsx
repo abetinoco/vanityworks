@@ -1,18 +1,13 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { SplitLetters } from '@/components/SplitLetters'
+import ContactPageForm from '@/components/ContactPageForm'
 
 export const metadata: Metadata = {
   title: 'Contact',
   description:
     "Get in touch with VanityWorks. Tell us about your vehicle — we'll get back with an honest read and a real quote.",
 }
-
-const SUBMIT_ICON = (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-    <path d="M5 11L11 5M11 5H6.5M11 5V9.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-)
 
 export default function ContactPage() {
   return (
@@ -61,64 +56,7 @@ export default function ContactPage() {
               <span className="inline-block w-2 h-2 rounded-full bg-ink" />
               Send a message
             </div>
-            <form
-              action="https://formspree.io/f/REPLACE_ME"
-              method="POST"
-              className="grid grid-cols-2 gap-5 max-[900px]:grid-cols-1"
-            >
-              <Field label="Name" name="name" required placeholder="Your name" />
-              <Field label="Phone" name="phone" type="tel" required placeholder="(224) 000-0000" />
-              <Field label="Email" name="email" type="email" placeholder="you@email.com" />
-              <Field label="Vehicle" name="vehicle" placeholder="Year / make / model" />
-              <div className="flex flex-col gap-2 col-span-2">
-                <label htmlFor="service" className="text-[11px] font-bold tracking-[0.1em] uppercase text-ink-muted">
-                  Service interested in
-                </label>
-                <select
-                  id="service"
-                  name="service"
-                  defaultValue=""
-                  className="appearance-none bg-no-repeat bg-[length:12px_8px] bg-[right_16px_center] pr-10 px-4 py-3.5 text-[15px] text-ink border border-line bg-white focus:outline-none focus:border-ink transition-colors"
-                  style={{
-                    backgroundImage:
-                      "url(\"data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E\")",
-                  }}
-                >
-                  <option value="">Select a service…</option>
-                  <option value="full-detail">Full Detail — $250</option>
-                  <option value="paint-correction">Paint Correction — from $350</option>
-                  <option value="ceramic-coating">Ceramic Coating — from $750</option>
-                  <option value="ppf">Paint Protection Film — by quote</option>
-                  <option value="not-sure">Not sure yet — need advice</option>
-                </select>
-              </div>
-              <div className="flex flex-col gap-2 col-span-2">
-                <label htmlFor="message" className="text-[11px] font-bold tracking-[0.1em] uppercase text-ink-muted">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  placeholder="Tell us about the car, the condition, and what you're hoping for."
-                  className="px-4 py-3.5 text-[15px] text-ink border border-line bg-white focus:outline-none focus:border-ink transition-colors resize-y min-h-[130px] placeholder:text-[#c4c4c4]"
-                />
-              </div>
-              <div className="col-span-2 flex items-center gap-6 flex-wrap mt-2 max-[900px]:flex-col max-[900px]:items-stretch">
-                <button
-                  type="submit"
-                  data-hover
-                  className="group bg-ink text-white rounded-full text-[15px] font-semibold px-7 py-[18px] inline-flex items-center justify-center gap-3 tracking-[-0.005em] transition-transform duration-300 [transition-timing-function:cubic-bezier(0.34,1.56,0.64,1)] hover:scale-[1.03] cursor-pointer"
-                >
-                  Send message {SUBMIT_ICON}
-                </button>
-                <span className="text-[12px] text-ink-muted tracking-[-0.005em]">
-                  Or text us directly at{' '}
-                  <a href="tel:+12245724787" className="text-ink font-semibold no-underline">
-                    (224) 572-4787
-                  </a>
-                </span>
-              </div>
-            </form>
+            <ContactPageForm />
           </div>
 
           {/* Info sidebar */}
@@ -140,9 +78,9 @@ export default function ContactPage() {
               </span>
             </InfoItem>
             <InfoItem label="Location">
-              <span className="text-[18px] font-bold tracking-[-0.02em] text-ink">Lakemoor, IL</span>
+              <span className="text-[18px] font-bold tracking-[-0.02em] text-ink">Chicagoland</span>
               <span className="text-[13px] text-ink-muted leading-[1.4] tracking-[-0.005em]">
-                By appointment · mobile service across Chicagoland &amp; the North Shore
+                Mobile · based in McHenry County — serving Lake County to the North Shore (Evanston · Glencoe)
               </span>
             </InfoItem>
             <InfoItem label="Hours">
@@ -176,17 +114,17 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto">
           <div className="relative w-full aspect-[21/7] overflow-hidden border border-ink bg-[#f4f4f4] max-[900px]:aspect-[4/3]">
             <span className="absolute top-4 left-4 z-[3] text-[10px] font-bold tracking-[0.14em] uppercase text-ink bg-white border border-ink px-3 py-2 pointer-events-none">
-              Lakemoor · HQ
+              Chicagoland
             </span>
             <iframe
-              src="https://www.google.com/maps?q=Lakemoor,IL&t=&z=11&ie=UTF8&iwloc=&output=embed"
+              src="https://www.google.com/maps?q=Chicago,IL&t=&z=9&ie=UTF8&iwloc=&output=embed"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="VanityWorks — Lakemoor, IL"
+              title="VanityWorks — Chicagoland"
               className="absolute inset-0 w-full h-full block border-0"
             />
             <a
-              href="https://www.google.com/maps/place/Lakemoor,+IL/"
+              href="https://www.google.com/maps/place/Chicago,+IL/"
               target="_blank"
               rel="noopener noreferrer"
               data-hover
@@ -200,37 +138,6 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
-    </div>
-  )
-}
-
-function Field({
-  label,
-  name,
-  type = 'text',
-  required = false,
-  placeholder,
-}: {
-  label: string
-  name: string
-  type?: string
-  required?: boolean
-  placeholder?: string
-}) {
-  return (
-    <div className="flex flex-col gap-2">
-      <label htmlFor={name} className="text-[11px] font-bold tracking-[0.1em] uppercase text-ink-muted">
-        {label}{' '}
-        {required && <span className="text-ink">*</span>}
-      </label>
-      <input
-        id={name}
-        name={name}
-        type={type}
-        required={required}
-        placeholder={placeholder}
-        className="px-4 py-3.5 text-[15px] text-ink border border-line bg-white focus:outline-none focus:border-ink transition-colors placeholder:text-[#c4c4c4]"
-      />
     </div>
   )
 }

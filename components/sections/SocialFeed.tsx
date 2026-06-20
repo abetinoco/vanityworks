@@ -30,9 +30,10 @@ export default function SocialFeed() {
             aria-label="Open @vanityworks.il on Instagram"
           >
             <Image
-              src="/portfolio/mclaren-720s/01.jpg"
+              src="/portfolio/mclaren-720s/01.webp"
               alt="McLaren 720S — pinned post on Instagram"
               fill
+              loading="lazy"
               sizes="(max-width: 900px) 100vw, 50vw"
               className="object-cover transition-transform duration-[900ms] [transition-timing-function:cubic-bezier(0.65,0,0.35,1)] group-hover:scale-[1.04]"
             />

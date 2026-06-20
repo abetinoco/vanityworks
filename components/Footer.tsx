@@ -17,8 +17,8 @@ const companyLinks = [
 ]
 
 const areaLinks = [
-  { href: '/contact', label: 'Lakemoor, IL' },
   { href: '/contact', label: 'Lake County' },
+  { href: '/service-area/evanston', label: 'North Shore' },
   { href: '/service-area/chicago', label: 'Chicago + North Shore' },
   { href: '/service-area/naperville', label: 'Western suburbs' },
 ]
@@ -54,10 +54,11 @@ export default function Footer() {
               className="inline-flex items-center no-underline"
             >
               <Image
-                src="/logo.png"
+                src="/logo.webp"
                 alt="VanityWorks Detailing"
                 width={1536}
                 height={1024}
+                loading="lazy"
                 className="h-16 w-auto object-contain invert brightness-105 max-[900px]:h-9"
               />
             </Link>
@@ -66,7 +67,7 @@ export default function Footer() {
               cars worth obsessing over.
             </p>
             <p className="text-[11px] font-semibold tracking-[0.04em] text-[#888] max-[900px]:text-[10px]">
-              EST. <strong className="text-white font-semibold">2017</strong> · Lakemoor, IL
+              EST. <strong className="text-white font-semibold">2023</strong> · Chicagoland
             </p>
 
             <div className="flex gap-2 mt-1 max-[900px]:mt-0">
@@ -228,8 +229,8 @@ export default function Footer() {
                 </svg>
               </span>
               <span>
-                <strong className="block font-semibold text-white mb-0.5 max-[900px]:mb-0">Lakemoor, IL</strong>
-                <span className="text-[#888] text-[12px] font-medium max-[900px]:hidden">By appointment</span>
+                <strong className="block font-semibold text-white mb-0.5 max-[900px]:mb-0">Chicagoland</strong>
+                <span className="text-[#888] text-[12px] font-medium max-[900px]:hidden">Mobile · by appointment</span>
               </span>
             </div>
 

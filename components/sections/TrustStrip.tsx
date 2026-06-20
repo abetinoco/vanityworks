@@ -23,11 +23,11 @@ const items: TrustItem[] = [
   },
   {
     num: '/ 02',
-    claim: <>2017</>,
+    claim: <>2023</>,
     label: (
       <>
-        Established. <span className="text-ink-muted font-medium">Volo, IL.</span>
-        <span className="block text-ink-muted font-medium">By appointment only.</span>
+        Established. <span className="text-ink-muted font-medium">Chicagoland.</span>
+        <span className="block text-ink-muted font-medium">Mobile · by appointment.</span>
       </>
     ),
   },

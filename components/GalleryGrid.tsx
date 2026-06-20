@@ -10,7 +10,7 @@ interface GalleryGridProps {
   showFilter?: boolean
 }
 
-const filters = ['All', 'Paint Protection Film', 'Ceramic Coating', 'Paint Correction', 'Window Tint', 'Full Detail', 'Interior Protection']
+const filters = ['All', 'Paint Protection Film', 'Ceramic Coating', 'Paint Correction', 'Full Detail', 'Interior Protection']
 
 export default function GalleryGrid({ items, showFilter = false }: GalleryGridProps) {
   const [activeFilter, setActiveFilter] = useState('All')
@@ -51,6 +51,7 @@ export default function GalleryGrid({ items, showFilter = false }: GalleryGridPr
               src={item.image}
               alt={item.title}
               fill
+              loading="lazy"
               className="object-cover group-hover:scale-105 transition-transform duration-500"
               sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
             />
@@ -92,7 +93,7 @@ export default function GalleryGrid({ items, showFilter = false }: GalleryGridPr
             onClick={(e) => e.stopPropagation()}
           >
             <div className="relative aspect-video">
-              <Image src={lightbox.image} alt={lightbox.title} fill className="object-cover" />
+              <Image src={lightbox.image} alt={lightbox.title} fill className="object-cover" priority />
             </div>
             <div className="bg-white px-5 py-4 flex items-center justify-between border-t border-[#E0E0E0]">
               <div>
