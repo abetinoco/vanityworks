@@ -1,7 +1,7 @@
 {
   "buildCommand": "next build",
   "outputDirectory": ".next",
-  "framework": "@vercel/next",
+  "framework": "nextjs",
   "headers": [
     {
       "source": "/(.*)",
