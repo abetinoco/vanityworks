@@ -235,10 +235,7 @@ export default function Nav() {
                 <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#888] mb-1">
                   Detailing Services
                 </p>
-                <h3
-                  className="text-3xl text-[#0A0A0A] leading-none"
-                  style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '0.04em' }}
-                >
+                <h3 className="font-sans font-extrabold text-3xl text-[#0A0A0A] leading-none tracking-[-0.03em]">
                   Built for Your Build.
                 </h3>
               </div>
@@ -277,13 +274,7 @@ export default function Nav() {
                       <ServiceIcon slug={service.slug} className="w-5 h-5" />
                     </span>
                     <div className="min-w-0 flex-1">
-                      <p
-                        className="text-base text-[#0A0A0A] leading-none mb-1.5"
-                        style={{
-                          fontFamily: 'Bebas Neue, sans-serif',
-                          letterSpacing: '0.04em',
-                        }}
-                      >
+                      <p className="font-sans font-bold text-[15px] text-[#0A0A0A] leading-tight mb-1.5 tracking-[-0.015em]">
                         {service.name}
                       </p>
                       <p className="text-[11px] text-[#666] leading-snug line-clamp-2">
