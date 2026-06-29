@@ -224,7 +224,7 @@ export default function AboutPage() {
       <FinalCta
         title="See the difference."
         sub="Bring us the car. We'll show you what obsessive actually looks like — **no pressure, just an honest read.**"
-        primaryCta={{ label: 'Book a consultation', href: '/contact' }}
+        primaryCta={{ label: 'Book a consultation', href: '/book' }}
         secondaryCta={{ label: 'See the work', href: '/portfolio' }}
       />
     </div>

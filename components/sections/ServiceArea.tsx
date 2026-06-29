@@ -84,7 +84,7 @@ export default function ServiceArea() {
             </div>
 
             <Link
-              href="/contact"
+              href="/book"
               data-hover
               className="inline-flex items-center gap-2.5 text-ink text-[14px] font-semibold tracking-[-0.005em] pb-1 border-b border-ink transition-[gap] duration-300 hover:gap-3.5"
             >

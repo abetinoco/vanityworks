@@ -536,7 +536,7 @@ export const services: Service[] = [
           'Best value entry point',
         ],
         ctaLabel: 'Request quote',
-        ctaHref: '/contact?service=PPF+High-Impact',
+        ctaHref: '/book?service=PPF+High-Impact',
       },
       {
         tier: 'Tier 02 — Full front',
@@ -551,7 +551,7 @@ export const services: Service[] = [
           'The complete daily-driver answer',
         ],
         ctaLabel: 'Request quote',
-        ctaHref: '/contact?service=PPF+Full+Front',
+        ctaHref: '/book?service=PPF+Full+Front',
         featured: true,
       },
       {
@@ -567,7 +567,7 @@ export const services: Service[] = [
           'For exotics + collectibles',
         ],
         ctaLabel: 'Request quote',
-        ctaHref: '/contact?service=PPF+Full+Body',
+        ctaHref: '/book?service=PPF+Full+Body',
       },
     ],
     packagesNote:
@@ -593,7 +593,7 @@ export const services: Service[] = [
     finalTitle: 'Quote your build.',
     finalSub:
       "Tell us about the car and the coverage you want — **we\'ll quote a real number, not a placeholder.**",
-    finalPrimaryCta: { label: 'Request PPF quote', href: '/contact?service=PPF' },
+    finalPrimaryCta: { label: 'Request PPF quote', href: '/book?service=PPF' },
     finalSecondaryCta: { label: 'All services', href: '/services' },
   },
 ]

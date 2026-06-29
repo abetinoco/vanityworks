@@ -19,7 +19,6 @@ const navLinks = [
   { href: '/portfolio', label: 'Portfolio' },
   { href: '/#reviews', label: 'Reviews' },
   { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
 ]
 
 export default function Nav() {

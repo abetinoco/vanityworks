@@ -15,7 +15,7 @@ const companyLinks = [
 ]
 
 const areaLinks = [
-  { href: '/contact', label: 'Lake County' },
+  { href: '/book', label: 'Lake County' },
   { href: '/service-area/evanston', label: 'North Shore' },
   { href: '/service-area/chicago', label: 'Chicago + North Shore' },
   { href: '/service-area/naperville', label: 'Western suburbs' },
@@ -140,7 +140,7 @@ export default function Footer() {
                 {l.label}
               </Link>
             ))}
-            <Link href="/contact" data-hover className={linkBaseClass}>
+            <Link href="/book" data-hover className={linkBaseClass}>
               Ask about your area
               <svg viewBox="0 0 10 10" fill="none" className="w-2.5 h-2.5 opacity-50">
                 <path

@@ -12,7 +12,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/portfolio', priority: 0.85, changeFrequency: 'weekly' },
     { path: '/about', priority: 0.7, changeFrequency: 'monthly' },
     { path: '/book', priority: 0.95, changeFrequency: 'monthly' },
-    { path: '/contact', priority: 0.9, changeFrequency: 'monthly' },
   ]
 
   const staticPages = staticRoutes.map(r => ({

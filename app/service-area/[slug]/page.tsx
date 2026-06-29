@@ -272,12 +272,12 @@ export default function ServiceAreaPage({ params }: Props) {
               Book a Consultation
               <ArrowRightIcon className="w-4 h-4" />
             </Link>
-            <Link
-              href="/contact"
+            <a
+              href="tel:+12245724787"
               className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-[#0A0A0A] text-[#0A0A0A] font-semibold text-sm tracking-widest uppercase rounded-lg hover:bg-[#0A0A0A] hover:text-white transition-colors"
             >
-              Contact Us
-            </Link>
+              Call or Text
+            </a>
           </div>
         </div>
       </section>
