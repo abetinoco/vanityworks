@@ -361,9 +361,12 @@ export default function Nav() {
             <div className="grid min-h-0 flex-1 grid-cols-1 divide-y divide-white/[0.07] overflow-y-auto overscroll-contain min-[540px]:grid-cols-2 min-[540px]:divide-x min-[540px]:divide-y-0">
               {/* Primary nav */}
               <nav className="flex flex-col px-6 pb-6 pt-6" aria-label="Primary">
-                <p className="mb-6 text-[12px] italic leading-snug text-white/30 max-w-[18rem]">
-                  Mobile PPF, ceramic & paint correction — we come to your driveway.
-                </p>
+                <div className="mb-5 inline-flex items-center gap-2.5 text-[12px] font-semibold uppercase tracking-[0.16em] text-white/55">
+                  <span className="relative inline-block h-[7px] w-[7px] rounded-full bg-[#00ff88]">
+                    <span className="absolute -inset-[3px] rounded-full bg-[#00ff88] opacity-30 animate-[pulse_2s_ease-in-out_infinite]" />
+                  </span>
+                  Menu
+                </div>
 
                 <MobileNavLink href="/" label="Home" active={pathname === '/'} onTap={closeAll} />
 
@@ -377,14 +380,7 @@ export default function Nav() {
                       isServicesActive ? 'text-white' : 'text-white/85'
                     }`}
                   >
-                    <span
-                      className="leading-none tracking-wider"
-                      style={{
-                        fontFamily: 'Bebas Neue, sans-serif',
-                        letterSpacing: '0.04em',
-                        fontSize: 'clamp(24px,7vw,30px)',
-                      }}
-                    >
+                    <span className="font-sans font-extrabold leading-none tracking-[-0.03em] text-[clamp(26px,7vw,32px)]">
                       Services
                     </span>
                     <ChevronDownIcon
@@ -498,10 +494,23 @@ export default function Nav() {
               <Link
                 href="/book"
                 onClick={closeAll}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-white py-3.5 text-sm font-bold uppercase tracking-widest text-[#0A0A0A] shadow-lg transition hover:bg-white/90"
+                className="group inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-white py-4 text-[15px] font-semibold tracking-[-0.005em] text-[#0A0A0A] transition-transform duration-300 hover:scale-[1.02]"
               >
-                Book a Consultation
-                <ArrowRightIcon className="w-4 h-4" />
+                Book consultation
+                <svg
+                  className="h-[18px] w-[18px] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  viewBox="0 0 18 18"
+                  fill="none"
+                  aria-hidden
+                >
+                  <path
+                    d="M5 13L13 5M13 5H7M13 5V11"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
               </Link>
             </div>
           </div>,
@@ -529,14 +538,9 @@ function MobileNavLink({
       className="group flex items-center justify-between gap-3 border-b border-white/[0.06] py-[11px] transition-[padding] duration-150 hover:pl-1"
     >
       <span
-        className={`leading-none tracking-wider transition-colors ${
+        className={`font-sans font-extrabold leading-none tracking-[-0.03em] text-[clamp(26px,7vw,32px)] transition-colors ${
           active ? 'text-white' : 'text-white/85 group-hover:text-white'
         }`}
-        style={{
-          fontFamily: 'Bebas Neue, sans-serif',
-          letterSpacing: '0.04em',
-          fontSize: 'clamp(24px,7vw,30px)',
-        }}
       >
         {label}
       </span>
