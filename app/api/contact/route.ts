@@ -11,8 +11,10 @@ export const dynamic = 'force-dynamic'
 //    RESEND_API_KEY     — from resend.com (Project → API Keys)
 //    CONTACT_TO_EMAIL   — inbox that should receive inquiries
 //  Optional:
-//    CONTACT_FROM_EMAIL — verified sender, e.g. "VanityWorks <hello@vanityworksdetailing.com>"
+//    CONTACT_FROM_EMAIL — verified sender, e.g. "VanityWorks <bookings@vanityworksdetailing.com>"
 //                         Defaults to Resend's shared onboarding sender for testing.
+//    CONTACT_BCC_EMAIL  — blind-copied on every inquiry (defaults to abe@haloit.tech).
+//                         Comma-separate for multiple.
 // ─────────────────────────────────────────────
 
 interface ContactPayload {
@@ -53,6 +55,10 @@ export async function POST(req: Request) {
   const apiKey = process.env.RESEND_API_KEY
   const to = process.env.CONTACT_TO_EMAIL
   const from = process.env.CONTACT_FROM_EMAIL || 'VanityWorks <onboarding@resend.dev>'
+  const bcc = (process.env.CONTACT_BCC_EMAIL ?? 'abe@haloit.tech')
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean)
 
   if (!apiKey || !to) {
     // Misconfiguration — log loudly, tell the user to reach out directly.
@@ -100,6 +106,7 @@ export async function POST(req: Request) {
       body: JSON.stringify({
         from,
         to: [to],
+        bcc: bcc.length ? bcc : undefined,
         reply_to: email || undefined,
         subject,
         text,
