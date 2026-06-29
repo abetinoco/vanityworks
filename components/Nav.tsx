@@ -148,9 +148,9 @@ export default function Nav() {
               <div onMouseEnter={handleEnter}>
                 <Link
                   href="/services"
-                  className={`inline-flex items-center gap-1.5 text-xs font-semibold tracking-wider uppercase transition-colors duration-200 ${
+                  className={`inline-flex items-center gap-1.5 text-xs font-bold tracking-wider uppercase transition-colors duration-200 ${
                     transparent
-                      ? isServicesActive ? 'text-white' : 'text-white/70 hover:text-white'
+                      ? isServicesActive ? 'text-white' : 'text-white/80 hover:text-white'
                       : isServicesActive ? 'text-[#0A0A0A]' : 'text-[#888] hover:text-[#0A0A0A]'
                   }`}
                   aria-expanded={servicesOpen}
@@ -171,9 +171,9 @@ export default function Nav() {
                   key={link.href}
                   href={link.href}
                   onMouseEnter={handleLeave}
-                  className={`text-xs font-semibold tracking-wider uppercase transition-colors duration-200 ${
+                  className={`text-xs font-bold tracking-wider uppercase transition-colors duration-200 ${
                     transparent
-                      ? pathname === link.href ? 'text-white' : 'text-white/70 hover:text-white'
+                      ? pathname === link.href ? 'text-white' : 'text-white/80 hover:text-white'
                       : pathname === link.href ? 'text-[#0A0A0A]' : 'text-[#888] hover:text-[#0A0A0A]'
                   }`}
                 >
@@ -186,8 +186,8 @@ export default function Nav() {
             <div className="hidden lg:flex items-center gap-4" onMouseEnter={handleLeave}>
               <Link
                 href="tel:+12245724787"
-                className={`text-xs tracking-wider transition-colors ${
-                  transparent ? 'text-white/65 hover:text-white' : 'text-[#888] hover:text-[#0A0A0A]'
+                className={`text-xs font-semibold tracking-wider transition-colors ${
+                  transparent ? 'text-white/80 hover:text-white' : 'text-[#888] hover:text-[#0A0A0A]'
                 }`}
               >
                 (224) 572-4787
