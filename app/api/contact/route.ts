@@ -70,31 +70,83 @@ export async function POST(req: Request) {
   }
 
   const subject = `New inquiry — ${name}${vehicle ? ` · ${vehicle}` : ''}`
-  const rows: Array<[string, string]> = [
+
+  // Plain-text fallback (for clients that don't render HTML).
+  const text = [
     ['Name', name],
-    ['Email', email || '—'],
     ['Phone', phone || '—'],
+    ['Email', email || '—'],
     ['Vehicle', vehicle || '—'],
     ['Service', service || '—'],
     ['Message', message || '—'],
   ]
+    .map(([k, v]) => `${k}: ${v}`)
+    .join('\n')
 
-  const text = rows.map(([k, v]) => `${k}: ${v}`).join('\n')
-  const html = `
-    <div style="font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#0a0a0a;max-width:560px">
-      <h2 style="margin:0 0 16px;font-size:18px">New website inquiry</h2>
-      <table style="border-collapse:collapse;width:100%;font-size:14px">
-        ${rows
-          .map(
-            ([k, v]) =>
-              `<tr>
-                 <td style="padding:8px 12px;border:1px solid #ececec;background:#fafafa;font-weight:600;white-space:nowrap;vertical-align:top">${esc(k)}</td>
-                 <td style="padding:8px 12px;border:1px solid #ececec">${esc(v).replace(/\n/g, '<br>')}</td>
-               </tr>`,
-          )
-          .join('')}
+  // ── Branded HTML email — mirrors the website (dark header, white logo,
+  //    ink-on-white cards, #00ff88 accent). Table-based + inline styles so
+  //    it renders consistently across Gmail, Apple Mail, Outlook, etc. ──
+  const SITE = 'https://vanityworksdetailing.com'
+  const telHref = phone.replace(/[^\d+]/g, '')
+  const FONT = "'Helvetica Neue',Helvetica,Arial,sans-serif"
+
+  const details: Array<{ label: string; value: string; href?: string }> = [
+    { label: 'Phone', value: phone || '—', href: phone ? `tel:${telHref}` : undefined },
+    { label: 'Email', value: email || '—', href: email ? `mailto:${email}` : undefined },
+    { label: 'Vehicle', value: vehicle || '—' },
+    { label: 'Service', value: service || '—' },
+    { label: 'Message', value: message || '—' },
+  ]
+
+  const rowsHtml = details
+    .map(({ label, value, href }, i) => {
+      const top = i === 0 ? '' : 'border-top:1px solid #E0E0E0;'
+      const val = href
+        ? `<a href="${href}" style="color:#0A0A0A;text-decoration:none;border-bottom:1px solid #CCCCCC">${esc(value)}</a>`
+        : esc(value).replace(/\n/g, '<br>')
+      return `<tr>
+        <td style="${top}padding:13px 18px;background:#FAFAFA;color:#888888;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;white-space:nowrap;vertical-align:top;width:92px">${esc(label)}</td>
+        <td style="${top}padding:13px 18px;color:#1A1A1A;font-size:14px;line-height:1.55;vertical-align:top">${val}</td>
+      </tr>`
+    })
+    .join('')
+
+  const callBtn = phone
+    ? `<a href="tel:${telHref}" style="display:inline-block;background:#0A0A0A;color:#FFFFFF;text-decoration:none;font-size:14px;font-weight:600;padding:13px 24px;border-radius:999px;margin:0 8px 8px 0">Call / Text ${esc(phone)}</a>`
+    : ''
+  const replyBtn = email
+    ? `<a href="mailto:${esc(email)}" style="display:inline-block;background:#FFFFFF;color:#0A0A0A;text-decoration:none;font-size:14px;font-weight:600;padding:12px 23px;border:1px solid #E0E0E0;border-radius:999px;margin:0 0 8px 0">Reply by email</a>`
+    : ''
+
+  const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light only"></head>
+<body style="margin:0;padding:0;background:#F5F5F5;">
+  <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:#F5F5F5">New booking inquiry from ${esc(name)}${vehicle ? ` — ${esc(vehicle)}` : ''}</div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F5F5F5;margin:0;padding:28px 12px;font-family:${FONT}">
+    <tr><td align="center">
+      <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:600px;max-width:600px;background:#FFFFFF;border-radius:18px;overflow:hidden">
+        <tr><td style="background:#0A0A0A;padding:32px 32px 28px;text-align:center">
+          <img src="${SITE}/email-logo-white.png" width="200" alt="VanityWorks Detailing" style="display:inline-block;width:200px;max-width:62%;height:auto;border:0;outline:none;text-decoration:none">
+          <div style="margin-top:20px;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.55);font-weight:600">
+            <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#00ff88;margin-right:8px;vertical-align:middle"></span>New Booking Inquiry
+          </div>
+        </td></tr>
+        <tr><td style="padding:34px 32px 30px">
+          <h1 style="margin:0 0 6px;font-size:27px;line-height:1.05;font-weight:800;letter-spacing:-0.025em;color:#0A0A0A">${esc(name)}</h1>
+          <p style="margin:0 0 26px;font-size:15px;line-height:1.5;color:#888888">${vehicle ? `${esc(vehicle)} &middot; ` : ''}New request from the website booking form.</p>
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #E0E0E0;border-radius:12px;border-collapse:separate;overflow:hidden;font-size:14px">
+            ${rowsHtml}
+          </table>
+          <div style="margin-top:26px">${callBtn}${replyBtn}</div>
+          <p style="margin:22px 0 0;font-size:13px;line-height:1.5;color:#888888">Or just hit reply &mdash; this email is set to respond to ${esc(name)} directly.</p>
+        </td></tr>
+        <tr><td style="background:#0A0A0A;padding:24px 32px;text-align:center">
+          <div style="font-size:13px;line-height:1.6;color:rgba(255,255,255,0.7)"><strong style="color:#FFFFFF;font-weight:700">VanityWorks Detailing</strong> &middot; Mobile &middot; Chicagoland, IL</div>
+          <div style="margin-top:5px;font-size:13px;color:rgba(255,255,255,0.5)">(224) 572-4787 &middot; @vanityworks.il</div>
+        </td></tr>
       </table>
-    </div>`
+    </td></tr>
+  </table>
+</body></html>`
 
   try {
     const res = await fetch('https://api.resend.com/emails', {
