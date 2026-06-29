@@ -16,8 +16,7 @@ import {
 import { services, serviceAreas } from '@/lib/data'
 
 const navLinks = [
-  { href: '/gallery', label: 'Gallery' },
-  { href: '/specialties', label: 'Specialties' },
+  { href: '/portfolio', label: 'Portfolio' },
   { href: '/#reviews', label: 'Reviews' },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
@@ -304,15 +303,6 @@ export default function Nav() {
                 <span className="text-[#0A0A0A] font-semibold">Not sure which package?</span> We&apos;ll help you pick after a free walkthrough.
               </p>
               <div className="flex items-center gap-3">
-                <Link
-                  href="/specialties"
-                  onClick={() => setServicesOpen(false)}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold tracking-widest uppercase text-[#0A0A0A] hover:text-[#888] transition-colors"
-                >
-                  JDM &amp; Exotic Specialty
-                  <ArrowRightIcon className="w-3.5 h-3.5" />
-                </Link>
-                <span className="text-[#E0E0E0]">·</span>
                 <Link
                   href="/book"
                   onClick={() => setServicesOpen(false)}

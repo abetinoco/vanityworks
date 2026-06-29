@@ -10,10 +10,8 @@ const serviceLinks = [
 
 const companyLinks = [
   { href: '/about', label: 'About' },
-  { href: '/certifications', label: 'Certifications' },
-  { href: '/gallery', label: 'Gallery' },
+  { href: '/portfolio', label: 'Portfolio' },
   { href: '/#reviews', label: 'Reviews' },
-  { href: '/specialties', label: 'JDM & Exotic' },
 ]
 
 const areaLinks = [
@@ -291,27 +289,6 @@ export default function Footer() {
         <div className="pt-7 flex justify-between items-center gap-6 flex-wrap text-[11px] max-[900px]:text-[10px] font-medium text-[#888] tracking-[-0.005em] max-[900px]:pt-3 max-[900px]:flex-col max-[900px]:items-start max-[900px]:gap-1.5">
           <div>© {year} VanityWorks LLC · All rights reserved.</div>
           <div className="flex gap-5 max-[900px]:gap-3 flex-wrap">
-            <Link
-              href="/privacy"
-              data-hover
-              className="text-[#888] no-underline transition-colors duration-200 hover:text-white"
-            >
-              Privacy
-            </Link>
-            <Link
-              href="/terms"
-              data-hover
-              className="text-[#888] no-underline transition-colors duration-200 hover:text-white"
-            >
-              Terms
-            </Link>
-            <Link
-              href="/certifications"
-              data-hover
-              className="text-[#888] no-underline transition-colors duration-200 hover:text-white"
-            >
-              Warranty info
-            </Link>
             <a
               href="https://halo.web"
               target="_blank"

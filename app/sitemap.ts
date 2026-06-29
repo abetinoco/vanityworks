@@ -9,15 +9,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: { path: string; priority: number; changeFrequency: 'monthly' | 'weekly' | 'yearly' }[] = [
     { path: '', priority: 1.0, changeFrequency: 'weekly' },
     { path: '/services', priority: 0.95, changeFrequency: 'monthly' },
-    { path: '/specialties', priority: 0.9, changeFrequency: 'monthly' },
-    { path: '/certifications', priority: 0.85, changeFrequency: 'monthly' },
     { path: '/portfolio', priority: 0.85, changeFrequency: 'weekly' },
-    { path: '/gallery', priority: 0.8, changeFrequency: 'weekly' },
     { path: '/about', priority: 0.7, changeFrequency: 'monthly' },
     { path: '/book', priority: 0.95, changeFrequency: 'monthly' },
     { path: '/contact', priority: 0.9, changeFrequency: 'monthly' },
-    { path: '/privacy', priority: 0.3, changeFrequency: 'yearly' },
-    { path: '/terms', priority: 0.3, changeFrequency: 'yearly' },
   ]
 
   const staticPages = staticRoutes.map(r => ({

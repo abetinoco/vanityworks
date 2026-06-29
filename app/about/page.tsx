@@ -225,7 +225,7 @@ export default function AboutPage() {
         title="See the difference."
         sub="Bring us the car. We'll show you what obsessive actually looks like — **no pressure, just an honest read.**"
         primaryCta={{ label: 'Book a consultation', href: '/contact' }}
-        secondaryCta={{ label: 'See the work', href: '/gallery' }}
+        secondaryCta={{ label: 'See the work', href: '/portfolio' }}
       />
     </div>
   )
