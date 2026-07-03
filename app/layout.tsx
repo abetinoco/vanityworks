@@ -63,10 +63,9 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     images: ['/og-image.webp'],
   },
-  icons: {
-    icon: '/favicon.webp',
-    apple: '/favicon.webp',
-  },
+  // Icons are provided by the file-based convention: app/favicon.ico,
+  // app/icon.png, and app/apple-icon.png (a real .ico + PNGs, so every
+  // surface has a supported format — WebP-only favicons broke on some).
   robots: {
     index: true,
     follow: true,

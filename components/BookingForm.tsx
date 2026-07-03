@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const services = [
   'Paint Protection Film',
@@ -23,6 +23,32 @@ export default function BookingForm() {
   const [submitted, setSubmitted] = useState(false)
   const [status, setStatus] = useState<'idle' | 'sending' | 'error'>('idle')
   const [error, setError] = useState('')
+
+  // Pre-select the service (and preserve the exact package) when arriving from a
+  // /book?service=… CTA. Progressive enhancement — runs after hydration.
+  useEffect(() => {
+    const svc = new URLSearchParams(window.location.search).get('service')
+    if (!svc) return
+    const s = svc.toLowerCase()
+    const match = /ppf|protection film/.test(s)
+      ? 'Paint Protection Film'
+      : /ceramic/.test(s)
+        ? 'Ceramic Coating'
+        : /correct|polish|compound/.test(s)
+          ? 'Paint Correction'
+          : /interior/.test(s)
+            ? 'Interior Protection'
+            : /detail/.test(s)
+              ? 'Full Detail'
+              : ''
+    setForm((prev) => ({
+      ...prev,
+      service: match || prev.service,
+      // If the exact package isn't one of the dropdown options, keep the detail
+      // in the message so nothing is lost.
+      message: match || !svc ? prev.message : `I'm interested in: ${svc}`,
+    }))
+  }, [])
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
