@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: 'Book a Consultation',
   description:
     "Book your free consultation with VanityWorks — Chicagoland's premier mobile auto detailer specializing in JDM and exotic vehicles. Tell us about your car and we come to you.",
+  alternates: { canonical: '/book' },
 }
 
 export default function BookPage() {

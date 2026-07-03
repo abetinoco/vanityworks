@@ -231,7 +231,6 @@ export default function RecentWork() {
               fill
               sizes="80vw"
               className="object-cover"
-              priority
             />
           </div>
 

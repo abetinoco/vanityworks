@@ -6,6 +6,7 @@ import { services, getServiceBySlug, type Service } from '@/lib/data'
 import { portfolio, type PortfolioEntry } from '@/lib/portfolio'
 import { SplitLetters } from '@/components/SplitLetters'
 import FinalCta from '@/components/sections/FinalCta'
+import { serviceSchema, faqSchema, breadcrumbSchema } from '@/lib/seo'
 
 interface Props {
   params: { slug: string }
@@ -21,6 +22,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: service.name,
     description: service.description,
+    alternates: { canonical: `/services/${service.slug}` },
+    openGraph: {
+      title: `${service.name} · VanityWorks Detailing`,
+      description: service.description,
+      url: `/services/${service.slug}`,
+    },
   }
 }
 
@@ -130,8 +137,26 @@ export default function ServiceDetailPage({ params }: Props) {
   const s = service as Service
   const heroTiles = getHeroTiles(s.slug, 3)
 
+  const path = `/services/${s.slug}`
+  const schemas = [
+    serviceSchema({ name: s.name, description: s.description, path, startingPrice: s.startingPrice }),
+    faqSchema(s.faq ?? []),
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Services', path: '/services' },
+      { name: s.name, path },
+    ]),
+  ].filter(Boolean)
+
   return (
     <div className="bg-white pt-20 md:pt-24 lg:pt-28">
+      {schemas.map((schema, i) => (
+        <script
+          key={i}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
       {/* HERO */}
       <header className="bg-white px-8 pt-16 max-[900px]:px-5 max-[900px]:pt-8">
         <div className="max-w-7xl mx-auto">

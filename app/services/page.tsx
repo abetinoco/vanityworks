@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'Services',
   description:
     'Four services. One obsession. Full Detail, Paint Correction, Ceramic Coating, and Paint Protection Film — built so every tier includes the prep underneath.',
+  alternates: { canonical: '/services' },
 }
 
 const chain = [

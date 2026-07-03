@@ -68,10 +68,17 @@ export default function Hero() {
           the Nav, Footer, and every other section so the headline's right
           edge lines up with the nav's right edge on every viewport. */}
       <div className="relative z-10 flex flex-col flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 lg:pt-36 pb-6 sm:pb-8">
-        {/* Massive headline (color inherits from `text-white` on the section) */}
+        {/* Massive headline (color inherits from `text-white` on the section).
+            Semantic <h1> for SEO; styles are neutralized to `inherit` so the
+            base h1 rule (Bebas / dark ink) doesn't leak onto the hero letters. */}
         <div className="mt-2 sm:mt-4 w-full">
-          <HeadlineLine text="Your car," delay={0.15} align="left" />
-          <HeadlineLine text="perfected." delay={0.35} align="right" />
+          <h1
+            className="m-0"
+            style={{ fontFamily: 'inherit', color: 'inherit', letterSpacing: 'normal', fontWeight: 'inherit' }}
+          >
+            <HeadlineLine text="Your car," delay={0.15} align="left" />
+            <HeadlineLine text="perfected." delay={0.35} align="right" />
+          </h1>
         </div>
 
         {/* Index row — services as a contents page */}

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter_Tight, Bebas_Neue, Allura } from 'next/font/google'
+import { Inter_Tight, Bebas_Neue } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
 import Nav from '@/components/Nav'
@@ -8,7 +8,7 @@ import Loader from '@/components/Loader'
 
 const interTight = Inter_Tight({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800', '900'],
+  weight: ['400', '500', '600', '700', '800'],
   variable: '--font-inter-tight',
   display: 'swap',
 })
@@ -17,13 +17,6 @@ const bebas = Bebas_Neue({
   subsets: ['latin'],
   weight: '400',
   variable: '--font-bebas',
-  display: 'swap',
-})
-
-const allura = Allura({
-  subsets: ['latin'],
-  weight: '400',
-  variable: '--font-allura',
   display: 'swap',
 })
 
@@ -131,8 +124,9 @@ const localBusinessSchema = {
   },
   aggregateRating: {
     '@type': 'AggregateRating',
-    ratingValue: '5.0',
+    ratingValue: '4.97',
     reviewCount: '200',
+    bestRating: '5',
   },
 }
 
@@ -142,7 +136,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${interTight.variable} ${bebas.variable} ${allura.variable}`}>
+    <html lang="en" className={`${interTight.variable} ${bebas.variable}`}>
       <body className="bg-white text-[#1A1A1A] font-sans antialiased">
         <Loader />
         <Nav />

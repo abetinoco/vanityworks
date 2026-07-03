@@ -100,7 +100,6 @@ function Lightbox({
               src={entry.photos[idx].src}
               alt={entry.vehicle}
               fill
-              priority
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 1024px"
             />

@@ -162,7 +162,6 @@ export default function SeeItYourself() {
               afterSrc={featuredPhotos.after}
               alt={featured.vehicle}
               sizes="(max-width: 900px) 100vw, 1280px"
-              priority
             />
           </div>
         </div>

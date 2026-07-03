@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'About',
   description:
     "A mobile-first detailing operation that treats every car like it's going on a showroom floor. Chicagoland — built on obsession since 2023.",
+  alternates: { canonical: '/about' },
 }
 
 function renderMarked(text: string) {
