@@ -25,11 +25,11 @@ const SITE_URL = 'https://vanityworksdetailing.com'
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'VanityWorks Detailing | Mobile PPF, Ceramic Coating & Paint Correction in Chicagoland',
+    default: 'VanityWorks Detailing | PPF & Ceramic Coating Chicagoland',
     template: '%s | VanityWorks Detailing',
   },
   description:
-    'Mobile auto detailing in Chicagoland. Opticle PPF & DetailWise Academy trained — paint protection film, ceramic coating, paint correction, and full detail, specializing in JDM and exotic vehicles. We come to you.',
+    'Mobile PPF, ceramic coating, paint correction & full detail across Chicagoland. Opticle & DetailWise certified. JDM & exotic specialists — we come to you.',
   keywords: [
     'paint protection film Chicago',
     'ceramic coating Chicagoland',

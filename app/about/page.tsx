@@ -83,7 +83,7 @@ export default function AboutPage() {
                 <span className="inline-block w-2 h-2 rounded-full bg-ink" />
                 Who we are
               </div>
-              <h1 className="font-sans font-extrabold text-ink leading-[0.88] tracking-[-0.05em] text-[clamp(48px,7.5vw,120px)] max-[900px]:text-[14vw]">
+              <h1 className="font-sans font-extrabold text-ink leading-[0.88] tracking-[-0.05em] text-[clamp(48px,7.5vw,120px)] max-[900px]:text-[12vw]">
                 <SplitLetters text="Built on obsession." />
               </h1>
             </div>

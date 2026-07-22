@@ -29,7 +29,7 @@ export default function ServiceArea() {
             <span className="inline-block w-2 h-2 rounded-full bg-ink" />
             Where we work
           </div>
-          <h2 className="font-sans font-extrabold text-ink leading-[0.92] tracking-[-0.045em] text-right justify-self-end break-words text-[clamp(40px,6vw,96px)] max-[900px]:text-left max-[900px]:justify-self-start max-[900px]:text-[13vw]">
+          <h2 className="font-sans font-extrabold text-ink leading-[0.92] tracking-[-0.045em] text-right justify-self-end break-words text-[clamp(40px,6vw,96px)] max-[900px]:text-left max-[900px]:justify-self-start max-[900px]:text-[11vw]">
             <SplitLetters text="Lake County to Lake Shore Drive." />
           </h2>
         </div>

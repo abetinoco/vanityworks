@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { ArrowRightIcon } from '@/components/Icons'
 
@@ -88,17 +88,25 @@ const rows: ServiceRow[] = [
 ]
 
 function LetterName({ text }: { text: string }) {
+  // Words are wrapped in whitespace-nowrap inline-blocks so the per-letter
+  // spans can never wrap mid-word ("Paint Protection Fi / lm"); real spaces
+  // between the word groups give the browser its only break opportunities.
+  const tokens = text.split(/(\s+)/)
   return (
     <>
-      {Array.from(text).map((ch, i) => (
-        <span
-          key={i}
-          data-hover
-          className={`ww-row-letter ${ch === ' ' ? 'space' : ''}`}
-        >
-          {ch === ' ' ? ' ' : ch}
-        </span>
-      ))}
+      {tokens.map((token, ti) => {
+        if (token.length === 0) return null
+        if (/^\s+$/.test(token)) return <Fragment key={ti}>{token}</Fragment>
+        return (
+          <span key={ti} className="inline-block whitespace-nowrap">
+            {Array.from(token).map((ch, ci) => (
+              <span key={ci} data-hover className="ww-row-letter">
+                {ch}
+              </span>
+            ))}
+          </span>
+        )
+      })}
     </>
   )
 }
@@ -125,7 +133,7 @@ export default function WhatWeDo() {
             What we do
           </div>
           <h2
-            className="text-[12vw] sm:text-[clamp(40px,6vw,96px)] font-extrabold leading-[0.92] tracking-[-0.045em] text-[#0A0A0A] lg:justify-self-end lg:text-right"
+            className="text-[11vw] sm:text-[clamp(40px,6vw,96px)] font-extrabold leading-[0.92] tracking-[-0.045em] text-[#0A0A0A] lg:justify-self-end lg:text-right"
             style={{ maxWidth: '18ch' }}
           >
             Four services.
@@ -162,7 +170,7 @@ export default function WhatWeDo() {
                   </span>
 
                   <div className="flex flex-col gap-2.5 lg:gap-3">
-                    <span className="ww-row-name text-[9vw] sm:text-[clamp(40px,7vw,96px)] lg:whitespace-nowrap font-extrabold leading-[0.92] tracking-[-0.055em] text-[#0A0A0A]">
+                    <span className="ww-row-name text-[8vw] sm:text-[clamp(40px,7vw,96px)] lg:whitespace-nowrap font-extrabold leading-[0.92] tracking-[-0.055em] text-[#0A0A0A]">
                       <LetterName text={row.name} />
                     </span>
 

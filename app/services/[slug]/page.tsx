@@ -177,7 +177,7 @@ export default function ServiceDetailPage({ params }: Props) {
               <div className="text-[13px] font-semibold text-ink-muted tracking-[0.04em] tabular-nums mb-5">
                 Service / {s.number ?? '01'}
               </div>
-              <h1 className="font-sans font-extrabold text-ink leading-[0.88] tracking-[-0.05em] mb-7 text-[clamp(56px,9vw,150px)] max-[900px]:text-[15vw]">
+              <h1 className="font-sans font-extrabold text-ink leading-[0.88] tracking-[-0.05em] mb-7 text-[clamp(56px,9vw,150px)] max-[900px]:text-[13vw]">
                 <SplitLetters text={`${s.shortName ?? s.name}.`} />
               </h1>
               <p className="text-ink font-medium leading-[1.35] tracking-[-0.018em] max-w-[30ch] text-[clamp(18px,1.8vw,24px)]">

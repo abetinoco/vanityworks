@@ -52,7 +52,7 @@ export default function ServicesPage() {
                 <span className="inline-block w-2 h-2 rounded-full bg-ink" />
                 What we do
               </div>
-              <h1 className="font-sans font-extrabold text-ink leading-[0.88] tracking-[-0.05em] text-[clamp(52px,8.5vw,140px)] max-[900px]:text-[15vw]">
+              <h1 className="font-sans font-extrabold text-ink leading-[0.88] tracking-[-0.05em] text-[clamp(52px,8.5vw,140px)] max-[900px]:text-[13vw]">
                 <SplitLetters text="Four services." />{' '}
                 <span className="text-ink-muted font-extrabold">
                   <SplitLetters text="One obsession." />

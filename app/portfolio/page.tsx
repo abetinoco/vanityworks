@@ -218,7 +218,7 @@ export default function PortfolioPage() {
                 Real Work · Real Results
               </div>
               <h1
-                className="text-6xl sm:text-7xl md:text-8xl text-[#0A0A0A] leading-none mb-4"
+                className="text-5xl sm:text-7xl md:text-8xl text-[#0A0A0A] leading-none mb-4"
                 style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '0.04em' }}
               >
                 Portfolio
