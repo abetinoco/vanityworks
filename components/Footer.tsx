@@ -288,6 +288,7 @@ export default function Footer() {
         {/* Bottom row */}
         <div className="pt-7 flex justify-between items-center gap-6 flex-wrap text-[11px] max-[900px]:text-[10px] font-medium text-[#888] tracking-[-0.005em] max-[900px]:pt-3 max-[900px]:flex-col max-[900px]:items-start max-[900px]:gap-1.5">
           <div>© {year} VanityWorks LLC · All rights reserved.</div>
+          <div>Site by <a href="https://haloweb.agency" target="_blank" rel="noopener">Halo Web Agency</a></div>
           <div className="flex gap-5 max-[900px]:gap-3 flex-wrap">
             <Link
               href="/privacy"
