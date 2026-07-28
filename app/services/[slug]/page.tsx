@@ -27,6 +27,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: `${service.name} · VanityWorks Detailing`,
       description: service.description,
       url: `/services/${service.slug}`,
+      // A page-level openGraph replaces the root layout's wholesale in Next
+      // rather than merging, so leaving images out shipped every service page
+      // with no social image at all.
+      images: [
+        {
+          url: '/og-image.webp',
+          width: 1734,
+          height: 907,
+          alt: 'VanityWorks Detailing — Your car, perfected.',
+        },
+      ],
     },
   }
 }
