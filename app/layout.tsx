@@ -21,7 +21,7 @@ const bebas = Bebas_Neue({
   display: 'swap',
 })
 
-const SITE_URL = 'https://vanityworksdetailing.com'
+const SITE_URL = 'https://www.vanityworksdetailing.com'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { services, serviceAreas } from '@/lib/data'
 
-const SITE_URL = 'https://vanityworksdetailing.com'
+const SITE_URL = 'https://www.vanityworksdetailing.com'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date()
