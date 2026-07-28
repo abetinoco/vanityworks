@@ -5,7 +5,7 @@ import BookingForm from '@/components/BookingForm'
 export const metadata: Metadata = {
   title: 'Book a Consultation',
   description:
-    "Book your free consultation with VanityWorks — Chicagoland's premier mobile auto detailer specializing in JDM and exotic vehicles. Tell us about your car and we come to you.",
+    "Book a free consultation with VanityWorks — Chicagoland mobile detailing for JDM and exotic vehicles. Tell us about your car and we come to you.",
   alternates: { canonical: '/book' },
 }
 

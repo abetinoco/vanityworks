@@ -5,13 +5,16 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Portfolio',
   description:
-    'See real VanityWorks work — paint protection film, ceramic coating, and paint correction on JDM, exotic, and enthusiast cars across Chicagoland. Before-and-after details from actual client vehicles.',
+    'Real VanityWorks work — paint protection film, ceramic coating and paint correction on JDM and exotic cars across Chicagoland.',
   alternates: { canonical: '/portfolio' },
   openGraph: {
     title: 'VanityWorks Portfolio — Real Client Cars',
     description:
       'PPF, ceramic coating, and paint correction on JDM and exotic builds across Chicagoland. Real before-and-after work.',
     url: '/portfolio',
+    // A page-level openGraph replaces the root layout's wholesale in Next, so
+    // the shared images have to be repeated here or og:image goes missing.
+    images: [{ url: '/og-image.webp', width: 1734, height: 907, alt: 'VanityWorks Detailing — Your car, perfected.' }],
   },
 }
 
