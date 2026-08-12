@@ -13,7 +13,7 @@ export const dynamic = 'force-dynamic'
 //  Optional:
 //    CONTACT_FROM_EMAIL — verified sender, e.g. "VanityWorks <bookings@vanityworksdetailing.com>"
 //                         Defaults to Resend's shared onboarding sender for testing.
-//    CONTACT_BCC_EMAIL  — blind-copied on every inquiry (defaults to abe@haloit.tech).
+//    CONTACT_BCC_EMAIL  — blind-copied on every inquiry (defaults to abe@haloweb.agency).
 //                         Comma-separate for multiple.
 // ─────────────────────────────────────────────
 
@@ -91,7 +91,7 @@ export async function POST(req: Request) {
   const apiKey = process.env.RESEND_API_KEY
   const to = process.env.CONTACT_TO_EMAIL
   const from = process.env.CONTACT_FROM_EMAIL || 'VanityWorks <onboarding@resend.dev>'
-  const bcc = (process.env.CONTACT_BCC_EMAIL ?? 'abe@haloit.tech')
+  const bcc = (process.env.CONTACT_BCC_EMAIL ?? 'abe@haloweb.agency')
     .split(',')
     .map((s) => s.trim())
     .filter(Boolean)
