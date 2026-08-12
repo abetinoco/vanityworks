@@ -1,6 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile'
+
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
 
 const services = [
   'Paint Protection Film',
@@ -23,6 +26,8 @@ export default function BookingForm() {
   const [submitted, setSubmitted] = useState(false)
   const [status, setStatus] = useState<'idle' | 'sending' | 'error'>('idle')
   const [error, setError] = useState('')
+  const [turnstileToken, setTurnstileToken] = useState('')
+  const turnstileRef = useRef<TurnstileInstance | null>(null)
 
   // Pre-select the service (and preserve the exact package) when arriving from a
   // /book?service=… CTA. Progressive enhancement — runs after hydration.
@@ -58,13 +63,18 @@ export default function BookingForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (TURNSTILE_SITE_KEY && !turnstileToken) {
+      setStatus('error')
+      setError('Please complete the verification challenge.')
+      return
+    }
     setStatus('sending')
     setError('')
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, turnstileToken }),
       })
       const json = await res.json().catch(() => ({}))
       if (!res.ok || !json.ok) {
@@ -74,6 +84,9 @@ export default function BookingForm() {
     } catch (err) {
       setStatus('error')
       setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
+      // Turnstile tokens are single-use — refresh so the visitor can retry.
+      turnstileRef.current?.reset()
+      setTurnstileToken('')
     }
   }
 
@@ -184,9 +197,22 @@ export default function BookingForm() {
         />
       </div>
 
+      {TURNSTILE_SITE_KEY && (
+        <div className="flex justify-center">
+          <Turnstile
+            ref={turnstileRef}
+            siteKey={TURNSTILE_SITE_KEY}
+            options={{ theme: 'light' }}
+            onSuccess={setTurnstileToken}
+            onError={() => setTurnstileToken('')}
+            onExpire={() => setTurnstileToken('')}
+          />
+        </div>
+      )}
+
       <button
         type="submit"
-        disabled={status === 'sending'}
+        disabled={status === 'sending' || (Boolean(TURNSTILE_SITE_KEY) && !turnstileToken)}
         className="group w-full py-4 bg-[#0A0A0A] text-white font-semibold text-[15px] tracking-[-0.005em] rounded-full hover:bg-[#1A1A1A] transition-all inline-flex items-center justify-center gap-2.5 disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {status === 'sending' ? 'Sending…' : 'Request my consultation'}

@@ -24,10 +24,36 @@ interface ContactPayload {
   vehicle?: string
   service?: string
   message?: string
+  turnstileToken?: string
 }
 
 const esc = (s = '') =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+
+/**
+ * Verify a Cloudflare Turnstile token server-side. Only enforced when
+ * TURNSTILE_SECRET_KEY is set — otherwise returns true so the form keeps
+ * working where the secret isn't configured.
+ */
+async function verifyTurnstile(token: string, remoteip: string | null): Promise<boolean> {
+  const secret = process.env.TURNSTILE_SECRET_KEY?.trim()
+  if (!secret) return true
+  if (!token) return false
+  try {
+    const params = new URLSearchParams({ secret, response: token })
+    if (remoteip) params.append('remoteip', remoteip)
+    const r = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: params,
+    })
+    if (!r.ok) return false
+    const data = (await r.json()) as { success?: boolean }
+    return data.success === true
+  } catch {
+    return false
+  }
+}
 
 export async function POST(req: Request) {
   let body: ContactPayload
@@ -49,6 +75,16 @@ export async function POST(req: Request) {
     return NextResponse.json(
       { ok: false, error: 'Please include your name and an email or phone number.' },
       { status: 400 },
+    )
+  }
+
+  // Bot protection: verify the Cloudflare Turnstile token before sending.
+  const remoteip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || null
+  const humanVerified = await verifyTurnstile((body.turnstileToken ?? '').trim(), remoteip)
+  if (!humanVerified) {
+    return NextResponse.json(
+      { ok: false, error: 'Verification failed. Please refresh the page and try again.' },
+      { status: 403 },
     )
   }
 
