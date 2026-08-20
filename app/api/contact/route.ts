@@ -211,6 +211,13 @@ export async function POST(req: Request) {
       )
     }
 
+    // Confirmation to the person who filled the form in. Best-effort: the lead
+    // is already delivered, so a failure here must never surface as an error to
+    // them or turn a captured lead into a retry.
+    if (email) {
+      void sendVisitorConfirmation({ apiKey, from, email, name, vehicle, service })
+    }
+
     return NextResponse.json({ ok: true })
   } catch (err) {
     console.error('[contact] Unexpected error', err)
@@ -218,5 +225,77 @@ export async function POST(req: Request) {
       { ok: false, error: 'Could not send right now. Please call or text us directly.' },
       { status: 502 },
     )
+  }
+}
+
+/** Receipt for the visitor — "we have it, here's what happens next". Silent on failure. */
+async function sendVisitorConfirmation(args: {
+  apiKey: string
+  from: string
+  email: string
+  name: string
+  vehicle: string
+  service: string
+}): Promise<void> {
+  const { apiKey, from, email, name, vehicle, service } = args
+  const firstName = (name || '').trim().split(/\s+/)[0] || 'there'
+  const esc = (v: string) =>
+    v.replace(/[&<>"']/g, (c) => (({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }) as Record<string, string>)[c])
+
+  const detail = [vehicle && `Vehicle: ${vehicle}`, service && `Service: ${service}`]
+    .filter(Boolean)
+    .join(' · ')
+
+  const text = [
+    `Hi ${firstName},`,
+    '',
+    "Thanks for reaching out to VanityWorks. We've got your request and we'll be in touch shortly - usually within a few hours.",
+    detail ? `\nWhat you told us - ${detail}` : '',
+    '',
+    'Need us sooner? Call or text (224) 572-4787.',
+    '',
+    '- VanityWorks Detailing, Chicagoland',
+  ]
+    .filter((l) => l !== '')
+    .join('\n')
+
+  const html = `<!doctype html><html><body style="margin:0;background:#f4f4f5;padding:24px 12px;">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width:560px;margin:0 auto;background:#ffffff;border-radius:14px;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+    <tr><td style="background:#0a0a0a;padding:30px 34px;">
+      <div style="color:#ffffff;font-size:15px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;">VanityWorks</div>
+      <div style="color:#a1a1aa;font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-top:5px;">Request received</div>
+    </td></tr>
+    <tr><td style="padding:32px 34px 8px;">
+      <h1 style="margin:0 0 10px;font-size:20px;color:#0a0a0a;font-weight:700;">Hi ${esc(firstName)},</h1>
+      <p style="margin:0 0 20px;font-size:15px;line-height:1.7;color:#3f3f46;">Thanks for reaching out. We&rsquo;ve got your request and we&rsquo;ll be in touch shortly &mdash; usually within a few hours. No pressure, and the consultation is free.</p>
+      ${detail ? `<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#fafafa;border-radius:10px;margin:0 0 24px;"><tr><td style="padding:16px 20px;font-size:14px;color:#3f3f46;line-height:1.7;">${esc(detail)}</td></tr></table>` : ''}
+      <p style="margin:0 0 12px;font-size:14px;color:#3f3f46;">Need us sooner?</p>
+      <a href="tel:+12245724787" style="display:inline-block;background:#0a0a0a;color:#ffffff;padding:13px 30px;text-decoration:none;font-weight:700;font-size:15px;border-radius:999px;">Call or text (224) 572-4787</a>
+      <p style="margin:26px 0 0;font-size:14px;color:#3f3f46;">&mdash; the <strong style="color:#0a0a0a;">VanityWorks</strong> team</p>
+    </td></tr>
+    <tr><td style="padding:22px 34px 28px;text-align:center;font-size:12px;color:#a1a1aa;line-height:1.7;">
+      Mobile detailing across Chicagoland &middot; by appointment<br>
+      <a href="https://www.vanityworksdetailing.com" style="color:#71717a;text-decoration:none;">vanityworksdetailing.com</a>
+    </td></tr>
+  </table>
+</body></html>`
+
+  try {
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        from,
+        to: [email],
+        subject: `We've got it, ${firstName} — VanityWorks`,
+        text,
+        html,
+      }),
+    })
+    if (!res.ok) {
+      console.warn('[contact] visitor confirmation not sent', res.status, await res.text().catch(() => ''))
+    }
+  } catch (err) {
+    console.warn('[contact] visitor confirmation threw', err)
   }
 }
