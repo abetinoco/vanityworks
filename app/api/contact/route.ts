@@ -1,3 +1,4 @@
+import { emailShell, detailRows, quoteBlock } from '@/lib/contact-email'
 import { NextResponse } from 'next/server'
 
 export const runtime = 'nodejs'
@@ -154,35 +155,26 @@ export async function POST(req: Request) {
     ? `<a href="mailto:${esc(email)}" style="display:inline-block;background:#FFFFFF;color:#0A0A0A;text-decoration:none;font-size:14px;font-weight:600;padding:12px 23px;border:1px solid #E0E0E0;border-radius:999px;margin:0 0 8px 0">Reply by email</a>`
     : ''
 
-  const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light only"></head>
-<body style="margin:0;padding:0;background:#F5F5F5;">
-  <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:#F5F5F5">New booking inquiry from ${esc(name)}${vehicle ? ` — ${esc(vehicle)}` : ''}</div>
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F5F5F5;margin:0;padding:28px 12px;font-family:${FONT}">
-    <tr><td align="center">
-      <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:600px;max-width:600px;background:#FFFFFF;border-radius:18px;overflow:hidden">
-        <tr><td style="background:#0A0A0A;padding:32px 32px 28px;text-align:center">
-          <img src="${SITE}/email-logo-white.png" width="200" alt="VanityWorks Detailing" style="display:inline-block;width:200px;max-width:62%;height:auto;border:0;outline:none;text-decoration:none">
-          <div style="margin-top:20px;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.55);font-weight:600">
-            <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#00ff88;margin-right:8px;vertical-align:middle"></span>New Booking Inquiry
-          </div>
-        </td></tr>
-        <tr><td style="padding:34px 32px 30px">
-          <h1 style="margin:0 0 6px;font-size:27px;line-height:1.05;font-weight:800;letter-spacing:-0.025em;color:#0A0A0A">${esc(name)}</h1>
-          <p style="margin:0 0 26px;font-size:15px;line-height:1.5;color:#888888">${vehicle ? `${esc(vehicle)} &middot; ` : ''}New request from the website booking form.</p>
-          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #E0E0E0;border-radius:12px;border-collapse:separate;overflow:hidden;font-size:14px">
-            ${rowsHtml}
-          </table>
-          <div style="margin-top:26px">${callBtn}${replyBtn}</div>
-          <p style="margin:22px 0 0;font-size:13px;line-height:1.5;color:#888888">Or just hit reply &mdash; this email is set to respond to ${esc(name)} directly.</p>
-        </td></tr>
-        <tr><td style="background:#0A0A0A;padding:24px 32px;text-align:center">
-          <div style="font-size:13px;line-height:1.6;color:rgba(255,255,255,0.7)"><strong style="color:#FFFFFF;font-weight:700">VanityWorks Detailing</strong> &middot; Mobile &middot; Chicagoland, IL</div>
-          <div style="margin-top:5px;font-size:13px;color:rgba(255,255,255,0.5)">(224) 572-4787 &middot; @vanityworks.il</div>
-        </td></tr>
-      </table>
-    </td></tr>
-  </table>
-</body></html>`
+  const html = emailShell({
+    preview: `${name}${vehicle ? ` — ${vehicle}` : ''}`,
+    eyebrow: 'New inquiry',
+    heading: `${name} wants a consultation`,
+    intro:
+      'A new booking inquiry came in through <strong style="color:#0A0A0A;">vanityworksdetailing.com</strong>. ' +
+      'Replying to this email goes straight back to them.',
+    body:
+      '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;margin:0 0 6px;">' +
+      detailRows([
+        ['Name', name],
+        email ? ['Email', email, `mailto:${email}`] : null,
+        phone ? ['Phone', phone, `tel:${phone.replace(/\D/g, '')}`] : null,
+        vehicle ? ['Vehicle', vehicle] : null,
+        service ? ['Service', service] : null,
+      ]) +
+      '</table>' +
+      quoteBlock('Their message', message),
+    cta: email ? { label: `Reply to ${name.split(/\s+/)[0]}`, href: `mailto:${email}` } : undefined,
+  })
 
   try {
     const res = await fetch('https://api.resend.com/emails', {
@@ -259,26 +251,17 @@ async function sendVisitorConfirmation(args: {
     .filter((l) => l !== '')
     .join('\n')
 
-  const html = `<!doctype html><html><body style="margin:0;background:#f4f4f5;padding:24px 12px;">
-  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width:560px;margin:0 auto;background:#ffffff;border-radius:14px;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
-    <tr><td style="background:#0a0a0a;padding:30px 34px;">
-      <div style="color:#ffffff;font-size:15px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;">VanityWorks</div>
-      <div style="color:#a1a1aa;font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-top:5px;">Request received</div>
-    </td></tr>
-    <tr><td style="padding:32px 34px 8px;">
-      <h1 style="margin:0 0 10px;font-size:20px;color:#0a0a0a;font-weight:700;">Hi ${esc(firstName)},</h1>
-      <p style="margin:0 0 20px;font-size:15px;line-height:1.7;color:#3f3f46;">Thanks for reaching out. We&rsquo;ve got your request and we&rsquo;ll be in touch shortly &mdash; usually within a few hours. No pressure, and the consultation is free.</p>
-      ${detail ? `<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#fafafa;border-radius:10px;margin:0 0 24px;"><tr><td style="padding:16px 20px;font-size:14px;color:#3f3f46;line-height:1.7;">${esc(detail)}</td></tr></table>` : ''}
-      <p style="margin:0 0 12px;font-size:14px;color:#3f3f46;">Need us sooner?</p>
-      <a href="tel:+12245724787" style="display:inline-block;background:#0a0a0a;color:#ffffff;padding:13px 30px;text-decoration:none;font-weight:700;font-size:15px;border-radius:999px;">Call or text (224) 572-4787</a>
-      <p style="margin:26px 0 0;font-size:14px;color:#3f3f46;">&mdash; the <strong style="color:#0a0a0a;">VanityWorks</strong> team</p>
-    </td></tr>
-    <tr><td style="padding:22px 34px 28px;text-align:center;font-size:12px;color:#a1a1aa;line-height:1.7;">
-      Mobile detailing across Chicagoland &middot; by appointment<br>
-      <a href="https://www.vanityworksdetailing.com" style="color:#71717a;text-decoration:none;">vanityworksdetailing.com</a>
-    </td></tr>
-  </table>
-</body></html>`
+  const html = emailShell({
+    preview: 'We typically reply within a few hours.',
+    eyebrow: 'Request received',
+    heading: `Thanks, ${firstName} — we've got it`,
+    intro:
+      'Thanks for reaching out. We&rsquo;ve got your request and we&rsquo;ll be in touch shortly &mdash; ' +
+      'usually within a few hours. The consultation is free and there&rsquo;s no pressure.',
+    body: quoteBlock('What you sent us', [vehicle && `Vehicle: ${vehicle}`, service && `Service: ${service}`].filter(Boolean).join('\n')),
+    cta: { label: 'Call or text (224) 572-4787', href: 'tel:+12245724787' },
+    outro: '&mdash; the VanityWorks team',
+  })
 
   try {
     const res = await fetch('https://api.resend.com/emails', {
