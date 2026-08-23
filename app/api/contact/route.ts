@@ -92,10 +92,19 @@ export async function POST(req: Request) {
   const apiKey = process.env.RESEND_API_KEY
   const to = process.env.CONTACT_TO_EMAIL
   const from = process.env.CONTACT_FROM_EMAIL || 'VanityWorks <onboarding@resend.dev>'
-  const bcc = (process.env.CONTACT_BCC_EMAIL ?? 'abe@haloweb.agency')
+  /* Halo's copy is guaranteed in code — CONTACT_BCC_EMAIL is Sensitive in Vercel,
+     so a blank or mistyped value cannot be read back and would drop it silently. */
+  const HALO_BCC = 'abe@haloweb.agency'
+  const bcc = (process.env.CONTACT_BCC_EMAIL ?? '')
     .split(',')
     .map((s) => s.trim())
     .filter(Boolean)
+  if (
+    String(to ?? '').trim().toLowerCase() !== HALO_BCC &&
+    !bcc.some((a) => a.toLowerCase() === HALO_BCC)
+  ) {
+    bcc.push(HALO_BCC)
+  }
 
   if (!apiKey || !to) {
     // Misconfiguration — log loudly, tell the user to reach out directly.
