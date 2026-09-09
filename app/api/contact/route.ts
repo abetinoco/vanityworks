@@ -38,7 +38,14 @@ const esc = (s = '') =>
  */
 async function verifyTurnstile(token: string, remoteip: string | null): Promise<boolean> {
   const secret = process.env.TURNSTILE_SECRET_KEY?.trim()
-  if (!secret) return true
+  if (!secret) {
+    // Fail-open path. The widget still renders for visitors, so a challenge
+    // gets solved and the token is then thrown away unvalidated: the friction
+    // without the protection. Vercel cannot read Sensitive vars back, so this
+    // line is the only way to tell from the outside that it is unset.
+    console.warn('[turnstile] TURNSTILE_SECRET_KEY is not set. Bot protection is OFF for VanityWorks.')
+    return true
+  }
   if (!token) return false
   try {
     const params = new URLSearchParams({ secret, response: token })
