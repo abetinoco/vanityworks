@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { serviceAreas, getServiceAreaBySlug, services } from '@/lib/data'
 import { ServiceIcon, ArrowRightIcon, MapPinIcon, PhoneIcon, CheckIcon } from '@/components/Icons'
 import GoogleMap from '@/components/GoogleMap'
-import { breadcrumbSchema } from '@/lib/seo'
 
 interface Props {
   params: { slug: string }
@@ -27,6 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: `VanityWorks Detailing · ${area.city}, ${area.state}`,
       description: area.metaDescription,
       url: `/service-area/${area.slug}`,
+      images: ['/og-image.webp'],
     },
   }
 }
@@ -54,20 +54,11 @@ export default function ServiceAreaPage({ params }: Props) {
     areaServed: { '@type': 'City', name: area.city },
   }
 
-  const breadcrumb = breadcrumbSchema([
-    { name: 'Home', path: '/' },
-    { name: `${area.city}, ${area.state}`, path: `/service-area/${area.slug}` },
-  ])
-
   return (
     <div className="min-h-screen pt-24 lg:pt-28 bg-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessAreaSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
 
       {/* Hero */}

@@ -4,7 +4,7 @@
 //  well-formed structured data.
 // ─────────────────────────────────────────────
 
-export const SITE_URL = 'https://vanityworksdetailing.com'
+export const SITE_URL = 'https://www.vanityworksdetailing.com'
 
 /** Absolute URL for a site-relative path (e.g. "/services" → full URL). */
 export const abs = (path: string) => `${SITE_URL}${path.startsWith('/') ? path : `/${path}`}`

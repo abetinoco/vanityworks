@@ -80,6 +80,7 @@ export default function BookingForm() {
       if (!res.ok || !json.ok) {
         throw new Error(json.error || 'Something went wrong. Please try again.')
       }
+      ;(window as unknown as { gtag?: (...args: unknown[]) => void }).gtag?.('event', 'generate_lead', { method: 'form', page: window.location.pathname })
       setSubmitted(true)
     } catch (err) {
       setStatus('error')
