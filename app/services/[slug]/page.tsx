@@ -6,7 +6,7 @@ import { services, getServiceBySlug, type Service } from '@/lib/data'
 import { portfolio, type PortfolioEntry } from '@/lib/portfolio'
 import { SplitLetters } from '@/components/SplitLetters'
 import FinalCta from '@/components/sections/FinalCta'
-import { serviceSchema, faqSchema, breadcrumbSchema } from '@/lib/seo'
+import { serviceSchema, faqSchema } from '@/lib/seo'
 
 interface Props {
   params: { slug: string }
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const service = getServiceBySlug(params.slug)
   if (!service) return {}
   return {
-    title: service.name,
+    title: `Mobile ${service.name} in Chicagoland`,
     description: service.description,
     alternates: { canonical: `/services/${service.slug}` },
     openGraph: {
@@ -152,11 +152,6 @@ export default function ServiceDetailPage({ params }: Props) {
   const schemas = [
     serviceSchema({ name: s.name, description: s.description, path, startingPrice: s.startingPrice }),
     faqSchema(s.faq ?? []),
-    breadcrumbSchema([
-      { name: 'Home', path: '/' },
-      { name: 'Services', path: '/services' },
-      { name: s.name, path },
-    ]),
   ].filter(Boolean)
 
   return (

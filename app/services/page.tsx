@@ -5,7 +5,7 @@ import { SplitLetters } from '@/components/SplitLetters'
 import FinalCta from '@/components/sections/FinalCta'
 
 export const metadata: Metadata = {
-  title: 'Services',
+  title: 'Mobile Detailing Services in Chicagoland',
   description:
     'Four services. One obsession. Full Detail, Paint Correction, Ceramic Coating, and Paint Protection Film — built so every tier includes the prep underneath.',
   alternates: { canonical: '/services' },

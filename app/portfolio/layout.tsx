@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 // The portfolio page itself is a client component (lightbox state), so its
 // metadata lives here in a server layout.
 export const metadata: Metadata = {
-  title: 'Portfolio',
+  title: 'Detailing, PPF & Ceramic Work in Chicagoland',
   description:
     'Real VanityWorks work — paint protection film, ceramic coating and paint correction on JDM and exotic cars across Chicagoland.',
   alternates: { canonical: '/portfolio' },

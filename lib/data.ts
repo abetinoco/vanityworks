@@ -723,7 +723,7 @@ export const serviceAreas: ServiceArea[] = [
     ],
     driveCopy: 'Centrally located — we cover all 77 Chicago community areas.',
     metaDescription:
-      'Mobile PPF, ceramic coating, and paint correction in Chicago, IL. DetailWise Academy–certified Opticle PPF installer — we come to your home, condo garage, or office anywhere in the city.',
+      'Mobile PPF, ceramic coating, and paint correction in Chicago, IL. DetailWise Academy–certified Opticle PPF installer, at your home, condo garage or office.',
   },
   {
     slug: 'naperville',
