@@ -38,7 +38,7 @@ export default function BookPage() {
               <span className="relative inline-block w-[7px] h-[7px] rounded-full bg-[#00ff88]">
                 <span className="absolute -inset-[3px] rounded-full bg-[#00ff88] opacity-30 animate-[pulse_2s_ease-in-out_infinite]" />
               </span>
-              Now booking — Summer 2026
+              Request a consultation
             </div>
 
             <h1 className="font-sans font-extrabold text-white leading-[0.9] tracking-[-0.055em] mb-5 text-[clamp(44px,6vw,84px)]">

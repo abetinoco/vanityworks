@@ -260,7 +260,7 @@ export default function Footer() {
           <div className="flex items-center gap-6 flex-wrap max-[900px]:flex-col max-[900px]:items-start max-[900px]:gap-1.5">
             <span className="inline-flex items-center gap-2.5 text-[13px] max-[900px]:text-[11px] font-semibold text-white tracking-[-0.005em]">
               <GreenPulseDot />
-              Now booking Summer 2026
+              Now booking
             </span>
             <span className="text-[11px] max-[900px]:text-[9px] font-semibold tracking-[0.08em] uppercase text-[#888]">
               <strong className="text-white">Opticle PPF</strong> ·{' '}

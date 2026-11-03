@@ -240,7 +240,7 @@ export const services: Service[] = [
       { num: '/ 03', name: 'Ceramic Coating', price: 'From $750', arrowLabel: 'Lock in the shine', href: '/services/ceramic-coating' },
       { num: '/ 04', name: 'Paint Protection Film', price: 'Quote by vehicle', arrowLabel: 'Armor the paint', href: '/services/paint-protection-film' },
     ],
-    finalEyebrow: 'Now booking — Summer 2026',
+    finalEyebrow: 'Request a consultation',
     finalTitle: 'Start with clean.',
     finalSub:
       "Book a Full Detail and we'll give you an honest read on what your car actually needs — **no upsell, no pressure.**",
@@ -357,7 +357,7 @@ export const services: Service[] = [
       { num: '/ 03', name: 'Ceramic Coating', price: 'From $750', arrowLabel: 'Lock in the gloss', href: '/services/ceramic-coating' },
       { num: '/ 04', name: 'Paint Protection Film', price: 'Quote by vehicle', arrowLabel: 'Armor the paint', href: '/services/paint-protection-film' },
     ],
-    finalEyebrow: 'Now booking — Summer 2026',
+    finalEyebrow: 'Request a consultation',
     finalTitle: 'Restore the gloss.',
     finalSub:
       "We'll measure your paint, recommend the right number of stages, and tell you exactly what you'll get — **no overselling.**",
@@ -473,7 +473,7 @@ export const services: Service[] = [
       { num: '/ 02', name: 'Paint Correction', price: 'From $350', arrowLabel: 'Deeper gloss first', href: '/services/paint-correction' },
       { num: '/ 04', name: 'Paint Protection Film', price: 'Quote by vehicle', arrowLabel: 'Add physical armor', href: '/services/paint-protection-film' },
     ],
-    finalEyebrow: 'Now booking — Summer 2026',
+    finalEyebrow: 'Request a consultation',
     finalTitle: 'Lock in the shine.',
     finalSub:
       "Pick the package, we'll handle the prep, polish, and seal — **gloss that lasts for years.**",
@@ -589,7 +589,7 @@ export const services: Service[] = [
       { num: '/ 02', name: 'Paint Correction', price: 'From $350', arrowLabel: 'Polish first', href: '/services/paint-correction' },
       { num: '/ 03', name: 'Ceramic Coating', price: 'From $750', arrowLabel: 'Add gloss on top', href: '/services/ceramic-coating' },
     ],
-    finalEyebrow: 'Now booking — Summer 2026',
+    finalEyebrow: 'Request a consultation',
     finalTitle: 'Quote your build.',
     finalSub:
       "Tell us about the car and the coverage you want — **we\'ll quote a real number, not a placeholder.**",

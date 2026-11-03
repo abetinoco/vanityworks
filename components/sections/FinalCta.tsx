@@ -36,7 +36,7 @@ function renderMarked(text: string) {
 }
 
 export default function FinalCta({
-  eyebrow = 'Now booking — Summer 2026',
+  eyebrow = 'Request a consultation',
   title = 'Ready when you are.',
   sub = DEFAULT_SUB,
   primaryCta = { label: 'Book a consultation', href: '/book' },

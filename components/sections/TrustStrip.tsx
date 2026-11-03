@@ -55,7 +55,7 @@ const items: TrustItem[] = [
     label: (
       <>
         <span className="pulse-dot" aria-hidden />
-        Summer 2026 slots open.
+        Slots open now.
         <span className="block text-ink-muted font-medium">Consultations free.</span>
       </>
     ),
