@@ -14,9 +14,11 @@ import BeforeAfterSlider from '@/components/BeforeAfterSlider'
 function PhotoTile({
   photo,
   onClick,
+  eager = false,
 }: {
   photo: FlatPhoto
   onClick: () => void
+  eager?: boolean
 }) {
   return (
     <button
@@ -27,7 +29,7 @@ function PhotoTile({
         src={photo.src}
         alt={photo.vehicle}
         fill
-        loading="lazy"
+        loading={eager ? 'eager' : 'lazy'}
         className="object-cover transition-transform duration-700 group-hover:scale-110"
         sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, 20vw"
       />
@@ -252,10 +254,13 @@ export default function PortfolioPage() {
       {/* Grid — all 44 photos, no filter UI */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">
-          {allPortfolioPhotos.map((photo) => (
+          {allPortfolioPhotos.map((photo, i) => (
             <PhotoTile
               key={photo.id}
               photo={photo}
+              // The first row (up to five tiles) is on the first screen and holds the page's
+              // largest element on desktop, so it loads right away; the rest stay lazy.
+              eager={i < 5}
               onClick={() => setLightbox({ entry: photo.entry, idx: photo.indexInEntry })}
             />
           ))}
