@@ -138,7 +138,7 @@ export default function WhatWeDo() {
           >
             Four services.
             <br />
-            <span className="text-[#9A9A9A] font-extrabold">One obsession.</span>
+            <span className="text-[#707070] font-extrabold">One obsession.</span>
           </h2>
         </div>
 
@@ -165,7 +165,7 @@ export default function WhatWeDo() {
               >
                 {/* Top line: number + (name / subtitle / price), all left-aligned */}
                 <div className="grid grid-cols-[36px_1fr] lg:grid-cols-[60px_1fr] gap-4 lg:gap-10 relative z-10 pr-8">
-                  <span className="ww-row-num text-[14px] font-semibold text-[#9A9A9A] tracking-[-0.01em] tabular-nums pt-2 lg:pt-4">
+                  <span className="ww-row-num text-[14px] font-semibold text-[#707070] tracking-[-0.01em] tabular-nums pt-2 lg:pt-4">
                     / {row.num}
                   </span>
 
@@ -175,19 +175,19 @@ export default function WhatWeDo() {
                     </span>
 
                     {/* Second title — always-visible subtitle */}
-                    <span className="ww-row-sub text-[15px] sm:text-[17px] lg:text-[19px] font-semibold text-[#9A9A9A] leading-[1.25] tracking-[-0.012em]">
+                    <span className="ww-row-sub text-[15px] sm:text-[17px] lg:text-[19px] font-semibold text-[#707070] leading-[1.25] tracking-[-0.012em]">
                       {row.tagline}
                     </span>
 
                     {/* Price + duration, left-aligned */}
                     <span className="flex items-baseline gap-2 mt-1.5 lg:mt-2.5">
-                      <span className="text-[11px] font-medium text-[#9A9A9A] tracking-[0.04em] uppercase">
+                      <span className="text-[11px] font-medium text-[#707070] tracking-[0.04em] uppercase">
                         From
                       </span>
                       <span className="text-[20px] lg:text-[22px] font-bold text-[#0A0A0A] tracking-[-0.025em] tabular-nums leading-none">
                         {row.price}
                       </span>
-                      <span className="text-[12px] text-[#9A9A9A] font-medium tracking-[-0.005em] ml-1">
+                      <span className="text-[12px] text-[#707070] font-medium tracking-[-0.005em] ml-1">
                         · {row.duration}
                       </span>
                     </span>
@@ -223,7 +223,7 @@ export default function WhatWeDo() {
 
                   <div>
                     <p
-                      className="text-[14px] lg:text-[15px] leading-[1.55] text-[#9A9A9A] mb-6 tracking-[-0.005em]"
+                      className="text-[14px] lg:text-[15px] leading-[1.55] text-[#707070] mb-6 tracking-[-0.005em]"
                       style={{ maxWidth: '56ch' }}
                     >
                       {row.body}
@@ -263,7 +263,7 @@ export default function WhatWeDo() {
           >
             Not sure which one?
             <br />
-            <span className="text-[#9A9A9A]">
+            <span className="text-[#707070]">
               Tell us about the car. We&apos;ll tell you what it needs.
             </span>
           </p>

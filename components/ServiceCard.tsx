@@ -32,12 +32,12 @@ export default function ServiceCard({ service, variant = 'default' }: ServiceCar
           <ServiceIcon slug={service.slug} className="w-9 h-9" />
         </div>
         <h3
-          className="text-2xl text-[#0A0A0A] mb-1 group-hover:text-[#888] transition-colors"
+          className="text-2xl text-[#0A0A0A] mb-1 group-hover:text-[#666] transition-colors"
           style={{ fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '0.04em' }}
         >
           {service.name}
         </h3>
-        <p className="text-[#888] text-xs font-semibold tracking-widest uppercase mb-3">
+        <p className="text-[#666] text-xs font-semibold tracking-widest uppercase mb-3">
           {service.tagline}
         </p>
         <p className="text-[#666] text-sm leading-relaxed">{service.description}</p>
@@ -60,11 +60,11 @@ export default function ServiceCard({ service, variant = 'default' }: ServiceCar
       {/* Footer */}
       <div className="px-6 py-5 mt-auto border-t border-[#E0E0E0] flex items-center justify-between">
         <div>
-          <span className="text-[#888] text-xs">Starting at</span>
+          <span className="text-[#666] text-xs">Starting at</span>
           <div className="text-[#0A0A0A] text-xl font-bold">{service.startingPrice}</div>
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-[#888] text-xs">{service.duration}</span>
+          <span className="text-[#666] text-xs">{service.duration}</span>
           <span className="w-7 h-7 rounded-full border border-[#0A0A0A] flex items-center justify-center text-[#0A0A0A] group-hover:bg-[#0A0A0A] group-hover:text-white transition-colors">
             <ArrowRightIcon className="w-3.5 h-3.5" />
           </span>

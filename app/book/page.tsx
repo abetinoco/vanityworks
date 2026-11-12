@@ -86,7 +86,7 @@ export default function BookPage() {
               <h2 className="font-sans font-extrabold text-[#0A0A0A] text-[clamp(22px,2.4vw,28px)] tracking-[-0.04em] leading-[0.95] mb-1.5">
                 Request your spot
               </h2>
-              <p className="text-[#888] text-[14px] mb-6">
+              <p className="text-[#666] text-[14px] mb-6">
                 Takes 30 seconds. Just the basics — we&apos;ll handle the rest.
               </p>
               <BookingForm />

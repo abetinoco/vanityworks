@@ -10,7 +10,7 @@ function StarRating({ rating }: { rating: number }) {
       {Array.from({ length: 5 }).map((_, i) => (
         <svg
           key={i}
-          className={`w-3.5 h-3.5 ${i < rating ? 'text-[#888]' : 'text-[#E0E0E0]'}`}
+          className={`w-3.5 h-3.5 ${i < rating ? 'text-[#666]' : 'text-[#E0E0E0]'}`}
           fill="currentColor"
           viewBox="0 0 20 20"
         >
@@ -26,7 +26,7 @@ export default function TestimonialCard({ testimonial }: TestimonialCardProps) {
     <div className="bg-white border border-[#E0E0E0] rounded-xl p-6 flex flex-col gap-4 shadow-[0_1px_3px_rgba(10,10,10,0.04)]">
       {/* Quote mark */}
       <div
-        className="text-5xl leading-none text-[#888] -mb-2"
+        className="text-5xl leading-none text-[#666] -mb-2"
         style={{ fontFamily: 'Georgia, serif' }}
       >
         &ldquo;
@@ -43,7 +43,7 @@ export default function TestimonialCard({ testimonial }: TestimonialCardProps) {
         </div>
         <div>
           <div className="text-[#0A0A0A] text-sm font-semibold">{testimonial.author}</div>
-          <div className="text-[#888] text-xs">{testimonial.vehicle}</div>
+          <div className="text-[#666] text-xs">{testimonial.vehicle}</div>
         </div>
       </div>
     </div>

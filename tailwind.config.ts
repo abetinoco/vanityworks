@@ -12,7 +12,7 @@ const config: Config = {
         ink: {
           DEFAULT: '#0A0A0A',
           body: '#1A1A1A',
-          muted: '#888888',
+          muted: '#666666', // 12 Nov 2026: was #888888 (3.5:1 on white)
           subtle: '#B5B5B5',
         },
         surface: {

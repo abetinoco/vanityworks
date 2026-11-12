@@ -85,7 +85,7 @@ export default function ServiceAreaPage({ params }: Props) {
           >
             Auto Detailing
             <br />
-            <span className="text-[#888]">in {area.city}.</span>
+            <span className="text-[#666]">in {area.city}.</span>
           </h1>
 
           <p className="text-[#1A1A1A] text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
@@ -115,7 +115,7 @@ export default function ServiceAreaPage({ params }: Props) {
       <section className="bg-[#F5F5F5] border-b border-[#E0E0E0] py-10 md:py-14 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-8">
-            <p className="text-[#888] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
+            <p className="text-[#666] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
               Service Map
             </p>
             <h2
@@ -133,7 +133,7 @@ export default function ServiceAreaPage({ params }: Props) {
       {/* Neighborhoods */}
       <section className="py-10 md:py-14 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <p className="text-[#888] text-xs font-semibold tracking-[0.2em] uppercase mb-3 text-center">
+          <p className="text-[#666] text-xs font-semibold tracking-[0.2em] uppercase mb-3 text-center">
             We Cover
           </p>
           <h2
@@ -160,7 +160,7 @@ export default function ServiceAreaPage({ params }: Props) {
       <section className="bg-[#F5F5F5] border-y border-[#E0E0E0] py-12 md:py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-10">
-            <p className="text-[#888] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
+            <p className="text-[#666] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
               Built for {area.region}
             </p>
             <h2
@@ -193,7 +193,7 @@ export default function ServiceAreaPage({ params }: Props) {
       <section className="py-12 md:py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-10">
-            <p className="text-[#888] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
+            <p className="text-[#666] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
               Available in {area.city}
             </p>
             <h2
@@ -220,7 +220,7 @@ export default function ServiceAreaPage({ params }: Props) {
                   {s.name}
                 </h3>
                 <p className="text-[#666] text-xs leading-relaxed mb-3">{s.tagline}</p>
-                <span className="inline-flex items-center gap-1.5 text-[#0A0A0A] text-xs font-bold tracking-wider uppercase group-hover:text-[#888] transition-colors">
+                <span className="inline-flex items-center gap-1.5 text-[#0A0A0A] text-xs font-bold tracking-wider uppercase group-hover:text-[#666] transition-colors">
                   Learn More
                   <ArrowRightIcon className="w-3.5 h-3.5" />
                 </span>
@@ -233,7 +233,7 @@ export default function ServiceAreaPage({ params }: Props) {
       {/* Other service areas */}
       <section className="bg-[#F5F5F5] border-y border-[#E0E0E0] py-10 md:py-14 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto text-center">
-          <p className="text-[#888] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
+          <p className="text-[#666] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
             Also Serving
           </p>
           <div className="flex flex-wrap gap-3 justify-center">

@@ -12,7 +12,7 @@
   --surface: #F5F5F5;
   --ink: #0A0A0A;
   --ink-body: #1A1A1A;
-  --ink-muted: #888888;
+  --ink-muted: #666666; /* 12 Nov 2026: was #888888 (3.5:1 on white) */
   --ink-subtle: #B5B5B5;
   --border: #E0E0E0;
   --border-strong: #CCCCCC;

@@ -150,7 +150,7 @@ export default function Nav() {
                   className={`inline-flex items-center gap-1.5 text-xs font-bold tracking-wider uppercase transition-colors duration-200 ${
                     transparent
                       ? isServicesActive ? 'text-white' : 'text-white/80 hover:text-white'
-                      : isServicesActive ? 'text-[#0A0A0A]' : 'text-[#888] hover:text-[#0A0A0A]'
+                      : isServicesActive ? 'text-[#0A0A0A]' : 'text-[#666] hover:text-[#0A0A0A]'
                   }`}
                   aria-expanded={servicesOpen}
                   aria-haspopup="true"
@@ -173,7 +173,7 @@ export default function Nav() {
                   className={`text-xs font-bold tracking-wider uppercase transition-colors duration-200 ${
                     transparent
                       ? pathname === link.href ? 'text-white' : 'text-white/80 hover:text-white'
-                      : pathname === link.href ? 'text-[#0A0A0A]' : 'text-[#888] hover:text-[#0A0A0A]'
+                      : pathname === link.href ? 'text-[#0A0A0A]' : 'text-[#666] hover:text-[#0A0A0A]'
                   }`}
                 >
                   {link.label}
@@ -186,7 +186,7 @@ export default function Nav() {
               <Link
                 href="tel:+12245724787"
                 className={`text-xs font-semibold tracking-wider transition-colors ${
-                  transparent ? 'text-white/80 hover:text-white' : 'text-[#888] hover:text-[#0A0A0A]'
+                  transparent ? 'text-white/80 hover:text-white' : 'text-[#666] hover:text-[#0A0A0A]'
                 }`}
               >
                 (224) 572-4787
@@ -231,7 +231,7 @@ export default function Nav() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10">
             <div className="mb-6 flex items-center justify-between gap-4">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#888] mb-1">
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#666] mb-1">
                   Detailing Services
                 </p>
                 <h3 className="font-sans font-extrabold text-3xl text-[#0A0A0A] leading-none tracking-[-0.03em]">
@@ -241,7 +241,7 @@ export default function Nav() {
               <Link
                 href="/services"
                 onClick={() => setServicesOpen(false)}
-                className="inline-flex items-center gap-1.5 text-xs font-bold tracking-widest uppercase text-[#0A0A0A] hover:text-[#888] transition-colors flex-shrink-0"
+                className="inline-flex items-center gap-1.5 text-xs font-bold tracking-widest uppercase text-[#0A0A0A] hover:text-[#666] transition-colors flex-shrink-0"
               >
                 View All Services
                 <ArrowRightIcon className="w-4 h-4" />
@@ -279,7 +279,7 @@ export default function Nav() {
                       <p className="text-[11px] text-[#666] leading-snug line-clamp-2">
                         {service.tagline}
                       </p>
-                      <p className="mt-2 text-[10px] font-bold tracking-widest uppercase text-[#888]">
+                      <p className="mt-2 text-[10px] font-bold tracking-widest uppercase text-[#666]">
                         From {service.startingPrice}
                       </p>
                     </div>

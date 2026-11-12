@@ -176,7 +176,7 @@ export default function BookingForm() {
           name="service"
           value={form.service}
           onChange={handleChange}
-          className={`${inputBase} appearance-none ${form.service ? 'text-[#0A0A0A]' : 'text-[#B5B5B5]'}`}
+          className={`${inputBase} appearance-none ${form.service ? 'text-[#0A0A0A]' : 'text-[#707070]'}`}
         >
           <option value="">What are you after? (optional)</option>
           {services.map((s) => (
@@ -243,7 +243,7 @@ export default function BookingForm() {
         </p>
       )}
 
-      <p className="text-[#888] text-[12px] text-center leading-relaxed">
+      <p className="text-[#666] text-[12px] text-center leading-relaxed">
         Free consultation · we typically reply within a few hours · no spam, ever.
       </p>
     </form>

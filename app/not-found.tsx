@@ -5,7 +5,7 @@ export default function NotFound() {
   return (
     <div className="min-h-screen pt-24 lg:pt-28 bg-white flex items-center justify-center px-4">
       <div className="max-w-xl mx-auto text-center py-16">
-        <p className="text-[#888] text-xs font-semibold tracking-[0.2em] uppercase mb-4">
+        <p className="text-[#666] text-xs font-semibold tracking-[0.2em] uppercase mb-4">
           404 · Page Not Found
         </p>
         <h1
@@ -14,7 +14,7 @@ export default function NotFound() {
         >
           Off The
           <br />
-          <span className="text-[#888]">Map.</span>
+          <span className="text-[#666]">Map.</span>
         </h1>
         <p className="text-[#666] text-base leading-relaxed mb-10 max-w-md mx-auto">
           The page you&apos;re looking for doesn&apos;t exist — or it moved. Let&apos;s get you back to something useful.

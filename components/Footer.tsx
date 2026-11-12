@@ -305,7 +305,7 @@ export default function Footer() {
               Terms
             </Link>
             <a
-              href="https://halo.web"
+              href="https://haloweb.agency"
               target="_blank"
               rel="noopener noreferrer"
               data-hover

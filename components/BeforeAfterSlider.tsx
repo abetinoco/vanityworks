@@ -84,9 +84,9 @@ export default function BeforeAfterSlider({
             >
               {title}
             </span>
-            {vehicle && <span className="text-[#888] text-xs ml-2">{vehicle}</span>}
+            {vehicle && <span className="text-[#666] text-xs ml-2">{vehicle}</span>}
           </div>
-          <span className="text-[#888] text-xs font-semibold tracking-wider uppercase">Paint Correction</span>
+          <span className="text-[#666] text-xs font-semibold tracking-wider uppercase">Paint Correction</span>
         </div>
       )}
 

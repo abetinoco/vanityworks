@@ -145,7 +145,7 @@ function Lightbox({
 
         <div className="mt-4 bg-white border border-[#E0E0E0] rounded-2xl px-6 py-5 flex items-start justify-between gap-4">
           <div className="min-w-0 flex-1">
-            <p className="text-[#888] text-xs uppercase tracking-wider mb-1">
+            <p className="text-[#666] text-xs uppercase tracking-wider mb-1">
               {entry.service}
             </p>
             <h3
@@ -241,10 +241,10 @@ export default function PortfolioPage() {
                 IG
               </div>
               <div>
-                <div className="text-[#0A0A0A] text-sm font-semibold group-hover:text-[#888] transition-colors">
+                <div className="text-[#0A0A0A] text-sm font-semibold group-hover:text-[#666] transition-colors">
                   @vanityworks.il
                 </div>
-                <div className="text-[#888] text-xs">New work posted weekly</div>
+                <div className="text-[#666] text-xs">New work posted weekly</div>
               </div>
             </a>
           </div>
