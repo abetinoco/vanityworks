@@ -121,7 +121,7 @@ export default function BookingForm() {
   }
 
   const inputBase =
-    'w-full bg-white border border-[#E0E0E0] rounded-xl px-4 py-3.5 text-[#0A0A0A] text-[15px] placeholder:text-[#B5B5B5] focus:outline-none focus:border-[#0A0A0A] focus:ring-1 focus:ring-[#0A0A0A] transition-all'
+    'w-full bg-white border border-[#E0E0E0] rounded-xl px-4 py-3.5 text-[#0A0A0A] text-[15px] placeholder:text-[#707070] focus:outline-none focus:border-[#0A0A0A] focus:ring-1 focus:ring-[#0A0A0A] transition-all'
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
